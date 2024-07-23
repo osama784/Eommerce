@@ -1,0 +1,88 @@
+{% extends 'main.html'%}
+{% load static %}
+
+{% block head%}
+<title>Nest | Privacy Policy</title>
+{% endblock head %}
+
+
+{% block content %}
+{% include 'navbar.html'%}
+{% include 'path.html'%}
+
+
+<div class="container mx-auto px-4 my-10 xl:max-w-7xl">
+    <div class="space-y-5">
+        <div class="space-y-3">
+            <h1 class="font-bold text-4xl">Privacy Policy</h1>
+            <p class="text-gray-500">By Osama . 13 June 2024 . 10 mins read . 12k views</p>
+            <h2 class="font-mono">Welcome to OsamaTeam's Privacy Policy</h2>
+            <br>
+            <ol class="list-decimal list-inside space-y-3">
+                <li>Hi there, we're OsamaTeam Pty Ltd (ABN 11 119 159 741) of level 1, 121 King street Melbourne, 3000,
+                    Australia('OsamaTeam') and welcome to our privacy policy which also applies to our Companies. This
+                    policy sets out how we handle your personal information if you're visitor to our Site.</li>
+                <li>When we say 'we', 'us', or 'OsamaTeam' it's because that's who we are and we own and run the Sites.
+                </li>
+                <li>If we say 'policy' we're talking about this privacy policy. If we say 'user terms' we're talking
+                    about
+                    the rules for using each of the Sites. The rules vary by product and each product makes them
+                    seperately
+                    available and seeks consent to them seperately to this policy.</li>
+            </ol>
+        </div>
+        <div>
+            <ol class="list-decimal list-inside space-y-5">
+                <div>
+                    <li class="font-semibold text-2xl">Information We Collect</li>
+                    <p>Describe the types of information your app collects from users. This may include:</p>
+                    <br>
+                    <ul class="list-disc list-inside">
+                        <li>Personal information (names, addresses, phone numbers)</li>
+                        <li>Location data</li>
+                        <li>Order history</li>
+                        <li>Payment details</li>
+                    </ul>
+                </div>
+                <div>
+                    <li class="font-semibold text-2xl">How We Use Collected Information</li>
+                    <p>Explain how you use the collected data:</p>
+                    <br>
+                    <ul class="list-disc list-inside">
+                        <li>To proccess orders.</li>
+                        <li>To improve our services</li>
+                        <li>To personalize user experience</li>
+
+                    </ul>
+                </div>
+                <div>
+                    <li class="font-semibold text-2xl">Data Security</li>
+                    <p>Detail the measures you take to protect user data:</p>
+                    <br>
+                    <ul class="list-disc list-inside">
+                        <li>Encryption</li>
+                        <li>Secure servers</li>
+                        <li>Regular audits</li>
+
+                    </ul>
+                </div>
+                <div>
+                    <li class="font-semibold text-2xl">User Rights</li>
+                    <p>Inform users of their rights:</p>
+                    <br>
+                    <ul class="list-disc list-inside">
+                        <li>Access their data</li>
+                        <li>Correct inaccuracies</li>
+                        <li>Delete thier accounts</li>
+                    </ul>
+                </div>
+                <div>
+                    <li class="font-semibold text-2xl">Contact Information</li>
+                    <p>You could visit the <a href="" class="underline">contact page</a> for information.</p>
+                </div>
+            </ol>
+        </div>
+    </div>
+</div>
+{% include 'footer.html'%}
+{% endblock content %}

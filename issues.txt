@@ -1,0 +1,10 @@
+REACT functionalities:
+    showing tha nav
+    showing the categories 
+    showing the pages
+    in the first nav: rolling the statements
+    showing the wishlist
+    
+
+TAILWIND functionalities:
+    completting the bottom of the page

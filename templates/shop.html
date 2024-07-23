@@ -1,0 +1,94 @@
+{% extends 'main.html'%}
+
+{% block head%}
+<title>Shop</title>
+{% endblock head %}
+
+
+{% block content %}
+{% include "navbar.html"%}
+<div class="container mx-auto px-16 flex gap-10 flex-wrap justify-between mt-10 max-w-[1270px] *:shadow *:rounded-lg *:border *:py-5 *:px-10">
+    <div class="flex flex-col gap-3">
+        <h2 class="font-bold text-lg">By Categories</h2>
+        <div class="flex flex-col gap-4 *:border *:py-1 *:px-5 *:rounded">
+            <div>
+                <input type="checkbox" name="food" id="">
+                <label for="food">Food</label>
+            </div>
+            <div>
+                <input type="checkbox" name="sweet" id="">
+                <label for="sweet">Sweets</label>
+            </div>
+            <div>
+                <input type="checkbox" name="fruit" id="">
+                <label for="fruit">Fresh Fruits</label>
+            </div>
+            <div>
+                <input type="checkbox" name="pet" id="">
+                <label for="pet">Pet Food</label>
+            </div>
+            <div>
+                <input type="checkbox" name="milk" id="">
+                <label for="milks">Milks & Dairies</label>
+            </div>
+            <div>
+                <input type="checkbox" name="bake" id="">
+                <label for="bake">Baking Material</label>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col gap-3">
+        <h2 class="font-bold text-lg">By Vendors</h2>
+        <div class="flex flex-col gap-4 *:py-1">
+            <div>
+                <input type="checkbox" name="nestify" id="">
+                <label for="food">Nestify</label>
+            </div>
+            <div>
+                <input type="checkbox" name="xfood" id="">
+                <label for="xfood">XFood</label>
+            </div>
+            <div>
+                <input type="checkbox" name="nature" id="">
+                <label for="nature">Nature Foods</label>
+            </div>
+            <div>
+                <input type="checkbox" name="nest" id="">
+                <label for="nest">NestFood</label>
+            </div>
+            <div>
+                <input type="checkbox" name="roots" id="">
+                <label for="roots">Healthy Roots</label>
+            </div>
+            <div>
+                <input type="checkbox" name="dest" id="">
+                <label for="dest">DestFood</label>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col gap-3">
+        <h2 class="font-bold text-lg">Popular Tags</h2>
+        <div class="flex flex-col gap-3 *:border *:py-1 *:px-5 *:rounded-xl *:shadow *:w-fit text-sm">
+            <a href="" class="text-green-500">chicken</a>
+            <a href="" class="text-green-500">burger</a>
+            <a href="" class="text-green-500">vanilla</a>
+            <a href="" class="text-green-500">cakes</a>
+            <a href=""  class="text-green-500">milkshake</a>
+            <a href="" class="text-green-500">chocolate</a>
+            
+        </div>
+    </div>
+    <div class="flex flex-col gap-3">
+        <h2 class="font-bold text-lg">By Price</h2>
+        <div class="flex flex-col">
+            <div class="h-2 w-full bg-green-500 rounded"></div>
+            <div class="flex justify-between text-gray-500">
+                <small>From: <span class="text-green-500">$10.23</span></small><small class="text-green-500">To: <span>$777.00</span></small>
+            </div>
+            <input type="number" class="w-full rounded border h-12 px-3 shadow" value="10.90">
+            <button class="w-full text-center text-white bg-green-600 mt-5 rounded py-2">Filter</button>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

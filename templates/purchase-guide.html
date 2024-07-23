@@ -1,0 +1,72 @@
+{% extends 'main.html'%}
+
+{% load static %}
+
+{%block head%}
+<title>Nest | Purchase Guide</title>
+{% endblock head%}
+
+
+{% block content %}
+{% include 'navbar.html'%}
+{% include 'path.html'%}
+
+
+<div class="container px-4 mx-auto my-10 xl:max-w-7xl">
+    <div class="space-y-7 col-span-9 order-first">
+        <h1 class="font-bold text-4xl">Purchase Guide</h1>
+        <p class="text-gray-500">By Osama . 9 April 2020 . 6 mins read . 29k view</p>
+        <br>
+        <div class="space-y-7">
+            <h1 class="font-bold text-4xl">1. Account Registering</h1>
+            <p>{% lorem 20 w %}</p>
+            <ul class="list-inside list-disc space-y-2">
+                <li>Name (required)</li>
+                <li>Age (required)</li>
+                <li>Date of birth (required)</li>
+                <li>Passport/ID no. (required)</li>
+                <li>Current carrer (required)</li>
+                <li>Mobile phone numbers (required)</li>
+                <li>Email address (required)</li>
+                <li>Hoppies & interests (optional)</li>
+                <li>Social Profiles (optional)</li>
+            </ul>
+        </div>
+
+        <div class="space-y-7">
+            <h1 class="font-bold text-4xl">2. Select Product</h1>
+            <p>{% lorem 20 w %}</p>
+        </div>
+        <div class="space-y-7">
+            <h1 class="font-bold text-4xl">3. Confirm Order Content</h1>
+            <p>{% lorem 20 w %}</p>
+        </div>
+        <div class="space-y-7">
+            <h1 class="font-bold text-4xl">4. Transaction Completed</h1>
+            <p>{% lorem 20 w %}</p>
+        </div>
+        <div class="space-y-7">
+            <h1 class="font-bold text-4xl">5. Accepted Creadit Cards</h1>
+            <ul class="list-inside list-disc space-y-2">
+                <li>Visa</li>
+                <li>Mastercards</li>
+                <li>American Express</li>
+                <li>Discover</li>
+            </ul>
+            <p>*Taxes are calculated by your local bank and location</p>
+        </div>
+        <div class="space-y-7">
+            <h1 class="font-bold text-4xl">6. Download and Setup</h1>
+            <ul class="list-inside list-disc space-y-2">
+                <li>Updated content on a regular basis</li>
+                <li>Secure & hastle-free payment</li>
+                <li>1-click checkout</li>
+                <li>Easy access & smart user dashboard</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% include 'footer.html'%}
+{% endblock content %}

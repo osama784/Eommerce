@@ -1,0 +1,50 @@
+{% extends 'main.html'%}
+{% load static %}
+
+
+{% block head%}
+<title>Login</title>
+{% endblock head%}
+
+
+{% block content%}
+{% include 'navbar.html'%}
+
+<div class=" w-full py-6 border-b border-slate-400 content-center">
+    <div class="container flex flex-wrap gap-7 px-4 sm:pl-24 justify-center sm:justify-normal items-center text-sm ">
+        <a href="{% url 'index'%}">
+            <div class="text-green-700 flex items-center gap-2">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </div>
+        </a>
+        <span class="text-green-500">&gt;</span>
+        <a href="" class="text-green-600">Pages</a>
+        <span class="text-green-500">&gt;</span>
+        <a href="">My Account</a>
+    </div>
+</div>
+
+<div class="flex flex-col md:flex-row *:grow container mx-auto my-24 px-5 rounded-lg gap-10 max-w-[1270px]">
+    <img src="{% static 'images/man3.jpg'%}" alt="" class="object-cover w-full self-center md:self-auto md:w-1/2 max-w-[600px] rounded-lg shadow">
+    <div class="flex flex-col gap-7">
+        <div class="">
+            <h1 class="font-bold text-3xl text-slate-900">Login</h1>
+            <small class="text-grey-500">Don't have an account? <a href="" class="text-green-500">Create here</a></small>
+        </div>
+        <div class="flex flex-col gap-3">
+            <input type="text" class="px-3 py-5 border rounded-lg">
+            <input type="password" class="px-3 py-5 border rounded-lg">
+            <div class="flex justify-between">
+                <div>
+                    <input type="checkbox" name="" id="">
+                    <span>Remember me</span>
+                </div>
+                <a href="" class="text-gray-500">Forgot password?</a>
+            </div>
+        </div>
+        <input type="submit" value="Login" class="py-3 px-5 bg-slate-900 text-white rounded-lg w-fit cursor-pointer">
+    </div>
+</div>
+
+{% endblock content%}

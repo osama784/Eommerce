@@ -1,0 +1,99 @@
+{% extends 'main.html'%}
+{% load static %}
+
+
+{% block head%}
+<title>About Us</title>
+{% endblock head%}
+
+
+
+{% block content %}
+{% include 'navbar.html'%}
+{% include 'path.html'%}
+
+<div class="container mx-auto px-4 my-10 xl:max-w-[1270px]">
+    <div class="flex gap-x-5 gap-y-10 flex-col items-center lg:flex-row lg:items-start">
+        <img src="{% static 'images/farmer.jpg'%}" alt="" class="h-64 w-72 transition-all sm:w-[400px] sm:h-[500px] md:w-[500px] object-cover rounded-lg shadow-sm">
+        <div class="flex flex-col gap-10 px-4 sm:px-20 lg:px-0">
+            <div>
+                <h1 class="font-semibold text-4xl">Welcom to Nest</h1>
+                <br>
+                <p>{% lorem 1 %}</p>
+                <br>
+                <p>{% lorem 1 %}</p>
+            </div>
+            <div class="flex gap-5 flex-wrap *:size-32 *:rounded-lg justify-center">
+                <img src="{% static 'images/plant1.jpg'%}" alt="" class="object-cover shadow-sm">
+                <img src="{% static 'images/plant2.jpg'%}" alt="" class="object-cover shadow-sm">
+                <img src="{% static 'images/plant3.jpg'%}" alt="" class="object-cover shadow-sm">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mx-auto px-4 mb-10 mt-20 xl:max-w-[1270px]">
+    <h1 class="text-center font-semibold text-3xl">What We Provide?</h1>
+    <span></span>
+    <br>
+    <div class="flex gap-5 text-center flex-col sm:flex-row *:rounded-lg *:border *:shadow-sm *:grow">
+        <div class="flex flex-col items-center px-3 py-3">
+            <i class="fa-solid fa-money-check-dollar fa-4x text-green-500"></i>
+            <br>
+            <h2 class="font-semibold text-xl">Best Prices & Offers</h2>
+            <br>
+            <p class="text-gray-500 text-sm">{% lorem 1 %}</p>
+        </div>
+        <div class="flex flex-col items-center px-3 py-3">
+            <i class="fa-regular fa-handshake fa-4x text-amber-500"></i>
+            <br>
+            <h2 class="font-semibold text-xl">Best Prices & Offers</h2>
+            <br>
+            <p class="text-gray-500 text-sm">{% lorem 1 %}</p>
+        </div>
+        <div class="flex flex-col items-center px-3 py-3">
+            <i class="fa-solid fa-truck fa-4x text-blue-800"></i>
+            <br>
+            <h2 class="font-semibold text-xl">Best Prices & Offers</h2>
+            <br>
+            <p class="text-gray-500 text-sm">{% lorem 1 %}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mx-auto px-4 mb-10 mt-20 xl:max-w-[1270px]">
+    <div class="flex flex-col gap-20">
+        <div class="flex flex-col gap-5 items-center lg:flex-row">
+            <div class="flex flex-col w-full sm:flex-row gap-5 items-center lg:min-w-[692px] justify-center">
+                <img src="{% static 'images/about-us-1.jpg'%}" alt="" class="w-full h-56 rounded-lg object-cover shadow-md sm:size-72">
+                <img src="{% static 'images/about-us-2.jpg'%}" alt="" class="w-full h-56 rounded-lg object-cover shadow-md sm:size-96">
+            </div>
+            <div class="px-4 sm:px-20 lg:px-0 order-first lg:order-none">
+                <small class="text-gray-500 font-semibold">Our Performance</small>
+                <br>
+                <h1 class="text-3xl font-semibold">Your Partner for e-commerce grocery solution</h1>
+                <br>
+                <p>{% lorem 1 %}</p>
+            </div>
+        </div>
+        <div class="flex gap-5 flex-col md:flex-row px-4 sm:px-20 lg:px-0">
+            <div class="flex flex-col gap-3 items-center">
+                <h1 class="font-semibold text-3xl">Who we are</h1>
+                <p>{% lorem 1 %}</p>
+            </div>
+            <div class="flex flex-col gap-3 items-center">
+                <h1 class="font-semibold text-3xl">Our history</h1>
+                <p>{% lorem 1 %}</p>
+            </div>
+            <div class="flex flex-col gap-3 items-center">
+                <h1 class="font-semibold text-3xl">Our mission</h1>
+                <p>{% lorem 1 %}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% include 'footer.html'%}
+
+{% endblock content%}

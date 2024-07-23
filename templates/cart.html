@@ -1,0 +1,160 @@
+{% extends 'main.html'%}
+{% load static %}
+
+{% block head %}
+<title>Cart</title>
+{% endblock head %}
+
+
+{% block content %}
+{% include 'navbar.html'%}
+{% include 'path.html'%}
+
+<div class="grid grid-cols-12 gap-10 container mx-auto my-8 px-5 max-w-[1270px]">
+    <div class="col-span-full lg:col-span-8 space-y-5">
+        <div class=" space-y-4">
+            <div class="space-y-2">
+                <h1 class="font-bold text-4xl">Your Cart</h1>
+                <div class="flex justify-between">
+                    <p class="grow">There are 10 products.</p>
+                    <small class="text-gray-500 text-sm cursor-pointer"><i
+                            class="fa-regular fa-trash-can mr-3"></i><span>Clear Cart</span></small>
+                </div>
+            </div>
+            <div class="overflow-x-auto pb-3 border rounded-t-lg">
+                <table class="rounded-lg min-w-[550px] sm:min-w-full h-fit text-center">
+                    <thead class="bg-gray-50">
+                        <tr class="*:py-3 *:font-medium *:tracking-wider text-gray-500">
+                            <th class="!w-24 ">Product</h3>
+                            <th>Title</h3>
+                            <th>Unit Price</h3>
+                            <th>Quantity</h3>
+                            <th>Subtotal</h3>
+                            <th>Remove</h3>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="*:pb-2 *:first:pt-3">
+                            <td class="pl-2">
+                                <img src="{% static 'images/juice.jpg'%}" alt="" class="rounded-lg object-cover h-24">
+                            </td>
+                            <td>Orange Juice</td>
+                            <td>$35.99</td>
+                            <td><input type="number" name="" id="" class="w-14 border p-1 outline-none rounded-lg"></td>
+                            <td>$15.99</td>
+                            <td><i class="fa-regular fa-trash-can cursor-pointer"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="space-y-10 sm:space-y-0 sm:grid grid-cols-12 gap-10 border rounded-xl">
+                <div class="flex flex-col w-full col-span-full">
+                    <div
+                        class="flex flex-wrap gap-y-3 *:grow space-x-3 *:w-16 py-5 text-center items-center bg-slate-200  rounded-xl">
+                        <h3 class="!w-24 ">Product</h3>
+                        <h3>Title</h3>
+                        <h3>Unit Price</h3>
+                        <h3>Quantity</h3>
+                        <h3>Subtotal</h3>
+                        <h3>Remove</h3>
+                    </div>
+                    <div class="flex flex-col [&>*]:border-b">
+                        <div
+                            class="flex flex-wrap gap-y-3 *:grow space-x-2 *:w-16 py-3 px-2 text-center items-center border-b last:border-b-0">
+                            <img src="{% static 'images/juice.jpg'%}" alt="" class="rounded-lg object-cover h-24">
+                            <div class="">Orange Juice</div>
+                            <div>$35.99</div>
+                            <div class=""><input type="number" name="" id=""
+                                    class="w-14 border p-1 outline-none rounded-lg"></div>
+                            <div>$15.99</div>
+                            <div><i class="fa-regular fa-trash-can cursor-pointer"></i></div>
+                        </div>
+                        <div
+                            class="flex flex-wrap *:grow space-x-2 space-y-4 *:w-16 py-3 px-2 text-center items-center border-b last:border-b-0">
+                            <img src="{% static 'images/cake.jpg'%}" alt="" class="rounded-lg object-cover h-24">
+                            <div class="">Chocolate Bread</div>
+                            <div>$15.99</div>
+                            <div class=""><input type="number" name="" id=""
+                                    class="w-14 border p-1 outline-none rounded-lg"></div>
+                            <div>$15.99</div>
+                            <div><i class="fa-regular fa-trash-can cursor-pointer"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="flex justify-between">
+                <a href="">
+                    <div class="text-white bg-green-600 px-2 py-3 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left-long"></i>
+                        <div>Continue Shopping</div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="text-white bg-green-600 px-2 py-3 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        <div>Update Cart</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row gap-2 grow">
+            <div class="p-5 flex flex-col gap-3 border grow rounded-lg">
+                <div>
+                    <h1 class="font-bold text-2xl">Calculate Shipping</h1>
+                    <p class="text-gray-500">Flat rate: <span class="text-green-500">5%</span></p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <input type="text" placeholder="United Kingdom"
+                        class="rounded-lg pl-3 py-2 border placeholder:text-black">
+                    <div class="flex gap-3 *:grow">
+                        <select name="" id="" class="rounded-lg pl-3 py-2 border">
+                            <option value="">Syria</option>
+                            <option value="">US</option>
+                            <option value="">Egypt</option>
+                            <option value="">Saudi Arabia</option>
+                        </select>
+                        <input type="text" placeholder="Product Code/ZIP" class="rounded-lg pl-3 py-2 border">
+                    </div>
+                </div>
+            </div>
+            <div class="p-5 flex flex-col gap-3 grow">
+                <div>
+                    <h1 class="font-bold text-2xl">Apply Coppon</h1>
+                    <p class="text-gray-500">Using Promo Coppon?</p>
+                </div>
+                <div class="flex gap-3 cursor-pointer">
+                    <input type="text" placeholder="Enter Your Coppon"
+                        class="rounded-lg pl-3 py-2 border grow placeholder:text-black">
+                    <div class="text-white bg-green-600 px-2 py-3 rounded-lg flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left-long"></i>
+                        <button>Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid-cols-2 gap-y-5 space-y-10 mt-10 sm:mt-0 lg:space-y-0 col-span-full lg:col-span-4 lg:grid">
+        <div class="rounded-lg shadow-md border flex flex-col gap-4 col-span-full p-3 h-fit">
+            <div class="border flex flex-col gap-2 p-2">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Subtotal</span>
+                    <span class="font-bold text-lg text-green-600">15.99$</span>
+                </div>
+                <hr class="border-gray-400">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Shipping</span>
+                    <span class="font-bold text-black ">Free</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Total</span>
+                    <span class="font-bold text-lg text-green-600">15.99$</span>
+                </div>
+            </div>
+            <div
+                class="cursor-pointer self-center text-center flex items-center px-2 py-3 gap-2 bg-green-600 w-fit rounded-lg text-white">
+                <span>Procced To Check Out</span><i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

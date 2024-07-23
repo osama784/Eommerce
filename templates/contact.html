@@ -1,0 +1,72 @@
+{% extends 'main.html'%}
+{%load static%}
+
+
+{% block head%}
+<title>Contact</title>
+{% endblock head%}
+
+{% block content%}
+{% include 'navbar.html' %}
+{% include 'path.html'%}
+
+<div class="container mx-auto my-10 px-4 xl:max-w-7xl">
+  <div class="flex flex-col gap-5 lg:flex-row">
+    <div class="w-2/3 text-center lg:text-left self-center">
+      <h4 class="text-green-500 font-semibold">How we can help you ?</h4>
+      <h1 class="text-4xl font-bold">Let us know how we can help you</h1>
+      <br>
+      <p>{% lorem 40 w%}</p>
+    </div>
+    <div class="flex flex-col gap-5 grow px-4 sm:px-0">
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <div>
+          <h3 class="font-semibold">01. Visit Feedback</h3>
+          <br>
+          <p>{% lorem 20 w%}</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">02. Employer Services</h3>
+          <br>
+          <p>{% lorem 20 w%}</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <div>
+          <h3 class="text-green-500 font-semibold">03. Billing Inquiries</h3>
+          <br>
+          <p>{% lorem 20 w%}</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">04. General Inquiries</h3>
+          <br>
+          <p>{% lorem 20 w%}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-4 mx-auto my-20 lg:max-w-6xl">
+  <div class="flex flex-col gap-3">
+    <h4 class="font-semibold text-green-500">Contact form</h4>
+    <h1 class="font-bold text-4xl">Drop Us a Line</h1>
+    <p class="text-sm text-gray-500">Your email will not be published.</p>
+    <form action="">
+      <div
+        class="gap-3 grid grid-cols-2 *:rounded-lg *:border *:border-gray-300 *:p-3 *:placeholder:text-gray-600 *:h-12 *:col-span-full sm:*:col-span-1">
+        <input type="text" placeholder="First Name">
+        <input type="email" placeholder="Your Email">
+        <input type="text" placeholder="Your Phone">
+        <input type="text" placeholder="Subject">
+        <textarea name="" id="" class="!col-span-full min-h-56">Message</textarea>
+      </div>
+      <input type="submit" value="Send Message" class="p-3 bg-cyan-950 rounded-lg w-fit text-white mt-3">
+    </form>
+
+
+  </div>
+</div>
+
+{% include 'footer.html'%}
+{% endblock content%}
