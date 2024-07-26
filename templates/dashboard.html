@@ -11,34 +11,30 @@
 <div class="container mx-auto px-4 my-20 xl:max-w-7xl">
     <div class="flex gap-10 flex-col md:flex-row">
         <ul
-            class="flex flex-col gap-4 w grow *:transition-colors *:border *:rounded-lg *:cursor-pointer *:shadow *:p-3 *:grow *:flex *:items-center *:gap-3">
+            class="flex flex-col gap-4 w grow h-fit *:transition-colors *:border *:rounded-lg *:cursor-pointer *:shadow *:p-3 *:grow *:flex *:items-center *:gap-3">
             <li class="text-white bg-green-500">
                 <i class="fa-solid fa-user text-gray"></i>
-                <h3>Profile</h3>
+                <label>Profile</label>
             </li>
-            <!-- <li class="hover:bg-amber-300">
-                <i class="fa-solid fa-table-columns"></i>
-                <h3>Dashboard</h3>
-            </li> -->
             <li class="hover:bg-amber-300">
                 <i class="fa-solid fa-burger text-gray"></i>
-                <h3>Orders</h3>
+                <label>Orders</label>
             </li>
             <!-- <li class="hover:bg-amber-300">
                 <i></i>
-                <h3>Track Your Order</h3>
+                <label>Track Your Order</label>
             </li> -->
             <li class="hover:bg-amber-300">
                 <i class="fa-solid fa-location-dot text-gray"></i>
-                <h3>My Address</h3>
+                <label>My Address</label>
             </li>
             <li class="hover:bg-amber-300">
                 <i class="fa-solid fa-address-book text-gray"></i>
-                <h3>Account details</h3>
+                <label>Account details</label>
             </li>
             <li class="hover:bg-amber-300">
                 <i class="fa-solid fa-arrow-right-from-bracket text-gray"></i>
-                <h3>Logout</h3>
+                <label>Logout</label>
             </li>
         </ul>
         <div class="order-first md:order-none grow-[3] hidden">
@@ -59,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="order-first md:order-none grow-[2] overflow-x-auto pb-5">
+        <div class="hidden order-first md:order-none grow-[2] overflow-x-auto pb-5">
             <table class="pb-5 pt-3 border rounded-lg min-w-[550px] sm:min-w-full h-fit text-center">
                 <thead class="bg-gray-50  *:*:last:pr-3">
                     <tr class="*:py-3 text-sm *:font-medium *:tracking-wider text-gray-500">
@@ -92,7 +88,7 @@
             </table>
         </div>
         <div class="hidden grow-[3] space-y-2">
-            <h3 class="font-semibold">Add address | Change Address</h3>
+            <label class="font-semibold">Add address | Change Address</label>
 
             <form action="" class="space-y-3 flex flex-col gap-3">
                 <div class="flex gap-3 flex-wrap *:grow items-center">
@@ -140,8 +136,90 @@
             <p class="text-sm text-gray">* These are the valid cities you could choose. If you are not in one of these
                 cities, we're really sorry.</p>
         </div>
+        <div class="grow-[3] flex flex-col gap-5">
+            <h2 class="font-semibold text-xl">Account Details</h2>
+            <div class="flex flex-col flex-wrap gap-3 *:grow">
+                <div class="flex flex-wrap gap-3 *:grow">
+                    <div class="flex flex-col gap-1">
+                        <label>First name</label>
+                        <input type="text" class="border rounded-lg p-2 caret-slate-400 p-2">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label>Last name</label>
+                        <input type="text" class="border rounded-lg p-2 caret-slate-400 p-2">
+                    </div>
+                </div>
+                <div class="flex flex-col gap-1 *:grow">
+                    <label>Display name</label>
+                    <input type="text" class="border rounded-lg p-2 caret-slate-400 p-2">
+                </div>
+                <div class="flex flex-col gap-1 *:grow">
+                    <label>Email Address</label>
+                    <input type="email" class="border rounded-lg p-2 caret-slate-400 p-2">
+                </div>
+                <div class="flex flex-col gap-1 *:grow">
+                    <label>Password</label>
+                    <input type="text" class="border rounded-lg p-2 caret-slate-400 p-2">
+                </div>
+            </div>
+            <button
+                class="bg-green-500 text-white border rounded-lg p-4 hover:bg-amber-400 transition-colors self-start">Save
+                Profile</button>
+            <div id="change-password-pop"
+                class="hidden -flex flex-col gap-3 bg-white border rounded-lg p-5 fixed w-4/5 mx-auto sm:w-96 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[120]  scale-90 hover:scale-95 transition-transform">
+                <h1 class="font-bold text-2xl">Change Password</h1>
+                <hr>
+                <div class="flex flex-col gap-1">
+                    <label for="">New Password</label>
+                    <input type="text" class="border rounded-lg p-2 caret-slate-300">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="">Confirm Password</label>
+                    <input type="text" class="border rounded-lg p-2 caret-slate-300">
+                </div>
+                <br>
+                <hr>
+                <button class="bg-green-500 text-white p-4 rounded-lg hover:bg-amber-400 transition-colors">Confirm
+                    Changes</button>
+            </div>
+            <div id="payment-online-pop"
+                class="flex flex-col gap-3 *:grow bg-white border rounded-lg p-5 absolute w-4/5 sm:w-auto mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[120]  ">
+                <h1 class="font-bold text-2xl">Payment</h1>
+                <hr>
+                <div>
+                    <h3>Saved cards:</h3>
+                    <br>
+                    <div class="flex flex-col gap-5">
+                        <div class="flex gap-3 flex-wrap">
+                            <img src="{% static 'images/mastercard-2.jpg'%}" alt="" class="size-14 object-cover">
+                            <input type="text" class="border rounded-lg p-2 grow h-fit">
+                            <button class="text-blue-500">Remove Card</button>
+                        </div>
+                        <div class="flex gap-5 flex-wrap">
+                            <img src="{% static 'images/vis.jpg'%}" alt="" class="size-36">
+                            <input type="text" class="border rounded-lg p-2 ">
+                            <button class="text-blue-500">Remove Card</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Add new card:</h3>
+                    <div class="flex flex-col gap-3">
+                        <input type="text" placeholder="Cardholder's Name" class="border rounded-lg p-2">
+                        <div class="flex flex-wrap gap-3">
+                            <input type="text" placeholder="Card Number">
+                            <input type="text" placeholder="Expire" class="border rounded-lg p-2">
+                            <input type="text" placeholder="Cvv" class="border rounded-lg p-2">
+                        </div>
+                    </div>
+                </div>
+                <button class="bg-green-500 rounded-lg text-white hover:bg-amber-400 transition-colors p-3">Pay
+                    $123.99</button>
+            </div>
+        </div>
     </div>
-
 </div>
+
+<div class="" id="theme"></div>
 
 {% endblock content %}

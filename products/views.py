@@ -48,5 +48,5 @@ def terms_of_service(request):
 def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
-def user_info(request):
-    return render(request, 'account.html')
+def dashboard(request):
+    return render(request, 'dashboard.html')
