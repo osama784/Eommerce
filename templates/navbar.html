@@ -1,4 +1,4 @@
-{% load static %} 
+{% load static %}
 
 <div class="border-b border-slate-400 w-full h-8 flex justify-center items-center">
   <div class="flex justify-center sm:justify-between items-center container px-4 text-sm">
@@ -10,7 +10,9 @@
         <li class="border-none">Order Tracking</li>
       </ul>
     </div>
-    <div class="hidden sm:block"><p>save up 35% off tody!</p></div>
+    <div class="hidden sm:block">
+      <p>save up 35% off tody!</p>
+    </div>
     <div class="hidden lg:block">
       <ul class="flex gap-2">
         <li>
@@ -23,20 +25,17 @@
   </div>
 </div>
 
-<div class="h-fit sm:h-28 w-full border-b border-slate-400 flex justify-center items-center" style="background-color: #fefefe">
-  <div class="flex flex-col gap-5 py-5 sm:py-0 justify-center sm:flex-row sm:justify-between items-center container px-4 text-sm sm:gap-4">
+<div class="h-fit sm:h-28 w-full border-b border-slate-400 flex justify-center items-center"
+  style="background-color: #fefefe">
+  <div
+    class="flex flex-col gap-5 py-5 sm:py-0 justify-center sm:flex-row sm:justify-between items-center container px-4 text-sm sm:gap-4">
     <div class="block">
       <img src="{% static 'images/nest.jpg' %}" alt="" />
     </div>
     <div class="flex-grow lg:max-w-96">
       <form action="" class="flex justify-between items-center border border-slate-400 px-6 h-8 rounded">
-        <input
-          type="text"
-          name=""
-          id=""
-          placeholder="Search for items..."
-          class="outline-none caret-slate-400 flex-1 placeholder:text-black"
-        />
+        <input type="text" name="" id="" placeholder="Search for items..."
+          class="outline-none caret-slate-400 flex-1 placeholder:text-black" />
         <i class="fa-solid fa-magnifying-glass text-green-400 cursor-pointer"></i>
       </form>
     </div>
@@ -59,18 +58,23 @@
   </div>
 </div>
 
-<div class="h-16 w-full border-b border-slate-400 flex justify-center items-center sticky top-0 bg-white z-[100] shadow-sm">
+<div
+  class="h-16 w-full border-b border-slate-400 flex justify-center items-center sticky top-0 bg-white z-[100] shadow-sm">
   <div class="flex justify-center md:justify-between items-center container px-4 text-sm gap-5 md:gap-0">
-    <div class="flex items-center gap-2 bg-green-500 p-2 rounded text-white cursor-pointer hover:bg-green-600 transition-colors">
+    <div
+      class="flex items-center gap-2 bg-green-500 p-2 rounded text-white cursor-pointer hover:bg-green-600 transition-colors">
       <i class="fa-solid fa-table"></i>
       <p>Browse All Categories</p>
       <i class="fa-solid fa-chevron-down"></i>
     </div>
-    <div class="block md:hidden py-1 px-3 rounded bg-gray-400 hover:bg-gray-500 transition-colors text-lg text-white cursor-pointer order-first">
+    <div
+      class="block md:hidden py-1 px-3 rounded bg-gray-400 hover:bg-gray-500 transition-colors text-lg text-white cursor-pointer order-first">
       <i class="fa-solid fa-list"></i>
     </div>
-    <div class="max-md:fixed max-md:min-h-screen max-md:w-1/4 max-md:bg-white max-md:z-50 -left-full top-0 max-md:shadow ">
-      <ul class="flex gap-3 max-md:flex-col max-md:pl-8 max-md:pt-10 *:p-1 *:cursor-pointer *:transition-colors *:rounded">
+    <div
+      class="max-md:fixed max-md:min-h-screen max-md:w-1/4 max-md:bg-white max-md:z-50 -left-full top-0 max-md:shadow ">
+      <ul
+        class="flex gap-3 max-md:flex-col max-md:pl-8 max-md:pt-10 *:p-1 *:cursor-pointer *:transition-colors *:rounded">
         <li class="flex items-center gap-2 hover:text-green-500">
           <i class="fa-solid fa-fire text-green-700"></i>
           <p>Deals</p>
@@ -79,9 +83,17 @@
         <li class="hover:text-green-500">Shop</li>
         <li class="hover:text-green-500">Vendors</li>
         <li class="hover:text-green-500">Blog</li>
-        <li class="flex items-center gap-2 hover:text-green-500">
+        <li class="flex items-center gap-2 hover:text-green-500 relative">
           <p>Pages</p>
           <i class="fa-solid fa-chevron-down text-sm"></i>
+          <ul id="pages-pop"
+            class="absolute hidden -flex flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -left-8 w-40 *:text-gray-500">
+            <li class="hover:text-black transition-colors">About Us</li>
+            <li class="hover:text-black transition-colors">My Dashboard</li>
+            <li class="hover:text-black transition-colors">Purchase Guide</li>
+            <li class="hover:text-black transition-colors">Privacy Policy</li>
+            <li class="hover:text-black transition-colors">Terms of Service</li>
+          </ul>
         </li>
         <li class="hover:text-green-500">Contact</li>
       </ul>

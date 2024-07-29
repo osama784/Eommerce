@@ -11,7 +11,7 @@
 <div class="container mx-auto px-4 my-20 xl:max-w-7xl">
     <div class="flex gap-10 flex-col md:flex-row">
         <ul
-            class="flex flex-col gap-4 w grow h-fit *:transition-colors *:border *:rounded-lg *:cursor-pointer *:shadow *:p-3 *:grow *:flex *:items-center *:gap-3">
+            class="flex flex-col gap-4 grow h-fit *:transition-colors *:border *:rounded-lg *:cursor-pointer *:shadow *:p-3 *:grow *:flex *:items-center *:gap-3">
             <li class="text-white bg-green-500">
                 <i class="fa-solid fa-user text-gray"></i>
                 <label>Profile</label>
@@ -20,10 +20,6 @@
                 <i class="fa-solid fa-burger text-gray"></i>
                 <label>Orders</label>
             </li>
-            <!-- <li class="hover:bg-amber-300">
-                <i></i>
-                <label>Track Your Order</label>
-            </li> -->
             <li class="hover:bg-amber-300">
                 <i class="fa-solid fa-location-dot text-gray"></i>
                 <label>My Address</label>
@@ -142,24 +138,24 @@
                 <div class="flex flex-wrap gap-3 *:grow">
                     <div class="flex flex-col gap-1">
                         <label>First name</label>
-                        <input type="text" class="border rounded-lg p-2 caret-slate-400 p-2">
+                        <input type="text" class="border rounded-lg p-2 caret-slate-400">
                     </div>
                     <div class="flex flex-col gap-1">
                         <label>Last name</label>
-                        <input type="text" class="border rounded-lg p-2 caret-slate-400 p-2">
+                        <input type="text" class="border rounded-lg p-2 caret-slate-400">
                     </div>
                 </div>
                 <div class="flex flex-col gap-1 *:grow">
                     <label>Display name</label>
-                    <input type="text" class="border rounded-lg p-2 caret-slate-400 p-2">
+                    <input type="text" class="border rounded-lg p-2 caret-slate-400">
                 </div>
                 <div class="flex flex-col gap-1 *:grow">
                     <label>Email Address</label>
-                    <input type="email" class="border rounded-lg p-2 caret-slate-400 p-2">
+                    <input type="email" class="border rounded-lg p-2 caret-slate-400">
                 </div>
                 <div class="flex flex-col gap-1 *:grow">
                     <label>Password</label>
-                    <input type="text" class="border rounded-lg p-2 caret-slate-400 p-2">
+                    <input type="text" class="border rounded-lg p-2 caret-slate-400">
                 </div>
             </div>
             <button
@@ -183,21 +179,21 @@
                     Changes</button>
             </div>
             <div id="payment-online-pop"
-                class="flex flex-col gap-3 *:grow bg-white border rounded-lg p-5 absolute w-4/5 sm:w-auto mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[120]  ">
+                class="hidden -flex flex-col gap-3 *:grow bg-white border rounded-lg p-5 absolute w-4/5 lg:w-3/5 mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[120] hover:scale-105 transition-all">
                 <h1 class="font-bold text-2xl">Payment</h1>
                 <hr>
                 <div>
                     <h3>Saved cards:</h3>
                     <br>
                     <div class="flex flex-col gap-5">
-                        <div class="flex gap-3 flex-wrap">
-                            <img src="{% static 'images/mastercard-2.jpg'%}" alt="" class="size-14 object-cover">
+                        <div class="flex gap-3 flex-wrap items-center">
+                            <img src="{% static 'images/mastercard.jpg'%}" alt="" class="size-14 object-cover">
                             <input type="text" class="border rounded-lg p-2 grow h-fit">
                             <button class="text-blue-500">Remove Card</button>
                         </div>
-                        <div class="flex gap-5 flex-wrap">
-                            <img src="{% static 'images/vis.jpg'%}" alt="" class="size-36">
-                            <input type="text" class="border rounded-lg p-2 ">
+                        <div class="flex gap-3 flex-wrap items-center">
+                            <img src="{% static 'images/visa.jpg'%}" alt="" class="size-14">
+                            <input type="text" class="border rounded-lg p-2 grow h-fit">
                             <button class="text-blue-500">Remove Card</button>
                         </div>
                     </div>
@@ -206,8 +202,8 @@
                     <h3>Add new card:</h3>
                     <div class="flex flex-col gap-3">
                         <input type="text" placeholder="Cardholder's Name" class="border rounded-lg p-2">
-                        <div class="flex flex-wrap gap-3">
-                            <input type="text" placeholder="Card Number">
+                        <div class="flex flex-wrap gap-3 *:grow">
+                            <input type="text" placeholder="Card Number" class="border rounded-lg p-2">
                             <input type="text" placeholder="Expire" class="border rounded-lg p-2">
                             <input type="text" placeholder="Cvv" class="border rounded-lg p-2">
                         </div>
@@ -220,6 +216,6 @@
     </div>
 </div>
 
-<div class="" id="theme"></div>
+<div class="hidden fixed inset-0 bg-slate-200/75 z-[110]" id="theme"></div>
 
 {% endblock content %}

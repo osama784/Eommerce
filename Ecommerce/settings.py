@@ -112,9 +112,12 @@ STATIC_URL = 'static/'
 
 # STATIC_ROOT = '/staticfiles/'
 
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+  BASE_DIR / "static",
+  BASE_DIR.parent / "node_modules"
 ]
+STATIC_ROOT = BASE_DIR.parent / "static"
 
 
 # Default primary key field type
