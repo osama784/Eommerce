@@ -1167,6 +1167,10 @@ html.dark{
   width: 100vw;
 }
 
+.w-44{
+  width: 11rem;
+}
+
 .min-w-\[550px\]{
   min-width: 550px;
 }
@@ -1943,6 +1947,10 @@ html.dark{
 
 .font-\[FontAwesome\]{
   font-family: FontAwesome;
+}
+
+.font-body{
+  font-family: Roboto;
 }
 
 .font-mono{

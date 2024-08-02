@@ -123,7 +123,7 @@ class Like_DisLike(models.Model):
  
 
 class Invoice(models.Model):
-    class PaidStatusChoices(models.IntegerChoices):
+    class StatusChoices(models.IntegerChoices):
         PROCESSING = 1
         DELIVERED  = 2
         SHIPPED = 3
@@ -132,6 +132,6 @@ class Invoice(models.Model):
     name = models.CharField(default='INVOICE', max_length=50)
     total = models.IntegerField()
     paid_status = models.BooleanField(default=False)
-    status = models.IntegerField(choices=PaidStatusChoices.choices)
+    status = models.IntegerField(choices=StatusChoices.choices)
     products = models.JSONField()
     created = models.DateTimeField(auto_now_add=True)
