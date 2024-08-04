@@ -110,11 +110,11 @@ USE_TZ = True
 
 # STATIC_ROOT = '/staticfiles/'
 
-# STATIC_URL = 'static/'
-# STATICFILES_DIRS = [
-#   BASE_DIR / "static",
-#   BASE_DIR.parent / "node_modules"
-# ]
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+  BASE_DIR / "static",
+  BASE_DIR.parent / "node_modules"
+]
 # STATIC_ROOT = BASE_DIR/ "static"
 
 
