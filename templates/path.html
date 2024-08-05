@@ -7,8 +7,10 @@
             </div>
         </a>
         <span class="text-green-500">&gt;</span>
-        <a href="" class="text-green-600">Shop</a>
+        <a href="" class="text-green-600">{{ parent_page_name }}</a>
+        {% if page_name %}
         <span class="text-green-500">&gt;</span>
-        <span>page name</span>
+        <span>{{ page_name }}</span>
+        {% endif %}
     </div>
 </div>

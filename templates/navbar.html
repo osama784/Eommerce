@@ -76,14 +76,29 @@
       <ul
         class="flex gap-3 max-md:flex-col max-md:pl-8 max-md:pt-10 text-base relative [&>*:where(li)]:p-1 [&>*:where(li)]:cursor-pointer [&>*:where(li)]:transition-colors [&>*:where(li)]:rounded"
         x-data="{pagesShown: false}">
-        <li class="flex items-center gap-2 hover:text-green-500">
-          <i class="fa-solid fa-fire text-green-700"></i>
+        <li class="flex items-center gap-2 hover:text-amber-500
+          {% if chosen == 'deals'%}
+          text-amber-500
+          {% endif %}">
+          <i class="fa-solid fa-fire text-amber-500"></i>
           <p>Deals</p>
         </li>
-        <li class="hover:text-green-500">Home</li>
-        <li class="hover:text-green-500">Shop</li>
-        <li class="hover:text-green-500">Vendors</li>
-        <li class="hover:text-green-500">Blog</li>
+        <li class="hover:text-green-500
+          {% if chosen == 'home' %}
+          text-green-500
+          {% endif %}">Home</li>
+        <li class="hover:text-green-500
+                  {% if chosen == 'shop' %}
+                  text-green-500
+                  {% endif %}">Shop</li>
+        <li class="hover:text-green-500
+                  {% if chosen == 'vendors' %}
+                  text-green-500
+                  {% endif %}">Vendors</li>
+        <li class="hover:text-green-500
+                  {% if chosen == 'blog' %}
+                  text-green-500
+                  {% endif %}">Blog</li>
         <li class="flex items-center gap-2 hover:text-green-500" @click="pagesShown = !pagesShown">
           <p>Pages</p>
           <i class="fa-solid fa-chevron-down text-sm"></i>
@@ -97,7 +112,10 @@
           <li class="hover:text-black transition-colors">Privacy Policy</li>
           <li class="hover:text-black transition-colors">Terms of Service</li>
         </ul>
-        <li class="hover:text-green-500">Contact</li>
+        <li class="hover:text-green-500 
+        {% if chosen == 'contact'%}
+        text-green-500
+        {% endif %}">Contact</li>
       </ul>
     </div>
 

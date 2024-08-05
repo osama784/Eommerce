@@ -20,7 +20,7 @@ def index(request):
 def product(request):
     return render(request, 'product.html')
 
-
+@login_required
 def cart(request):
     orders = Order.objects.filter(owner=request.user.profile).select_related('product', 'owner')
     context = {'orders': orders}
