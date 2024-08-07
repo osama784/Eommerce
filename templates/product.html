@@ -8,33 +8,24 @@
 {% block content %}
 {% include 'navbar.html'%}
 
-
-<div class=" w-full py-6 border-b border-slate-400 content-center">
-    <div class="container flex flex-wrap  gap-7 px-4 sm:pl-24 justify-center sm:justify-normal items-center text-sm ">
-        <a href="{% url 'index'%}">
-            <div class="text-green-700 flex items-center gap-2">
-                <i class="fa-solid fa-house"></i>
-                <span >Home</span>
-            </div>
-        </a>
-        <span class="text-green-500">&gt;</span>
-        <a href="" class="text-green-600">category-name</a>
-        <span class="text-green-500">&gt;</span>
-        <a href="">Product-name</a>
-    </div>
-</div>
+{% include 'path.html' with parent_page_name="Category_name" page_name="product_name" %}
 
 <div class="grid grid-cols-12 gap-4 container mx-auto my-5 px-4 max-w-[1270px]">
     <div class="space-y-10 sm:space-y-0 sm:grid grid-cols-12 gap-10 col-span-full lg:col-span-8 xl:col-span-9 h-fit">
         <div class="sm:col-span-6 flex flex-col gap-5 w-4/6 mx-auto sm:w-auto sm:mx-0 max-[420px]:w-full">
             <div class="h-96 rounded-xl border-2">
-                <img src="{% static 'images/grilled-bbq-chicken.jpg'%}" alt="" class="rounded-lg size-full object-cover">
+                <img src="{% static 'images/grilled-bbq-chicken.jpg'%}" alt=""
+                    class="rounded-lg size-full object-cover">
             </div>
             <div class="flex justify-between gap-1 *:rounded-lg *:border h-24 *:cursor-pointer *:w-20">
-                <div class="hover:opacity-80 transition-opacity"><img src="{% static 'images/cake.jpg'%}" alt="" class="size-full rounded-lg object-cover"></div>
-                <div class="hover:opacity-80 transition-opacity"><img src="{% static 'images/cake.jpg'%}" alt="" class="size-full rounded-lg object-cover"></div>
-                <div class="hover:opacity-80 transition-opacity"><img src="{% static 'images/cake.jpg'%}" alt="" class="size-full rounded-lg object-cover"></div>
-                <div class="hover:opacity-80 transition-opacity"><img src="{% static 'images/cake.jpg'%}" alt="" class="size-full rounded-lg object-cover"></div>
+                <div class="hover:opacity-80 transition-opacity"><img src="{% static 'images/cake.jpg'%}" alt=""
+                        class="size-full rounded-lg object-cover"></div>
+                <div class="hover:opacity-80 transition-opacity"><img src="{% static 'images/cake.jpg'%}" alt=""
+                        class="size-full rounded-lg object-cover"></div>
+                <div class="hover:opacity-80 transition-opacity"><img src="{% static 'images/cake.jpg'%}" alt=""
+                        class="size-full rounded-lg object-cover"></div>
+                <div class="hover:opacity-80 transition-opacity"><img src="{% static 'images/cake.jpg'%}" alt=""
+                        class="size-full rounded-lg object-cover"></div>
             </div>
         </div>
         <div class="flex flex-col gap-5 border rounded-lg p-3 sm:p-0 sm:border-none sm:col-span-6 xl:pr-24">
@@ -59,7 +50,8 @@
             </div>
             <p class="text-gray-800">This is the product.</p>
             <div class="flex flex-col gap-2">
-                <input type="number" maxlength="3" class="rounded-lg outline-none border w-fit border-gray-500 px-3 py-5 caret-slate-400">
+                <input type="number" maxlength="3"
+                    class="rounded-lg outline-none border w-fit border-gray-500 px-3 py-5 caret-slate-400">
                 <div class="flex gap-2 items-center">
                     <div class="space-x-2 bg-green-500 text-white py-2 px-3 rounded cursor-pointer">
                         <i class="fa-solid fa-cart-shopping"></i>
@@ -82,7 +74,7 @@
                 <div>
                     <p>SKU: <span></span></p>
                     <p>TAGS: </p>
-                    <p>STOCK: <span class="text-green-500">10 items</span></p>                        
+                    <p>STOCK: <span class="text-green-500">10 items</span></p>
                 </div>
             </div>
         </div>
@@ -119,9 +111,11 @@
                         </div>
                     </div>
                     <div class="mt-16">
-                        <p class="flex gap-3 items-center"><i class="fa-solid fa-location-dot text-green-700"></i><span>Address: 123 Main
+                        <p class="flex gap-3 items-center"><i
+                                class="fa-solid fa-location-dot text-green-700"></i><span>Address: 123 Main
                                 Street</span></p>
-                        <p class="flex gap-2 items-center"><i class="fa-solid fa-headset text-green-700"></i><span>Contact Seller:
+                        <p class="flex gap-2 items-center"><i
+                                class="fa-solid fa-headset text-green-700"></i><span>Contact Seller:
                                 +124(456)789</span></p>
                     </div>
                     <hr class="border-gray-400 mt-5">
@@ -148,11 +142,13 @@
                                 <div class="flex flex-col gap-2 *:rounded *:border *:p-2">
                                     <div>
                                         <small>Username</small>
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique saepe esse.</p>
+                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique saepe
+                                            esse.</p>
                                     </div>
                                     <div>
                                         <small>Username</small>
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique saepe esse.</p>
+                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique saepe
+                                            esse.</p>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +160,7 @@
                             <select name="" id="" class="font-[FontAwesome] p-3 rounded-lg border w-fit">
                                 <option value="">
                                     &#xf005;
-                                    
+
                                 </option>
                                 <option value="">
                                     &#xf005;
@@ -196,209 +192,233 @@
                     </div>
                     <div class="flex flex-col gap-3 xl:w-5/12 ">
                         <div class="font-medium">
-                            <h3 >Customer Quastions & answers</h3>
+                            <h3>Customer Quastions & answers</h3>
                             <small>out of 5.0</small>
                         </div>
                         <div class="flex flex-col gap-3 *:flex *:gap-3">
                             <div>
                                 <span>5 star</span>
-                                <div class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-4/5 before:h-full before:rounded-s-lg before:block "></div>
+                                <div
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-4/5 before:h-full before:rounded-s-lg before:block ">
+                                </div>
                             </div>
                             <div>
                                 <span>4 star</span>
-                                <div class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-3/5 before:h-full before:rounded-s-lg before:block "></div>
+                                <div
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-3/5 before:h-full before:rounded-s-lg before:block ">
+                                </div>
                             </div>
                             <div>
                                 <span>3 star</span>
-                                <div class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-1/5 before:h-full before:rounded-s-lg before:block "></div>
+                                <div
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-1/5 before:h-full before:rounded-s-lg before:block ">
+                                </div>
                             </div>
                             <div>
                                 <span>2 star</span>
-                                <div class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-2/5 before:h-full before:rounded-s-lg before:block "></div>
+                                <div
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-2/5 before:h-full before:rounded-s-lg before:block ">
+                                </div>
                             </div>
                             <div>
                                 <span>1 star</span>
-                                <div class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-full before:h-full before:rounded-lg before:block "></div>
+                                <div
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-full before:h-full before:rounded-lg before:block ">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-        
+
         </div>
     </div>
-    <div class="lg:grid grid-cols-2 gap-y-5 space-y-10 mt-10 sm:mt-0 lg:space-y-0 col-span-full lg:col-span-4 xl:col-span-3 h-fit">
-        <div class="rounded-lg shadow-md border flex flex-col gap-1 col-span-full p-3 pb-10 pl-5 bg-slate-200 h-fit">
-            <h1 class="font-bold text-black text-2xl">Delivery</h1>
-            <p class="text-green-400"><i class="fa-solid fa-location-dot"></i></p>
-            <p class="flex justify-between mt-5"><span class="text-red-500">unverefied location</span><a href="" class="text-green-600">Change</a></p>
-            <hr class="border-gray-400 mt-5">
-            <h1 class="font-bold text-black text-2xl my-3">Return & Warranty</h1>
-            <p class="flex gap-1 items-center"><i class="fa-solid fa-shield-heart text-green-700"></i><span>100 Days Authentic</span></p>
-            <p class="flex gap-1 items-center"><i class="fa-solid fa-rotate-left text-green-700"></i><span>100 Days Return</span></p>
-            <p class="flex gap-1 items-center"><i class="fa-solid fa-medal text-green-700"></i><span>100 Months Warranty</span></p>
-        </div>
-        <div class="rounded-lg shadow-md border flex flex-col gap-1 col-span-full p-3 pb-10 pl-5 bg-slate-200 h-fit">
-            <h1 class="font-bold text-black text-2xl ">Vendor</h1>
-            <div class="flex h-36 gap-2 w-fit items-center self-center">
-                <div class="rounded-full w-fit h-fit overflow-hidden mt-10">
-                    <img src="{% static 'images/nature-food.png'%}" alt="" class="object-cover size-32">
-                </div>
-                <div class="flex flex-col gap-2">
-                    <span class="text-green-500">Nestify</span>
-                    <div class="flex gap-1 pl-5">
-                        <i class="fa-solid fa-star text-yellow-500"></i>
-                        <i class="fa-solid fa-star text-yellow-500"></i>
-                        <i class="fa-solid fa-star text-yellow-500"></i>
-                        <i class="fa-solid fa-star text-yellow-500"></i>
-                        <i class="fa-solid fa-star text-yellow-500"></i>
+    <div
+        class="flex flex-col lg:grid grid-cols-2 gap-y-10 lg:gap-y-5 mt-10 sm:mt-0 col-span-full lg:col-span-4 xl:col-span-3 h-fit">
+        <div
+            class="col-span-full h-fit flex flex-col sm:flex-row lg:flex-col items-center justify-between gap-x-10 gap-y-5 max-w-[730px] mx-auto">
+            <div
+                class="rounded-lg shadow-md border flex flex-col gap-1 col-span-full p-3 pb-10 px-5 bg-slate-200 h-fit">
+                <h1 class="font-bold text-black text-2xl">Delivery</h1>
+                <p class="text-green-400"><i class="fa-solid fa-location-dot"></i></p>
+                <p class="flex justify-between mt-5"><span class="text-red-500">unverefied location</span><a href=""
+                        class="text-green-600">Change</a></p>
+                <hr class="border-gray-400 mt-5">
+                <h1 class="font-bold text-black text-2xl my-3">Return & Warranty</h1>
+                <p class="flex gap-1 items-center"><i class="fa-solid fa-shield-heart text-green-700"></i><span>100 Days
+                        Authentic</span></p>
+                <p class="flex gap-1 items-center"><i class="fa-solid fa-rotate-left text-green-700"></i><span>100 Days
+                        Return</span></p>
+                <p class="flex gap-1 items-center"><i class="fa-solid fa-medal text-green-700"></i><span>100 Months
+                        Warranty</span></p>
+            </div>
+            <div
+                class="rounded-lg shadow-md border flex flex-col gap-1 col-span-full p-3 pb-10 px-5 bg-slate-200 h-fit">
+                <h1 class="font-bold text-black text-2xl ">Vendor</h1>
+                <div class="flex h-36 gap-2 w-fit items-center self-center">
+                    <div class="rounded-full w-fit h-fit overflow-hidden mt-10">
+                        <img src="{% static 'images/nature-food.png'%}" alt="" class="object-cover size-32">
                     </div>
-                    <span class="text-gray-500 pl-12">reviews(32)</span>
+                    <div class="flex flex-col gap-2">
+                        <span class="text-green-500">Nestify</span>
+                        <div class="flex gap-1 pl-5">
+                            <i class="fa-solid fa-star text-yellow-500"></i>
+                            <i class="fa-solid fa-star text-yellow-500"></i>
+                            <i class="fa-solid fa-star text-yellow-500"></i>
+                            <i class="fa-solid fa-star text-yellow-500"></i>
+                            <i class="fa-solid fa-star text-yellow-500"></i>
+                        </div>
+                        <span class="text-gray-500 pl-12">reviews(32)</span>
+                    </div>
+                </div>
+                <div class="mt-16">
+                    <p class="flex gap-3 items-center"><i
+                            class="fa-solid fa-location-dot text-green-700"></i><span>Address:
+                            123 Main Street</span></p>
+                    <p class="flex gap-2 items-center"><i class="fa-solid fa-headset text-green-700"></i><span>Contact
+                            Seller: +124(456)789</span></p>
+                </div>
+                <hr class="border-gray-400 mt-5">
+                <div class="flex gap-2 justify-between mt-5">
+                    <div class="flex flex-col gap-2 items-center">
+                        <small class="text-green-600">Rating</small>
+                        <strong class="font-bold text-3xl">92%</strong>
+                    </div>
+                    <div class="flex flex-col gap-2 items-center">
+                        <small class="text-green-600">Snip on time</small>
+                        <strong class="font-bold text-3xl">100%</strong>
+                    </div>
+                    <div class="flex flex-col gap-2 items-center">
+                        <small class="text-green-600">Chat reponse</small>
+                        <strong class="font-bold text-3xl">100%</strong>
+                    </div>
+                </div>
+                <hr class="border-gray-400 mt-5">
+                <p class="mt-5 text-lg">Become A Vendor? <a href="" class="text-green-600">Register Now</a></p>
+            </div>
+        </div>
+        <div class="grid-cols-2 gap-y-5 hidden col-span-3 lg:grid lg:col-span-4 xl:col-span-3 order-last">
+            <div class="rounded-lg shadow-md border flex col-span-full p-3 flex-col">
+                <h2 class="font-bold border-b pb-3 text-lg">Category</h2>
+                <ul
+                    class="*:flex *:items-center *:justify-between *:gap-1 *:border *:px-2 *:py-1 text-sm flex flex-col h-full mt-5 gap-5">
+                    <li>
+                        <div class="flex gap-2 items-center">
+                            <i class="fa-solid fa-cow text-blue-950"></i>
+                            <a href="">
+                                <p class="hover:text-blue-950 transition-colors cursor-pointer">
+                                    Milks & Dairies
+                                </p>
+                            </a>
+                        </div>
+                        <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">64</span>
+                    </li>
+                    <li>
+                        <div class="flex gap-2 items-center">
+                            <i class="fa-solid fa-paw text-blue-800"></i>
+                            <a href="">
+                                <p class="hover:text-blue-800 transition-colors cursor-pointer">
+                                    Pet Foods
+                                </p>
+                            </a>
+                        </div>
+                        <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">41</span>
+                    </li>
+                    <li>
+                        <div class="flex gap-2 items-center">
+                            <i class="fa-solid fa-cake-candles text-pink-600"></i>
+                            <a href="">
+                                <p class="hover:text-pink-600 transition-colors cursor-pointer">
+                                    Baking Material
+                                </p>
+                            </a>
+                        </div>
+                        <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">34</span>
+                    </li>
+                    <li>
+                        <div class="flex gap-2 items-center">
+                            <i class="fa-solid fa-seedling text-green-500"></i>
+                            <a href="">
+                                <p class="hover:text-green-500 transition-colors cursor-pointer">
+                                    Fresh Fruits
+                                </p>
+                            </a>
+                        </div>
+                        <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">25</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="rounded-lg shadow-md border flex col-span-full p-3 flex-col gap-2 relative ">
+                <h2 class="font-bold border-b pb-3 text-lg">Fill by price</h2>
+                <hr class="border-green-600 border-2 rounded" />
+                <div class="flex justify-between">
+                    <p class="text-sm">
+                        From: <span class="text-green-600 font-bold">$500</span>
+                    </p>
+                    <p class="text-sm">
+                        To: <span class="text-green-600 font-bold">$1,000</span>
+                    </p>
+                </div>
+
+                <form action="" class="flex flex-col gap-5">
+                    <div>
+                        <h3>Color</h3>
+                        <ul class="text-gray-700 flex flex-col pl-2 gap-1 *:flex *:items-center *:gap-1">
+                            <li>
+                                <input type="checkbox" name="color" id="red" class="" />
+                                <label for="">Red (56)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="color" id="green" />
+                                <label for="green">Green (56)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="color" id="blue" />
+                                <label for="blue">Blue (21)</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Item Condition</h3>
+                        <ul class="text-gray-700 flex flex-col pl-2 gap-1 *:flex *:items-center *:gap-1">
+                            <li>
+                                <input type="checkbox" name="condition" id="new" />
+                                <label for="new">New</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="condition" id="refurbished" />
+                                <label for="refurbished">Refurbished</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="condition" id="sweets" />
+                                <label for="sweets">Sweets</label>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+                <div
+                    class="w-fit bg-green-500 hover:bg-green-600 transition-colors text-center py-3 px-8 rounded space-x-2 cursor-pointer">
+                    <i class="fa-solid fa-filter text-white"></i>
+                    <button class="text-white rounded">Filter</button>
+                </div>
+                <div class="absolute bottom-10 right-0 rotate-90">
+                    <img src="{% static 'images/lettuce.png'%}" alt="" class="w-24" draggable="false" />
                 </div>
             </div>
-            <div class="mt-16">
-                <p class="flex gap-3 items-center"><i class="fa-solid fa-location-dot text-green-700"></i><span>Address: 123 Main Street</span></p>
-                <p class="flex gap-2 items-center"><i class="fa-solid fa-headset text-green-700"></i><span>Contact Seller: +124(456)789</span></p>
-            </div>
-            <hr class="border-gray-400 mt-5">
-            <div class="flex gap-2 justify-between mt-5">
-                <div class="flex flex-col gap-2 items-center">
-                    <small class="text-green-600">Rating</small>
-                    <strong class="font-bold text-3xl">92%</strong>
-                </div>
-                <div class="flex flex-col gap-2 items-center">
-                    <small class="text-green-600">Snip on time</small>
-                    <strong class="font-bold text-3xl">100%</strong>
-                </div>
-                <div class="flex flex-col gap-2 items-center">
-                    <small class="text-green-600">Chat reponse</small>
-                    <strong class="font-bold text-3xl">100%</strong>
-                </div>
-            </div>
-            <hr class="border-gray-400 mt-5">
-            <p class="mt-5 text-lg">Become A Vendor? <a href="" class="text-green-600">Register Now</a></p>
         </div>
     </div>
 </div>
 
 
 <div class="grid grid-cols-12 gap-4 container mx-auto my-5 px-4 max-w-[1270px]">
-    <div class="grid-cols-2 gap-y-5 hidden col-span-3 lg:grid lg:col-span-4 xl:col-span-3 order-last">
-        <div class="rounded-lg shadow-md border flex col-span-full p-3 flex-col">
-            <h2 class="font-bold border-b pb-3 text-lg">Category</h2>
-            <ul
-                class="*:flex *:items-center *:justify-between *:gap-1 *:border *:px-2 *:py-1 text-sm flex flex-col h-full mt-5 gap-5">
-                <li>
-                    <div class="flex gap-2 items-center">
-                        <i class="fa-solid fa-cow text-blue-950"></i>
-                        <a href="">
-                            <p class="hover:text-blue-950 transition-colors cursor-pointer">
-                                Milks & Dairies
-                            </p>
-                        </a>
-                    </div>
-                    <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">64</span>
-                </li>
-                <li>
-                    <div class="flex gap-2 items-center">
-                        <i class="fa-solid fa-paw text-blue-800"></i>
-                        <a href="">
-                            <p class="hover:text-blue-800 transition-colors cursor-pointer">
-                                Pet Foods
-                            </p>
-                        </a>
-                    </div>
-                    <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">41</span>
-                </li>
-                <li>
-                    <div class="flex gap-2 items-center">
-                        <i class="fa-solid fa-cake-candles text-pink-600"></i>
-                        <a href="">
-                            <p class="hover:text-pink-600 transition-colors cursor-pointer">
-                                Baking Material
-                            </p>
-                        </a>
-                    </div>
-                    <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">34</span>
-                </li>
-                <li>
-                    <div class="flex gap-2 items-center">
-                        <i class="fa-solid fa-seedling text-green-500"></i>
-                        <a href="">
-                            <p class="hover:text-green-500 transition-colors cursor-pointer">
-                                Fresh Fruits
-                            </p>
-                        </a>
-                    </div>
-                    <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">25</span>
-                </li>
-            </ul>
-        </div>
-        <div class="rounded-lg shadow-md border flex col-span-full p-3 flex-col gap-2 relative ">
-            <h2 class="font-bold border-b pb-3 text-lg">Fill by price</h2>
-            <hr class="border-green-600 border-2 rounded" />
-            <div class="flex justify-between">
-                <p class="text-sm">
-                    From: <span class="text-green-600 font-bold">$500</span>
-                </p>
-                <p class="text-sm">
-                    To: <span class="text-green-600 font-bold">$1,000</span>
-                </p>
-            </div>
-
-            <form action="" class="flex flex-col gap-5">
-                <div>
-                    <h3>Color</h3>
-                    <ul class="text-gray-700 flex flex-col pl-2 gap-1 *:flex *:items-center *:gap-1">
-                        <li>
-                            <input type="checkbox" name="color" id="red" class="" />
-                            <label for="">Red (56)</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="color" id="green" />
-                            <label for="green">Green (56)</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="color" id="blue" />
-                            <label for="blue">Blue (21)</label>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Item Condition</h3>
-                    <ul class="text-gray-700 flex flex-col pl-2 gap-1 *:flex *:items-center *:gap-1">
-                        <li>
-                            <input type="checkbox" name="condition" id="new" />
-                            <label for="new">New</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="condition" id="refurbished" />
-                            <label for="refurbished">Refurbished</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="condition" id="sweets" />
-                            <label for="sweets">Sweets</label>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-            <div
-                class="w-fit bg-green-500 hover:bg-green-600 transition-colors text-center py-3 px-8 rounded space-x-2 cursor-pointer">
-                <i class="fa-solid fa-filter text-white"></i>
-                <button class="text-white rounded">Filter</button>
-            </div>
-            <div class="absolute bottom-10 right-0 rotate-90">
-                <img src="{% static 'images/lettuce.png'%}" alt="" class="w-24" draggable="false" />
-            </div>
-        </div>
-    </div>
     <div class="grid grid-cols-12 gap-y-5 col-span-full lg:col-span-8 xl:col-span-9 h-fit">
         <div class="rounded-lg col-span-full flex flex-col gap-y-4">
             <h1 class="text-3xl max-[360px]:text-xl">Related Prducts</h1>
             <hr class="border">
             <div class="grid max-[430px]:grid-cols-2 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                <div class="border rounded-xl flex flex-col gap-1 relative px-2 py-2 col-span-2 transition-all hover:shadow hover:border-gray-500">
+                <div
+                    class="border rounded-xl flex flex-col gap-1 relative px-2 py-2 col-span-2 transition-all hover:shadow hover:border-gray-500">
                     <span
                         class="absolute w-16 h-6 text-center content-center text-sm bg-pink-500 text-white top-0 left-0 rounded-ss-xl rounded-ee-xl z-50">-40%</span>
                     <div class="w-full border h-56 rounded-lg group realtive overflow-hidden">
