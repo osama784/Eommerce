@@ -28,48 +28,10 @@
     </div>
 </div>
 
-<div class="container mx-auto px-4">
+<div class="container mx-auto px-4 flex flex-col gap-3">
     <p>We found 5 items for you!</p>
     <div class="grid grid-cols-12 gap-y-5">
-        <!-- <div class="rounded-lg shadow-sm border col-span-full px-5 sm:px-20 py-16 bg-center bg-no-repeat bg-cover"
-            style="background-image: url(../static/images/fruits-background.jpg)">
-            <h1 class="text-4xl tracking-wider font-bold text-blue-950">
-                Don't Miss Amazing
-            </h1>
-            <h1 class="text-4xl tracking-wider font-bold text-blue-950">
-                Grocery Deals!
-            </h1>
-            <p class="mt-3 text-lg text-gray-500">Sign up for the daily newsletter</p>
-            <div
-                class="mt-8 border w-fit rounded-full pl-3 bg-white max-[460px]:text-sm flex max-[460px]:flex-col max-[460px]:w-full max-[460px]:bg-transparent max-[460px]:gap-4 max-[460px]:border-none items-center">
-                <i class="fa-regular fa-paper-plane"></i>
-                <input type="text" placeholder="Your Email Address"
-                    class="rounded-xl placeholder:text-gray-600 p-1 outline-none max-[460px]:p-2 max-[460px]:w-full" />
-                <button class="bg-green-500 text-white rounded-full py-3 px-7">
-                    Subscribe
-                </button>
-            </div>
-        </div> -->
         <div class="rounded-lg col-span-full flex flex-col gap-y-4">
-            <!-- <div class="flex justify-between items-center w-full relative">
-                <h1 class="text-3xl max-[360px]:text-xl">Popular Prducts</h1>
-                <ul
-                    class="text-sm space-y-3 hidden *:cursor-pointer flex-col bg-white absolute z-50 top-16 right-[10%] w-3/4 py-8 border rounded-lg text-center items-center md:border-none md:flex md:flex-row md:static md:w-auto md:gap-4 md:rounded-none md:space-y-0">
-                    <li class="text-green-500">All</li>
-                    <li class="hover:text-green-500 transition-colors">
-                        Milks & Dairies
-                    </li>
-                    <li class="hover:text-green-500 transition-colors">Coffes & Teas</li>
-                    <li class="hover:text-green-500 transition-colors">Pet Foods</li>
-                    <li class="hover:text-green-500 transition-colors">Meats</li>
-                    <li class="hover:text-green-500 transition-colors">Vigitables</li>
-                    <li class="hover:text-green-500 transition-colors">Fruits</li>
-                </ul>
-                <div
-                    class="md:hidden max-[360px]:mr-0 max-[360px]:text-sm mr-8 cursor-pointer bg-gray-700 hover:bg-gray-800 transition-colors text-white py-1 px-2 shadow rounded">
-                    <i class="fa-solid fa-ellipsis"></i>
-                </div>
-            </div> -->
             <div class="grid max-[430px]:grid-cols-2 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
                 <div class="border rounded-xl flex flex-col gap-1 relative px-2 py-2 col-span-2">
                     <span
@@ -104,10 +66,14 @@
                 </div>
                 <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
                     <span class="absolute"></span>
-                    <div class="w-full border h-56 bg-cover bg-left bg-no-repeat rounded-lg" style="
-                  background-image: url(../static/images/spatchcock-bbq-chicken.jpg);
-                ">
-                        <!-- <img src="{% static 'images/cake.jpg'%}" alt="" class="w-full"> -->
+                    <div class="w-full border h-56 rounded-lg group realtive overflow-hidden">
+                        <img src="{% static 'images/spatchcock-bbq-chicken.jpg'%}" alt=""
+                            class="object-cover size-full transition-transform duration-500 group-hover:scale-125">
+                        <div
+                            class="opacity-0 absolute gap-1 group-hover:opacity-100 flex rounded transition-opacity p-1 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 text-green-700 *:cursor-pointer">
+                            <div class=" border-r pr-1"><i class="fa-regular fa-heart"></i></div>
+                            <div><i class="fa-solid fa-circle-info"></i></div>
+                        </div>
                     </div>
                     <small class="text-gray-500 text-xs">Food</small>
                     <strong class="font-bold">Spatchcock BBQ Chicken</strong>
@@ -127,10 +93,14 @@
                 </div>
                 <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
                     <span class="absolute"></span>
-                    <div class="w-full border h-56 bg-cover bg-left bg-no-repeat rounded-lg" style="
-                  background-image: url(../static/images/grilled-bbq-chicken.jpg);
-                ">
-                        <!-- <img src="{% static 'images/cake.jpg'%}" alt="" class="w-full"> -->
+                    <div class="w-full border h-56 rounded-lg group realtive overflow-hidden">
+                        <img src="{% static 'images/grilled-bbq-chicken.jpg'%}" alt=""
+                            class="object-cover size-full transition-transform duration-500 group-hover:scale-125">
+                        <div
+                            class="opacity-0 absolute gap-1 group-hover:opacity-100 flex rounded transition-opacity p-1 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 text-green-700 *:cursor-pointer">
+                            <div class=" border-r pr-1"><i class="fa-regular fa-heart"></i></div>
+                            <div><i class="fa-solid fa-circle-info"></i></div>
+                        </div>
                     </div>
                     <small class="text-gray-500 text-xs">Food</small>
                     <strong class="font-bold">Home-made BBQ Grilled Chicken</strong>
@@ -203,25 +173,6 @@
                 %} {%endcomponent%} {% endcomment %}
             </div>
         </div>
-        <!-- <div class="col-span-full">
-            <div class="rounded-lg shadow-sm border px-5 md:px-20 py-16 bg-center bg-no-repeat bg-cover"
-                style="background-image: url(/static/images/fruits-background.jpg)">
-                <h1 class="text-2xl">Stay home & get your daily</h1>
-                <h1>From Our Shop</h1>
-                <small class="text-gray-500">Start Your Daily Shop With <a href="{% url 'index'%}"
-                        class="text-green-500">Nest
-                        Mart</a></small>
-                <div
-                    class="mt-8 border w-fit rounded-full pl-3 bg-white max-[460px]:text-sm flex max-[460px]:flex-col max-[460px]:w-full max-[460px]:bg-transparent max-[460px]:gap-4 max-[460px]:border-none items-center">
-                    <i class="fa-regular fa-paper-plane"></i>
-                    <input type="text" placeholder="Your Email Address"
-                        class="rounded-xl placeholder:text-gray-600 p-1 outline-none max-[460px]:p-2 max-[460px]:w-full" />
-                    <button class="bg-green-500 text-white rounded-full py-3 px-7">
-                        Subscribe
-                    </button>
-                </div>
-            </div>
-        </div> -->
     </div>
 </div>
 
