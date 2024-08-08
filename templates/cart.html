@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <div class="rounded-lg shadow-md border flex flex-col gap-4 p-3 h-fit">
+        <div class="rounded-lg shadow-md border flex flex-col gap-4 p-3 h-fit" x-data="{checkoutShown: false}">
             <div class="border flex flex-col gap-2 p-2">
                 <div class="flex justify-between items-center">
                     <span class="text-gray-500">Subtotal</span>
@@ -117,12 +117,16 @@
                     <span class="font-bold text-lg text-green-600">15.99$</span>
                 </div>
             </div>
-            <div
-                class="cursor-pointer self-center text-center flex items-center px-2 py-3 gap-2 bg-green-600 w-fit rounded-lg text-white hover:bg-amber-400 transition-colors">
+            <div class="cursor-pointer self-center text-center flex items-center px-2 py-3 gap-2 bg-green-600 w-fit rounded-lg text-white hover:bg-amber-400 transition-colors"
+                @click="checkoutShown = true">
                 <span>Procced To Check Out</span><i class="fa-solid fa-arrow-right-from-bracket"></i>
             </div>
-            <div class="hidden -flex flex-col gap-3 bg-white border rounded-lg p-5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[120]"
-                id="checked-out-pop">
+            <div class="flex flex-col gap-3 bg-white border rounded-lg p-5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[120]"
+                id="checked-out-pop" x-show="checkoutShown" x-transition:enter="transition ease-out duration-300">
+                <span class="absolute -top-3 -right-3 text-sky-950 hover:text-red-500 transition-colors cursor-pointer"
+                    @click="checkoutShown = false">
+                    <i class="fa-solid fa-circle-xmark fa-2x"></i>
+                </span>
                 <h1 class="font-bold text-2xl">Billing Details</h1>
                 <hr>
                 <h2>Number of products: 3</h2>
@@ -138,9 +142,11 @@
                 <button
                     class="border rounded-lg p-2 bg-green-500 text-white hover:bg-amber-400 transition-colors">Confirm</button>
             </div>
+            <div class="bg-slate-200/75 z-[110] fixed inset-0" id="theme" x-show="checkoutShown"
+                @click="checkoutShown = false" x-transition></div>
         </div>
     </div>
 </div>
 
-<!-- <div class="bg-slate-200/75 z-[110] fixed inset-0" id="theme"></div> -->
+
 {% endblock content %}

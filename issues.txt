@@ -8,3 +8,8 @@ REACT functionalities:
 
 TAILWIND functionalities:
     completting the bottom of the page
+
+
+HTML functionalities:
+    product.html 
+       
