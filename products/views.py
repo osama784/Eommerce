@@ -20,6 +20,7 @@ def index(request):
 def product(request):
     return render(request, 'product.html')
 
+
 @login_required
 def cart(request):
     orders = Order.objects.filter(owner=request.user.profile).select_related('product', 'owner')
@@ -32,6 +33,9 @@ def shop(request):
 
 def vendor(request):
     return render(request, 'vendor.html')
+
+def category(request, category):
+    return render(request, 'category.html')
 
 def about_us(request):
     return render(request, 'about-us.html')
