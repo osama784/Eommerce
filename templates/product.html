@@ -87,13 +87,14 @@
                     @click="openedIndex = 3" x-bind:class="openedIndex == 3 && 'text-green-500' ">Reviews(0)</h3>
             </div>
             <div>
-                <div x-show="openedIndex == 0" x-transition:enter>
+                <div x-show="openedIndex == 0" x-transition:enter x-transition:enter.duration.500ms>
                     <p>This is the product.</p>
                 </div>
-                <div x-show="openedIndex == 1" x-transition:enter>
+                <div x-show="openedIndex == 1" x-transition:enter x-transition:enter.duration.500ms>
                     <p>There are no additional info.</p>
                 </div>
-                <div class="flex-col gap-1" x-show="openedIndex == 2" x-transition:enter>
+                <div class="flex-col gap-1" x-show="openedIndex == 2" x-transition:enter
+                    x-transition:enter.duration.500ms>
                     <h1 class="font-bold text-black text-2xl ">Vendor</h1>
                     <div class="flex h-36 gap-2 w-fit items-center self-center">
                         <div class="rounded-full w-fit h-fit overflow-hidden mt-10">
@@ -135,7 +136,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex gap-x-3 gap-y-10 flex-col xl:flex-row" x-show="openedIndex == 3" x-transition:enter>
+                <div class="flex gap-x-3 gap-y-10 flex-col xl:flex-row" x-show="openedIndex == 3" x-transition:enter
+                    x-transition:enter.duration.500ms>
                     <div class="flex flex-col gap-5 xl:w-7/12">
                         <div>
                             <h3 class="font-medium">Customer Quastions & answers</h3>
@@ -230,6 +232,7 @@
                                 </div>
                             </div>
                         </div>
+                        <p class="text-gray-500">Here are the ratings calculated</p>
                     </div>
                 </div>
             </div>
@@ -436,7 +439,7 @@
                     </div>
                 </div>
                 <hr class="border-gray-400 mt-5">
-                <p class="mt-5 text-lg">Become A Vendor? <a href="" class="text-green-600">Register Now</a></p>
+                <p class="mt-5">Become A Vendor? <a href="" class="text-green-600">Register Now</a></p>
             </div>
         </div>
         <div class="grid-cols-2 gap-y-5 hidden col-span-3 lg:grid lg:col-span-4 xl:col-span-3 order-last">
@@ -696,5 +699,3 @@
 
 {% include 'footer.html'%}
 {% endblock content %}
-
-<!-- lg:col-span-9 -->

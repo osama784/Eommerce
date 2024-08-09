@@ -1,0 +1,12 @@
+templates/product.html:
+    sending reviews - hx
+    adding to cart - hx
+    add it to favorites - hx
+
+templates/cart.html:
+    updating the cart if any product changed
+    delete the product
+
+
+others:
+    connecting to strap api

@@ -39,8 +39,8 @@
         <i class="fa-solid fa-magnifying-glass text-green-400 cursor-pointer"></i>
       </form>
     </div>
-    <div class="hidden sm:block">
-      <ul class="flex items-center *:flex *:gap-1 *:items-center *:cursor-pointer gap-5">
+    <div class="hidden sm:block relative" x-data="{accountOpened: false}">
+      <ul class="flex items-center *:h-7 *:flex *:gap-1 *:items-center *:cursor-pointer gap-5">
         <li>
           <i class="fa-regular fa-heart"></i>
           <p class="hover:text-green-500 transition-colors">Wishlist</p>
@@ -49,11 +49,33 @@
           <i class="fa-solid fa-cart-shopping"></i>
           <p class="hover:text-green-500 transition-colors">Cart</p>
         </li>
-        <li>
+        <li x-on:mouseover="accountOpened = true" x-on:mouseover.outside="accountOpened = false">
           <i class="fa-regular fa-circle-user"></i>
-          <p class="hover:text-green-500 transition-colors">Account</p>
+          <p class="transition-colors" x-bind:class="accountOpened && 'text-green-500'">Account</p>
+          <div id="account-pop" class="absolute bg-white rounded-lg border top-7 -right-10 z-[110] shadow-lg"
+            x-show="accountOpened" x-transition>
+            <ul class="flex flex-col gap-5 p-3 *:flex *:gap-2 *:items-center *:cursor-pointer">
+              <li>
+                <i class="fa-regular fa-circle-user"></i>
+                <p>My account</p>
+              </li>
+              <li>
+                <i class="fa-solid fa-burger"></i>
+                <p>Order Tracking</p>
+              </li>
+              <li>
+                <i class="fa-regular fa-heart"></i>
+                <p>My Wishlist</p>
+              </li>
+              <li>
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <p>Sign in</p>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
+
     </div>
   </div>
 </div>
@@ -64,7 +86,7 @@
     <div
       class="flex text-base items-center gap-2 bg-green-500 p-2 rounded text-white cursor-pointer hover:bg-green-600 transition-colors">
       <i class="fa-solid fa-table"></i>
-      <p>Browse All Categories</p>
+      <p class="text-center text-sm sm:text-base">Browse All Categories</p>
       <i class="fa-solid fa-chevron-down"></i>
     </div>
     <div
