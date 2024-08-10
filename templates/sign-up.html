@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load static%}
+
+{% block head %}
+<title>Nest | Sign up</title>
+{% endblock head%}
+
+
+{% block content %}
+{% include 'navbar.html' with chosen='home'%}
+{% include 'path.html' with parent_page_name="Pages" page_name="Sign up"%}
+
+<div class="container mx-auto px-4 my-10 lg:max-w-[1023.99px]">
+    <div class="flex flex-wrap gap-10 items-center justify-center *:grow">
+        <div class="flex flex-col gap-7">
+            <div class="space-y-2">
+                <h1 class="font-bold text-4xl">Create an Account</h1>
+                <p>Already have an account? <a href="" class="text-green-500">Login</a></p>
+            </div>
+            <div class="flex flex-col gap-5 *:border *:rounded-lg *:p-3 *:outline-slate-400">
+                <input type="text" placeholder="Username" class="placeholder:text-gray-500">
+                <input type="text" placeholder="Email" class="placeholder:text-gray-500">
+                <input type="password" placeholder="Password" class="placeholder:text-gray-500">
+                <input type="password" placeholder="Confirm Password" class="placeholder:text-gray-500">
+            </div>
+        </div>
+        <div class="flex flex-col gap-5 border rounded p-10 *:rounded-lg *:p-3">
+            <button class="bg-blue-700 text-white hover:bg-blue-800 transition-colors">Continue with Facebook</button>
+            <button class="border hover:bg-gray-50 transition-colors">Continue with Google</button>
+            <button class="bg-gray-900 text-white hover:bg-black transition-colors">Continue with Apple</button>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

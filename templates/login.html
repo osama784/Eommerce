@@ -8,9 +8,9 @@
 
 
 {% block content%}
-{% include 'navbar.html'%}
+{% include 'navbar.html' with chosen="home"%}
 
-{%include 'path.html'%}
+{%include 'path.html' with parent_page_name="Pages" page_name="Login" %}
 
 <div class="flex flex-col md:flex-row *:grow container mx-auto my-24 px-5 rounded-lg gap-10 max-w-[1270px]">
     <img src="{% static 'images/man3.jpg'%}" alt=""

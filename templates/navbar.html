@@ -39,11 +39,15 @@
         <i class="fa-solid fa-magnifying-glass text-green-400 cursor-pointer"></i>
       </form>
     </div>
-    <div class="hidden sm:block relative" x-data="{accountOpened: false}">
+    <div class="hidden sm:block relative" x-data="{accountOpened: false, wishlistTextOpened : false}">
       <ul class="flex items-center *:h-7 *:flex *:gap-1 *:items-center *:cursor-pointer gap-5">
-        <li>
+        <li class="relative" x-on:mouseover="wishlistTextOpened = true"
+          x-on:mouseover.outside="wishlistTextOpened = false">
           <i class="fa-regular fa-heart"></i>
           <p class="hover:text-green-500 transition-colors">Wishlist</p>
+          <span class="bg-white border shadow rounded-xl absolute top-8 -left-5 w-32 p-2 text-center z-[110]"
+            x-show="wishlistTextOpened" x-on:mouseenter="wishlistTextOpened = false" x-transition>Items You
+            Liked</span>
         </li>
         <li>
           <i class="fa-solid fa-cart-shopping"></i>
@@ -127,7 +131,7 @@
         </li>
         <ul id="pages-pop"
           class="absolute flex flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -right-8 w-44 *:cursor-pointer text-gray-500"
-          x-show="pagesShown" x-transition>
+          x-show="pagesShown" x-on:click.outside="pagesShown = false" x-transition>
           <li class="hover:text-black transition-colors">About Us</li>
           <li class="hover:text-black transition-colors">My Dashboard</li>
           <li class="hover:text-black transition-colors">Purchase Guide</li>

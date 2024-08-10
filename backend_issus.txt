@@ -7,6 +7,9 @@ templates/cart.html:
     updating the cart if any product changed
     delete the product
 
+templates/login.html:
+    logging users
+    signing up users
 
 others:
     connecting to strap api
