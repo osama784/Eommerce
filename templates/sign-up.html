@@ -10,24 +10,35 @@
 {% include 'navbar.html' with chosen='home'%}
 {% include 'path.html' with parent_page_name="Pages" page_name="Sign up"%}
 
-<div class="container mx-auto px-4 my-10 lg:max-w-[1023.99px]">
-    <div class="flex flex-wrap gap-10 items-center justify-center *:grow">
-        <div class="flex flex-col gap-7">
-            <div class="space-y-2">
-                <h1 class="font-bold text-4xl">Create an Account</h1>
-                <p>Already have an account? <a href="" class="text-green-500">Login</a></p>
-            </div>
-            <div class="flex flex-col gap-5 *:border *:rounded-lg *:p-3 *:outline-slate-400">
+<div class="container mx-auto px-4 my-16 lg:max-w-[1023.99px]">
+    <div class="flex flex-col flex-wrap gap-10 items-center justify-center *:grow">
+        <div class="space-y-2 self-start">
+            <h1 class="font-bold text-4xl">Create an Account</h1>
+            <p>Already have an account? <a href="" class="text-green-500">Login</a></p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-10 w-full px-5 sm:px-0 *:sm:w-1/2 ">
+            <div class="flex flex-col gap-5 *:border *:rounded-lg *:p-3 *:outline-slate-400 *:grow">
                 <input type="text" placeholder="Username" class="placeholder:text-gray-500">
                 <input type="text" placeholder="Email" class="placeholder:text-gray-500">
                 <input type="password" placeholder="Password" class="placeholder:text-gray-500">
                 <input type="password" placeholder="Confirm Password" class="placeholder:text-gray-500">
+                <button type="submit"
+                    class="bg-green-500 hover:bg-green-600 hover:-translate-y-1 transition-[background-color,transform] rounded-lg text-white p-2 w-fit">Submit
+                    &
+                    register</button>
+                <p class="text-gray-500 text-sm !border-none">Notice: Your personal data will be used to support
+                    your
+                    experience
+                    throughout this website, to manage access to your account, and for other purposes described in
+                    our <a href="{% url 'privacy-policy'%}"
+                        class="text-green-500 underline hover:text-green-600">privacy policy</a>. </p>
             </div>
-        </div>
-        <div class="flex flex-col gap-5 border rounded p-10 *:rounded-lg *:p-3">
-            <button class="bg-blue-700 text-white hover:bg-blue-800 transition-colors">Continue with Facebook</button>
-            <button class="border hover:bg-gray-50 transition-colors">Continue with Google</button>
-            <button class="bg-gray-900 text-white hover:bg-black transition-colors">Continue with Apple</button>
+            <div class="flex flex-col gap-5 border rounded p-9 *:rounded-lg *:p-3 *:grow h-fit">
+                <button class="bg-blue-700 text-white hover:bg-blue-800 transition-colors">Continue with
+                    Facebook</button>
+                <button class="border hover:bg-gray-50 transition-colors">Continue with Google</button>
+                <button class="bg-gray-900 text-white hover:bg-black transition-colors">Continue with Apple</button>
+            </div>
         </div>
     </div>
 

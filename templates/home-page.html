@@ -218,8 +218,15 @@
               class="object-cover size-full transition-transform duration-500 group-hover:scale-125">
             <div
               class="opacity-0 absolute gap-1 group-hover:opacity-100 flex rounded transition-opacity p-1 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 text-green-700 *:cursor-pointer">
-              <div class=" border-r pr-1"><i class="fa-regular fa-heart"></i></div>
-              <div><i class="fa-solid fa-circle-info"></i></div>
+              <div class="border-r pr-1 peer/heart"><i class="fa-regular fa-heart"></i></div>
+              <div class="peer/info"><i class="fa-solid fa-circle-info"></i></div>
+              <span
+                class="w-28 text-white text-sm text-center rounded absolute -top-7 -left-11 p-1 bg-green-500 opacity-0 peer-hover/heart:opacity-100 peer-hover/heart:-top-10 transition-all before:border-8 before:size-3 before:-bottom-3 before:right-12 before:absolute before:border-transparent before:border-t-green-500">Add
+                to WishList</span>
+              <span
+                class="w-24 text-white text-sm text-center rounded absolute -top-7 -left-2 p-1 bg-green-500 opacity-0 peer-hover/info:opacity-100 peer-hover/info:-top-10 transition-all before:border-8 before:size-3 before:-bottom-3 before:right-10 before:absolute before:border-transparent before:border-t-green-500">Details
+
+              </span>
             </div>
           </div>
           <small class="text-gray-500 text-xs">Food</small>
@@ -346,7 +353,7 @@
         style="background-image: url(/static/images/fruits-background.jpg)">
         <h1 class="text-2xl">Stay home & get your daily</h1>
         <h1>From Our Shop</h1>
-        <small class="text-gray-500">Start Your Daily Shop With <a href="{% url 'index'%}" class="text-green-500">Nest
+        <small class="text-gray-500">Start Your Daily Shop With <a href="{% url 'home'%}" class="text-green-500">Nest
             Mart</a></small>
         <div
           class="mt-8 border w-fit rounded-full pl-3 bg-white max-[460px]:text-sm flex max-[460px]:flex-col max-[460px]:w-full max-[460px]:bg-transparent max-[460px]:gap-4 max-[460px]:border-none items-center">

@@ -31,7 +31,7 @@ def cart(request):
 def shop(request):
     return render(request, 'shop.html')
 
-def vendor(request):
+def vendor(request, vendor):
     return render(request, 'vendor.html')
 
 def category(request, category):

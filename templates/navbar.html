@@ -56,12 +56,12 @@
         <li x-on:mouseover="accountOpened = true" x-on:mouseover.outside="accountOpened = false">
           <i class="fa-regular fa-circle-user"></i>
           <p class="transition-colors" x-bind:class="accountOpened && 'text-green-500'">Account</p>
-          <div id="account-pop" class="absolute bg-white rounded-lg border top-7 -right-10 z-[110] shadow-lg"
+          <div id="account-pop" class="absolute bg-white rounded-lg border top-7 -right-2 z-[110] shadow-lg"
             x-show="accountOpened" x-transition>
             <ul class="flex flex-col gap-5 p-3 *:flex *:gap-2 *:items-center *:cursor-pointer">
               <li>
                 <i class="fa-regular fa-circle-user"></i>
-                <p>My account</p>
+                <p><a href="{% url 'dashboard' %}">My account</a></p>
               </li>
               <li>
                 <i class="fa-solid fa-burger"></i>
@@ -107,20 +107,20 @@
           text-amber-500
           {% endif %}">
           <i class="fa-solid fa-fire text-amber-500"></i>
-          <p>Deals</p>
+          <p><a href="">Deals</a></p>
         </li>
         <li class="hover:text-green-500
           {% if chosen == 'home' %}
           text-green-500
-          {% endif %}">Home</li>
+          {% endif %}"><a href="{% url 'home'%}">Home</a></li>
         <li class="hover:text-green-500
                   {% if chosen == 'shop' %}
                   text-green-500
-                  {% endif %}">Shop</li>
+                  {% endif %}"><a href="{% url 'shop'%}">Shop</a></li>
         <li class="hover:text-green-500
                   {% if chosen == 'vendors' %}
                   text-green-500
-                  {% endif %}">Vendors</li>
+                  {% endif %}"><a href="{% url 'vendor' 'hello' %}">Vendors</a></li>
         <li class="hover:text-green-500
                   {% if chosen == 'blog' %}
                   text-green-500
@@ -141,7 +141,7 @@
         <li class="hover:text-green-500 
         {% if chosen == 'contact'%}
         text-green-500
-        {% endif %}">Contact</li>
+        {% endif %}"><a href="{% url 'contact'%}">Contact</a></li>
       </ul>
     </div>
 
