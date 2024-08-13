@@ -9,7 +9,7 @@
 
 {% block content %}
 {% include 'navbar.html'%}
-<div class="container mx-auto px-4 mt-5 max-w-[1270px]">
+<div class="container mx-auto px-4 mt-5 xl:max-w-7xl">
     <div class="flex flex-wrap items-center gap-x-10 gap-y-5 rounded-lg shadow-sm border px-5 sm:px-20 py-16 bg-center bg-no-repeat bg-cover text-white"
         style="background-image:url(../static/images/vendor.webp)">
         <img src="/static/images/nature-food.png" class="size-56" alt="">
@@ -44,8 +44,8 @@
         </div>
     </div>
 </div>
-<div class="container mx-auto px-4 grid grid-cols-12 gap-x-5 my-10 max-w-[1270px]">
-    <div class="grid-cols-2 gap-y-5 hidden col-span-3 lg:grid">
+<div class="container mx-auto px-4 grid grid-cols-12 gap-x-5 my-10 xl:max-w-7xl">
+    <!-- <div class="grid-cols-2 gap-y-5 hidden col-span-3 lg:grid">
         <div class="rounded-lg shadow-md border flex col-span-full p-3 flex-col">
             <h2 class="font-bold border-b pb-3 text-lg">Category</h2>
             <ul
@@ -96,7 +96,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
     <div class="col-span-full lg:col-span-9">
         <div class="mb-5">
             <small>We found 10 items for you!</small>
@@ -112,7 +112,18 @@
                     <p class="text-sm">This is the product</p>
                     <strong class="block text-green-600 text-xl">$44.99 <span
                             class="text-gray-500 line-through text-sm">$201.99</span></strong>
-                    <button class="bg-green-500 py-2 px-5 !w-fit text-white rounded-lg">Add To Cart</button>
+                    <div class="flex gap-3 items-center !w-fit text-white" x-data="{heartHovered: false, heartClicked: false}">
+                        <button class="bg-green-500 py-2 px-5 rounded-lg hover:bg-amber-400 transition-colors">Add To Cart</button>
+                        <div class="rounded-lg py-2 bg-green-500 px-3 cursor-pointer" x-on:mouseover="heartHovered = true"
+                            x-on:mouseleave="heartHovered = false" x-on:click="heartClicked = true" x-show="!heartClicked">
+                            <i class="fa-regular fa-heart" x-show="!heartHovered" x-transition:enter></i>
+                            <i class="fa-solid fa-heart" x-show="heartHovered" x-transition:enter></i>
+                        </div>
+                        <div class="rounded-lg py-2 bg-green-500 px-3 cursor-pointer" x-on:click="heartHovered = false;heartClicked = false"
+                            x-show="heartClicked" x-transition:enter>
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                    </div>
                 </div>
 
             </div>

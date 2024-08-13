@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap");
 @tailwind base;
 
+@tailwind components;
+@tailwind utilities;
+
+/* 
 @layer base {
     html {
         @apply text-surface;
@@ -11,7 +15,4 @@
         @apply text-neutral-50;
         @apply bg-body-dark;
     }
-}
-
-@tailwind components;
-@tailwind utilities;
+} */

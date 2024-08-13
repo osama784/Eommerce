@@ -1,13 +1,13 @@
 <div class=" w-full py-6 border-b border-slate-400 content-center">
     <div class="container flex flex-wrap mx-auto gap-7 px-4 justify-center md:justify-normal items-center text-sm ">
-        <a href="{% url 'index'%}">
+        <a href="{% url 'home'%}">
             <div class="text-green-700 flex items-center gap-2">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </div>
         </a>
         <span class="text-green-500">&gt;</span>
-        <a href="" class="text-green-600">{{ parent_page_name }}</a>
+        <a href="{{parent_page_url}}" class="text-green-600">{{ parent_page_name }}</a>
         {% if page_name %}
         <span class="text-green-500">&gt;</span>
         <span>{{ page_name }}</span>

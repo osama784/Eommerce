@@ -1,7 +1,5 @@
-{% for tab in tablist %}
-<li class="hover:bg-amber-300" @click="openedIndex = {{forloop.counter0}}"
+<li class="hover:bg-amber-300" x-on:click="openedIndex = {{forloop.counter0}}"
     :class="openedIndex == {{forloop.counter0}} ? 'bg-green-500 text-white hover:!bg-green-500' : '' " x-transition>
-    <i class="fa-solid fa-user text-gray"></i>
+    <i class="{{icon}} text-gray"></i>
     <label>{{ tab }}</label>
 </li>
-{% endfor %}

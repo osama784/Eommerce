@@ -4,10 +4,10 @@
   <div class="flex justify-center sm:justify-between items-center container px-4 text-sm">
     <div>
       <ul class="flex *:border-r gap-2 *:pr-1 *:cursor-pointer text-xs">
-        <li>About Us</li>
-        <li>My Account</li>
-        <li>Wishlist</li>
-        <li class="border-none">Order Tracking</li>
+        <li><a href="">About Us</a></li>
+        <li><a href="">My Account</a></li>
+        <li><a href="">Wishlist</a></li>
+        <li class="border-none"><a href="">Order Tracking</a></li>
       </ul>
     </div>
     <div class="hidden sm:block">
@@ -65,15 +65,15 @@
               </li>
               <li>
                 <i class="fa-solid fa-burger"></i>
-                <p>Order Tracking</p>
+                <p><a href="{% url 'dashboard' %}">Order Tracking</a></p>
               </li>
               <li>
                 <i class="fa-regular fa-heart"></i>
-                <p>My Wishlist</p>
+                <p><a href="">My Wishlist</a></p>
               </li>
               <li>
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                <p>Sign in</p>
+                <p><a href="{% url 'dashboard' %}">Sign in</a></p>
               </li>
             </ul>
           </div>
@@ -130,13 +130,13 @@
           <i class="fa-solid fa-chevron-down text-sm"></i>
         </li>
         <ul id="pages-pop"
-          class="absolute flex flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -right-8 w-44 *:cursor-pointer text-gray-500"
+          class="absolute flex flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -right-8 w-48 *:cursor-pointer text-gray-500"
           x-show="pagesShown" x-on:click.outside="pagesShown = false" x-transition>
-          <li class="hover:text-black transition-colors">About Us</li>
-          <li class="hover:text-black transition-colors">My Dashboard</li>
-          <li class="hover:text-black transition-colors">Purchase Guide</li>
-          <li class="hover:text-black transition-colors">Privacy Policy</li>
-          <li class="hover:text-black transition-colors">Terms of Service</li>
+          <li class="hover:text-black transition-colors"><a href="{% url 'about-us'%}">About Us</a></li>
+          <li class="hover:text-black transition-colors"><a href="{% url 'dashboard'%}">My Dashboard</a></li>
+          <li class="hover:text-black transition-colors"><a href="{% url 'purchase-guide'%}">Purchase Guide</a></li>
+          <li class="hover:text-black transition-colors"><a href="{% url 'privacy-policy'%}">Privacy Policy</a></li>
+          <li class="hover:text-black transition-colors"><a href="{% url 'terms-of-service'%}">Terms of Service</a></li>
         </ul>
         <li class="hover:text-green-500 
         {% if chosen == 'contact'%}
