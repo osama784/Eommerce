@@ -8,7 +8,8 @@
 
 
 {% block content %}
-{% include 'navbar.html' with chosen="shop"%}
+{% include 'partials/navbar.html' with chosen="shop"%}
+{% include 'path.html' with parent_page_name='Categories' page_name="category_name"%}
 
 <div class="container mx-auto px-4 my-5">
     <div class="flex flex-col gap-3 bg-green-100 border rounded-lg py-20 text-center px-4 sm:px-20 sm:text-left">
@@ -176,5 +177,5 @@
     </div>
 </div>
 
-{% include 'footer.html' %}
+{% include 'partials/footer.html' %}
 {% endblock content %}

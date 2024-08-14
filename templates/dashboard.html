@@ -8,9 +8,9 @@
 
 
 {% block content %}
-{% include 'navbar.html'%}
+{% include 'partials/navbar.html'%}
 {% url 'dashboard' as parent_page_url%}
-{% include "path.html" with parent_page_name="Dashboard" parent_page_url=parent_page_url%}
+{% include "partials/path.html" with parent_page_name="Dashboard" parent_page_url=parent_page_url%}
 <div class="container mx-auto px-4 my-20 xl:max-w-7xl">
     <div x-data="{ openedIndex: 0}">
         <div class="flex gap-10 flex-col md:flex-row">
@@ -217,7 +217,7 @@
 </div>
 
 
-{% include "footer.html" %}
+{% include "partials/footer.html" %}
 
 <div class="hidden fixed inset-0 bg-slate-200/75 z-[110]" id="theme"></div>
 

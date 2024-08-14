@@ -6,9 +6,9 @@
 {% endblock head %}
 
 {% block content %}
-{% include 'navbar.html'%}
-
-{% include 'path.html' with parent_page_name="Category_name" page_name="product_name" %}
+{% include 'partials/navbar.html' with chosen='shop'%}
+{% url 'shop' as parent_page_url %}
+{% include 'partials/path.html' with parent_page_name="Category_name" page_name="product_name" parent_page_url=parent_page_url%}
 
 <div class="grid grid-cols-12 gap-4 container mx-auto my-5 px-4 max-w-[1270px]">
     <div class="space-y-10 sm:space-y-0 sm:grid grid-cols-12 gap-10 col-span-full lg:col-span-8 xl:col-span-9 h-fit">
@@ -697,5 +697,5 @@
     </div>
 </div>
 
-{% include 'footer.html'%}
+{% include 'partials/footer.html'%}
 {% endblock content %}

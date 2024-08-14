@@ -44,14 +44,14 @@
         <li class="relative" x-on:mouseover="wishlistTextOpened = true"
           x-on:mouseover.outside="wishlistTextOpened = false">
           <i class="fa-regular fa-heart"></i>
-          <p class="hover:text-green-500 transition-colors">Wishlist</p>
+          <a href="{% url 'wishlist' %}" class="hover:text-green-500 transition-colors">Wishlist</a>
           <span class="bg-white border shadow rounded-xl absolute top-8 -left-5 w-32 p-2 text-center z-[110]"
             x-show="wishlistTextOpened" x-on:mouseenter="wishlistTextOpened = false" x-transition>Items You
             Liked</span>
         </li>
         <li>
           <i class="fa-solid fa-cart-shopping"></i>
-          <p class="hover:text-green-500 transition-colors">Cart</p>
+          <a href="{% url 'cart' %}" class="hover:text-green-500 transition-colors">Cart</a>
         </li>
         <li x-on:mouseover="accountOpened = true" x-on:mouseover.outside="accountOpened = false">
           <i class="fa-regular fa-circle-user"></i>

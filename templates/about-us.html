@@ -9,9 +9,9 @@
 
 
 {% block content %}
-{% include 'navbar.html' %}
+{% include 'partials/navbar.html' %}
 {% url 'about-us' as parent_page_url %}
-{% include 'path.html' with parent_page_name="About us" parent_page_url=parent_page_url %}
+{% include 'partials/path.html' with parent_page_name="About us" parent_page_url=parent_page_url %}
 
 <div class="container mx-auto px-4 my-10 xl:max-w-7xl">
     <div class="flex gap-x-5 gap-y-10 flex-col items-center lg:flex-row lg:items-start">
@@ -98,6 +98,6 @@
     </div>
 </div>
 
-{% include 'footer.html'%}
+{% include 'partials/footer.html'%}
 
 {% endblock content%}

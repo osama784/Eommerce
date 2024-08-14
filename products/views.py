@@ -54,3 +54,6 @@ def privacy_policy(request):
 
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+def wishlist(request):
+    return render(request, 'wishlist.html')
