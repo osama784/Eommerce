@@ -11,14 +11,14 @@
 {% url 'shop' as parent_page_url %}
 {% include 'partials/path.html' with parent_page_name="Shop" page_name="Wishlist" parent_page_url=parent_page_url %}
 
-<div class="container mx-auto px-4 my-10 xl:max-w-7xl" x-data="{removePopShown : false, removeText: ''}">
-    <div class="flex flex-col gap-5">
+<div class="container mx-auto px-4 my-10 xl:max-w-7xl" x-data="{removePopShown : false, removeText: '', numberOfProducts: 1}">
+    <div class="flex flex-col gap-5" x-show="numberOfProducts != 0">
         <div class="space-y-2">
             <h1 class="font-bold text-4xl">My Wishlist</h1>
             <div class="flex justify-between">
                 <p class="grow">There are 10 products.</p>
                 <small class="text-gray-500 text-sm cursor-pointer" x-on:click="removePopShown = true;removeText = 'all the products from the wishlist' "><i class="fa-regular fa-trash-can mr-3"></i><span>Clear
-                        Cart</span></small>
+                        Wishlist</span></small>
             </div>
         </div>
         <div class="overflow-x-auto pb-3 border rounded-t-lg">
@@ -42,13 +42,13 @@
                         <td class="text-2xl font-semibold text-green-500">$35.99</td>
                         <td>
                             <div class="size-full flex justify-center items-center">
-                                <p class="w-fit p-1 text-green-500 bg-green-50 rounded-lg">In Stock</p>
+                                <p class="w-fit p-2 text-green-500 bg-green-50 rounded-lg">In Stock</p>
                             </div>
                         </td>
 
                         <td>
                             <div class="w-full"><div x-text="addedToCart ? 'Added' : 'Add to cart' " 
-                            x-bind:class="addedToCart ? 'w-full p-1 text-green-500 bg-green-50 rounded-lg' : 'w-full cursor-pointer bg-green-500 px-5 py-2 text-white hover:bg-amber-400 transition-colors rounded-lg' "
+                            x-bind:class="addedToCart ? 'w-full p-2 text-green-500 bg-green-50 rounded-lg' : 'w-full cursor-pointer bg-green-500 px-5 py-2 text-white hover:bg-amber-400 transition-colors rounded-lg' "
                             x-on:click="addedToCart = true" x-transition>Add to cart</div></div></td>
                         <td><div class="cursor-pointer" x-on:click="removePopShown = true; removeText = 'this product' "><i class="fa-regular fa-trash-can"></i></div></td>
                     </tr>
@@ -93,6 +93,24 @@
             </div>
             <!-- end flowbite element -->
             <div id="theme" class="inset-0 bg-slate-200/75 fixed z-[110]" x-show="removePopShown" x-transition></div>
+        </div>
+        <div class="flex">
+            <a href="">
+                <div class="text-white bg-green-600 hover:bg-amber-400 translate-x-1 hover:translate-x-0 transition-[background-color,transform] px-2 py-3 rounded-lg flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left-long"></i>
+                    <div>Continue Shopping</div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div x-show="numberOfProducts == 0 " class="flex flex-col gap-20">
+        <div class="space-y-2">
+            <h1 class="font-bold text-4xl">My Wishlist</h1>
+            <p class="grow">There are 0 products.</p>
+        </div>
+        <div class="text-center text-xl flex flex-col gap-8 items-center justify-center">
+            <i class="fa-regular fa-face-smile-beam fa-4x text-green-400"></i>
+            <p class="max-w-[470px]">You have no products in the wishlist yet, Go and see our amazing products!</p>
         </div>
     </div>
 </div>
