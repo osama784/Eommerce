@@ -34,6 +34,9 @@ def shop(request):
 def vendor(request, vendor):
     return render(request, 'vendor.html')
 
+def vendor_list(request):
+    return render(request, 'vendors_list.html')
+
 def category(request, category):
     return render(request, 'category.html')
 
@@ -57,3 +60,5 @@ def dashboard(request):
 
 def wishlist(request):
     return render(request, 'wishlist.html')
+
+

@@ -31,10 +31,15 @@
     </p>
     <div class="flex justify-between items-center mt-3">
         <span class="text-green-600 font-bold">$ 88.93</span>
+        {% if request.user.is_authenticated %}
         <div class="flex items-center gap-2">
-            <div class="bg-green-200 hover:bg-green-500 group cursor-pointer transition-colors px-2 py-1 rounded">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <button class="group-hover:text-white">Add</button>
+            <div class="bg-green-200 hover:bg-green-500 group cursor-pointer transition-colors px-2 py-1 rounded"
+                x-data="{addedToCart: false}" x-on:click="addedToCart = true">
+                <div x-show="!addedToCart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <button class="group-hover:text-white" >Add</button>
+                </div>
+                <i class="fa-solid fa-check group-hover:text-white transition-colors" x-show="addedToCart"></i>
             </div>
             <div class="cursor-pointer" x-data="{heartHovered: false, heartClicked:false}" x-on:mouseover="heartHovered = true" x-on:mouseleave="heartHovered = false"
                 x-on:click="heartClicked = !heartClicked">
@@ -42,6 +47,7 @@
                 <i class="fa-solid fa-heart text-red-400" x-show="heartHovered || heartClicked"></i>
             </div>
         </div>
+        {% endif %}
     </div>
     <small class="line-through text-gray-500 text-sm ml-2">$200.99</small>
 </div>

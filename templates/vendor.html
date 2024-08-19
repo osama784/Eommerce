@@ -47,63 +47,12 @@
     </div>
 </div>
 <div class="container mx-auto px-4 grid grid-cols-12 gap-x-5 my-10 xl:max-w-7xl">
-    <!-- <div class="grid-cols-2 gap-y-5 hidden col-span-3 lg:grid">
-        <div class="rounded-lg shadow-md border flex col-span-full p-3 flex-col">
-            <h2 class="font-bold border-b pb-3 text-lg">Category</h2>
-            <ul
-                class="*:flex *:items-center *:justify-between *:gap-1 *:border *:px-2 *:py-1 text-sm flex flex-col h-full mt-5 gap-5">
-                <li>
-                    <div class="flex gap-2 items-center">
-                        <i class="fa-solid fa-cow text-blue-950"></i>
-                        <a href="">
-                            <p class="hover:text-blue-950 transition-colors cursor-pointer">
-                                Milks &amp; Dairies
-                            </p>
-                        </a>
-                    </div>
-                    <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">64</span>
-                </li>
-                <li>
-                    <div class="flex gap-2 items-center">
-                        <i class="fa-solid fa-paw text-blue-800"></i>
-                        <a href="">
-                            <p class="hover:text-blue-800 transition-colors cursor-pointer">
-                                Pet Foods
-                            </p>
-                        </a>
-                    </div>
-                    <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">41</span>
-                </li>
-                <li>
-                    <div class="flex gap-2 items-center">
-                        <i class="fa-solid fa-cake-candles text-pink-600"></i>
-                        <a href="">
-                            <p class="hover:text-pink-600 transition-colors cursor-pointer">
-                                Baking Material
-                            </p>
-                        </a>
-                    </div>
-                    <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">34</span>
-                </li>
-                <li>
-                    <div class="flex gap-2 items-center">
-                        <i class="fa-solid fa-seedling text-green-500"></i>
-                        <a href="">
-                            <p class="hover:text-green-500 transition-colors cursor-pointer">
-                                Fresh Fruits
-                            </p>
-                        </a>
-                    </div>
-                    <span class="rounded-full border bg-green-200 px-1 py-0.5 text-xs">25</span>
-                </li>
-            </ul>
-        </div>
-    </div> -->
     <div class="col-span-full lg:col-span-9">
         <div class="mb-5">
-            <small>We found 10 items for you!</small>
+            <p>We found 10 items for you!</p>
         </div>
-        <div class="flex flex-col gap-7 w-full">
+        <div class="flex flex-col gap-7 w-full">         
+            {% include 'partials/vendor-product-partial.html'%}
             <div class="flex gap-5 items-center">
                 <div class="border rounded-lg p-2">
                     <img src="/static/images/grilled-bbq-chicken.jpg" alt="" class="rounded-lg size-56">

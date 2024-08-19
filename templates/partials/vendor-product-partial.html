@@ -1,0 +1,26 @@
+<div class="flex gap-5 items-center">
+    <div class="border rounded-lg p-2">
+        <img src="/static/images/grilled-bbq-chicken.jpg" alt="" class="rounded-lg size-56">
+    </div>
+    <div class="space-y-3 grow *:w-full">
+        <small class="text-sm">Food</small>
+        <h1 class="font-semibold">Home-made BBQ Grilled Chicken</h1>
+        <p class="text-sm">This is the product</p>
+        <strong class="block text-green-600 text-xl">$44.99 <span
+                class="text-gray-500 line-through text-sm">$201.99</span></strong>
+        <div class="flex gap-3 items-center !w-fit text-white">
+            <div class="bg-green-500 py-2 px-5 rounded-lg hover:bg-amber-400 transition-colors" x-data="{addedToCart: false}"
+                x-on:click="addedToCart = true">
+                <button x-show="!addedToCart">Add To Cart</button>
+                <i class="fa-solid fa-check group-hover:text-white transition-colors" x-show="addedToCart"></i>
+            </div>
+            <div class="rounded-lg py-2 bg-green-500 px-3 cursor-pointer"  x-data="{heartHovered: false, heartClicked: false}"
+                x-on:mouseover="heartHovered = true"
+                x-on:mouseleave="heartHovered = false" x-on:click="heartClicked = !heartClicked">
+                <i class="fa-regular fa-heart" x-show="!(heartHovered || heartClicked)" x-transition:enter></i>
+                <i class="fa-solid fa-heart text-red-400" x-show="heartHovered || heartClicked"></i>
+            </div>
+        </div>
+    </div>
+
+</div>

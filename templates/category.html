@@ -9,13 +9,13 @@
 
 {% block content %}
 {% include 'partials/navbar.html' with chosen="shop"%}
-{% include 'path.html' with parent_page_name='Categories' page_name="category_name"%}
+{% include 'partials/path.html' with parent_page_name='Categories' page_name="category_name"%}
 
 <div class="container mx-auto px-4 my-5">
     <div class="flex flex-col gap-3 bg-green-100 border rounded-lg py-20 text-center px-4 sm:px-20 sm:text-left">
         <h1 class="font-bold text-4xl">#Burger</h1>
         <div class="flex flex-wrap gap-3 items-center text-sm justify-center sm:justify-normal">
-            <a href="{% url 'index'%}">
+            <a href="{% url 'home'%}">
                 <div class="text-green-700 flex items-center gap-2">
                     <i class="fa-solid fa-house"></i>
                     <span>Home</span>

@@ -156,8 +156,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="grow flex flex-col gap-2">
+                        {% if request.user.is_authenticated %}
+                        <div id="add-comment" class="grow flex flex-col gap-2">
                             <h3 class="font-medium">Add a Review</h3>
                             <textarea name="" id="" class="rounded-lg border p-2 w-full h-56"></textarea>
                             <select name="" id="" class="font-[FontAwesome] p-3 rounded-lg border w-fit">
@@ -194,6 +194,7 @@
                                     Review</button>
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                     <div class="flex flex-col gap-3 xl:w-5/12 ">
                         <div class="font-medium">

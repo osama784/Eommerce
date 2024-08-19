@@ -11,7 +11,7 @@
 
 {% include 'partials/navbar.html' with chosen="home" %}
 
-<div class="grid grid-cols-12 gap-4 container mx-auto my-5 px-4">
+<div class="grid grid-cols-12 gap-4 container mx-auto my-5 px-4 xl:max-w-7xl">
     <div class="grid-cols-2 gap-y-5 hidden col-span-3 lg:grid">
         <div class="rounded-lg shadow-md border flex col-span-full p-3 flex-col">
             <h2 class="font-bold border-b pb-3 text-lg">Category</h2>
@@ -194,7 +194,7 @@
                 <i class="fa-regular fa-paper-plane"></i>
                 <input type="text" placeholder="Your Email Address"
                     class="rounded-xl placeholder:text-gray-600 p-1 outline-none max-[460px]:p-2 max-[460px]:w-full" />
-                <button class="bg-green-500 text-white rounded-full py-3 px-7">
+                <button class="bg-green-500 hover:bg-amber-400 translate-x-1 hover:translate-x-0 transition-[background-color,transform] text-white rounded-full py-3 px-7">
                     Subscribe
                 </button>
             </div>
