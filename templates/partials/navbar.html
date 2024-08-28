@@ -4,10 +4,10 @@
   <div class="flex justify-center sm:justify-between items-center container px-4 text-sm">
     <div>
       <ul class="flex *:border-r gap-2 *:pr-1 *:cursor-pointer text-xs">
-        <li><a href="">About Us</a></li>
-        <li><a href="">My Account</a></li>
-        <li><a href="">Wishlist</a></li>
-        <li class="border-none"><a href="">Order Tracking</a></li>
+        <li><a href="{% url 'about-us'%}">About Us</a></li>
+        <li><a href="{% url 'dashboard'%}">My Account</a></li>
+        <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
+        <li class="border-none"><a href="{% url 'dashboard'%}">Order Tracking</a></li>
       </ul>
     </div>
     <div class="hidden sm:block">
@@ -69,7 +69,7 @@
               </li>
               <li>
                 <i class="fa-regular fa-heart"></i>
-                <p><a href="">My Wishlist</a></p>
+                <p><a href="{% url 'wishlist' %}">My Wishlist</a></p>
               </li>
               <li>
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
@@ -86,70 +86,87 @@
 
 <div
   class="h-16 w-full border-b border-slate-400 flex justify-center items-center sticky top-0 bg-white z-[100] shadow-sm">
-  <div class="flex justify-center md:justify-between items-center container px-4 text-sm gap-5 md:gap-0">
-    <div
-      class="flex text-base items-center gap-2 bg-green-500 p-2 rounded text-white cursor-pointer hover:bg-green-600 transition-colors">
-      <i class="fa-solid fa-table"></i>
-      <p class="text-center text-sm sm:text-base">Browse All Categories</p>
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-    <div
-      class="block md:hidden py-1 px-3 rounded bg-gray-400 hover:bg-gray-500 transition-colors text-lg text-white cursor-pointer order-first">
-      <i class="fa-solid fa-list"></i>
-    </div>
-    <div
-      class="max-md:fixed max-md:min-h-screen max-md:w-1/4 max-md:bg-white max-md:z-[110] -left-full top-0 max-md:shadow ">
-      <ul
-        class="flex gap-3 max-md:flex-col max-md:pl-8 max-md:pt-10 text-base relative [&>*:where(li)]:p-1 [&>*:where(li)]:cursor-pointer [&>*:where(li)]:transition-colors [&>*:where(li)]:rounded"
-        x-data="{pagesShown: false}">
-        <li class="flex items-center gap-2 hover:text-amber-500
-          {% if chosen == 'deals'%}
-          text-amber-500
-          {% endif %}">
-          <i class="fa-solid fa-fire text-amber-500"></i>
-          <p><a href="">Deals</a></p>
-        </li>
-        <li class="hover:text-green-500
-          {% if chosen == 'home' %}
-          text-green-500
-          {% endif %}"><a href="{% url 'home'%}">Home</a></li>
-        <li class="hover:text-green-500
-                  {% if chosen == 'shop' %}
-                  text-green-500
-                  {% endif %}"><a href="{% url 'shop'%}">Shop</a></li>
-        <li class="hover:text-green-500
-                  {% if chosen == 'vendors' %}
-                  text-green-500
-                  {% endif %}"><a href="{% url 'vendor' 'hello' %}">Vendors</a></li>
-        <li class="hover:text-green-500
-                  {% if chosen == 'blog' %}
-                  text-green-500
-                  {% endif %}">Blog</li>
-        <li class="flex items-center gap-2 hover:text-green-500" @click="pagesShown = !pagesShown">
-          <p>Pages</p>
-          <i class="fa-solid fa-chevron-down text-sm"></i>
-        </li>
-        <ul id="pages-pop"
-          class="absolute flex flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -right-8 w-48 *:cursor-pointer text-gray-500"
-          x-show="pagesShown" x-on:click.outside="pagesShown = false" x-transition>
-          <li class="hover:text-black transition-colors"><a href="{% url 'about-us'%}">About Us</a></li>
-          <li class="hover:text-black transition-colors"><a href="{% url 'dashboard'%}">My Dashboard</a></li>
-          <li class="hover:text-black transition-colors"><a href="{% url 'purchase-guide'%}">Purchase Guide</a></li>
-          <li class="hover:text-black transition-colors"><a href="{% url 'privacy-policy'%}">Privacy Policy</a></li>
-          <li class="hover:text-black transition-colors"><a href="{% url 'terms-of-service'%}">Terms of Service</a></li>
+  <div class="container px-4 "
+    x-data="{smallNavbarShown: false, categoriesDropdownShown: false}">
+    <div class="relative flex justify-center md:justify-between items-center text-sm gap-5 md:gap-0">
+      <div class="flex text-base items-center gap-2 bg-green-500 p-2 rounded text-white cursor-pointer hover:bg-green-600 transition-colors"
+        x-on:click="categoriesDropdownShown = !categoriesDropdownShown">
+        <i class="fa-solid fa-table"></i>
+        <p class="text-center text-sm sm:text-base">Browse All Categories</p>
+        <i class="fa-solid fa-chevron-down" x-bind:class="categoriesDropdownShown && rotate-90" x-transition></i>
+      </div>
+      <!-- flowbite element -->
+      <div id="categories-dropdown" class="border absolute top-12 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+        x-show="categoriesDropdownShown" x-on:click.outside="categoriesDropdownShown = false" x-transition>
+        <ul class="py-2 text-sm text-black">
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Burger</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Sea Food</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Pet Food</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Milks & dairies</a>
+          </li>
         </ul>
-        <li class="hover:text-green-500 
-        {% if chosen == 'contact'%}
-        text-green-500
-        {% endif %}"><a href="{% url 'contact'%}">Contact</a></li>
-      </ul>
-    </div>
-
-    <div class="items-center gap-3 mr-8 hidden lg:flex">
-      <i class="fa-solid fa-headset text-3xl"></i>
-      <div class="flex flex-col">
-        <p class="text-green-500 text-lg">1900 - 888</p>
-        <p class="text-gray">24/7 Support Center</p>
+      </div>
+      <!-- endelement -->
+      <div class="block md:hidden py-1 px-3 rounded bg-gray-400 hover:bg-gray-500 transition-colors text-lg text-white cursor-pointer order-first"
+        x-on:click="smallNavbarShown = true">
+        <i class="fa-solid fa-list"></i>
+      </div>
+      <div class="hidden md:block">
+        <ul
+          class="flex gap-3 max-md:flex-col text-base relative [&>*:where(li)]:p-1 [&>*:where(li)]:cursor-pointer [&>*:where(li)]:transition-colors [&>*:where(li)]:rounded"
+          x-data="{pagesShown: false}">
+          <li class="flex items-center gap-2 hover:text-amber-500
+            {% if chosen == 'deals'%}
+            text-amber-500
+            {% endif %}">
+            <i class="fa-solid fa-fire text-amber-500"></i>
+            <p><a href="">Deals</a></p>
+          </li>
+          <li class="hover:text-green-500
+            {% if chosen == 'home' %}
+            text-green-500
+            {% endif %}"><a href="{% url 'home'%}">Home</a></li>
+          <li class="hover:text-green-500
+                    {% if chosen == 'shop' %}
+                    text-green-500
+                    {% endif %}"><a href="{% url 'shop'%}">Shop</a></li>
+          <li class="hover:text-green-500
+                    {% if chosen == 'vendors' %}
+                    text-green-500
+                    {% endif %}"><a href="{% url 'vendor' 'hello' %}">Vendors</a></li>
+          <li class="flex items-center gap-2 hover:text-green-500" x-on:click="pagesShown = !pagesShown">
+            <p>Pages</p>
+            <i class="fa-solid fa-chevron-down text-sm"></i>
+          </li>
+          <ul id="pages-pop"
+            class="absolute flex flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -right-8 w-48 *:cursor-pointer text-gray-500"
+            x-show="pagesShown" x-on:click.outside="pagesShown = false" x-transition>
+            <li class="hover:text-black transition-colors"><a href="{% url 'about-us'%}">About Us</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'dashboard'%}">My Dashboard</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'purchase-guide'%}">Purchase Guide</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'privacy-policy'%}">Privacy Policy</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'terms-of-service'%}">Terms of Service</a></li>
+          </ul>
+          <li class="hover:text-green-500 
+          {% if chosen == 'contact'%}
+          text-green-500
+          {% endif %}"><a href="{% url 'contact'%}">Contact</a></li>
+        </ul>
+      </div>
+      {% include 'partials/small-navbar.html' %}
+      <div class="items-center gap-3 mr-8 hidden lg:flex">
+        <i class="fa-solid fa-headset text-3xl"></i>
+        <div class="flex flex-col">
+          <p class="text-green-500 text-lg">1900 - 888</p>
+          <p class="text-gray">24/7 Support Center</p>
+        </div>
       </div>
     </div>
   </div>

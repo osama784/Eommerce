@@ -91,7 +91,7 @@
                     <div id="theme" class="inset-0 bg-slate-200/75 fixed z-[110]" x-show="removePopShown" x-transition></div>
                 </div>
                 <div class="flex justify-between">
-                    <a href="">
+                    <a href="{% url 'shop'%}">
                         <div class="text-white bg-green-600 hover:bg-amber-400 translate-x-1 hover:translate-x-0 transition-[background-color,transform] px-2 py-3 rounded-lg flex items-center gap-2">
                             <i class="fa-solid fa-arrow-left-long"></i>
                             <div>Continue Shopping</div>
@@ -142,7 +142,7 @@
                 </div>
             </div>
         </div>
-        <div class="rounded-lg shadow-md border flex flex-col gap-4 p-3 h-fit" x-data="{checkoutShown: false}">
+        <div class="rounded-lg shadow-md border flex flex-col gap-4 p-3 h-fit" x-data="{checkoutShown: false, execuseShown: false}">
             <div class="border flex flex-col gap-2 p-2">
                 <div class="flex justify-between items-center">
                     <span class="text-gray-500">Subtotal</span>
@@ -159,11 +159,11 @@
                 </div>
             </div>
             <div class="cursor-pointer self-center text-center flex items-center px-2 py-3 gap-2 bg-green-600 w-fit rounded-lg text-white hover:bg-amber-400 transition-colors"
-                @click="checkoutShown = true">
+                x-on:click="checkoutShown = true">
                 <span>Procced To Check Out</span><i class="fa-solid fa-arrow-right-from-bracket"></i>
             </div>
             <div id="checked-out-pop" class="flex flex-col gap-3 bg-white border rounded-lg p-5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[120]"
-                x-show="checkoutShown" x-transition:enter="transition ease-out duration-300">
+                x-show="checkoutShown && !execuseShown" x-transition:enter="transition ease-out duration-300">
                 <span class="absolute -top-3 -right-3 text-sky-950 hover:text-red-500 transition-colors cursor-pointer"
                     @click="checkoutShown = false">
                     <i class="fa-solid fa-circle-xmark fa-2x"></i>
@@ -180,11 +180,21 @@
                     Address</a>
                 <br>
                 <hr>
-                <button
-                    class="border rounded-lg p-2 bg-green-500 text-white hover:bg-amber-400 transition-colors">Confirm</button>
+                <button class="border rounded-lg p-2 bg-green-500 text-white hover:bg-amber-400 transition-colors"
+                    x-on:click="execuseShown = true">Confirm</button>
+            </div>
+            <div id="execuse-pop" class="w-80 text-center flex flex-col gap-5 items-center bg-white border rounded-lg p-5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[120]"
+                x-show="execuseShown" x-transition:enter="transition ease-out duration-300">
+                <i class="fa-solid fa-face-sad-tear fa-4x text-amber-950"></i>
+                <p>
+                    I want to connect to <a href="https://stripe.com" class="text-green-500 underline">Stripe</a> for the payment, but these products are not real and i don't have a bank account. 
+                </p>
+                <p class="text-sm text-gray-500">(*cuz I live in syria)</p>
+                <button class="border rounded-lg p-2 bg-green-500 text-white hover:bg-amber-400 transition-colors"
+                    x-on:click="execuseShown = false; checkoutShown = false">got it.</button>
             </div>
             <div class="bg-slate-200/75 z-[110] fixed inset-0" id="theme" x-show="checkoutShown"
-                @click="checkoutShown = false" x-transition></div>
+                x-on:click="checkoutShown = false; execuseShown = false" x-transition></div>
         </div>
     </div>
     <div x-show="numberOfProducts == 0" class="flex flex-col gap-20">

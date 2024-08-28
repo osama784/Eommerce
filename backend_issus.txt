@@ -11,5 +11,9 @@ templates/login.html:
     logging users
     signing up users
 
+templates/contact.html:
+    sending contect messages
+
+
 others:
     connecting to strap api

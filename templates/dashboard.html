@@ -14,8 +14,7 @@
 <div class="container mx-auto px-4 my-20 xl:max-w-7xl">
     <div x-data="{ openedIndex: 0}">
         <div class="flex gap-10 flex-col md:flex-row">
-            <ul
-                class="flex flex-col gap-4 grow h-fit *:transition-colors *:border *:rounded-lg *:cursor-pointer *:shadow *:p-3 *:grow *:flex *:items-center *:gap-3">
+            <ul class="flex flex-col gap-4 grow h-fit *:transition-colors *:border *:rounded-lg *:cursor-pointer *:shadow *:p-3 *:grow *:flex *:items-center *:gap-3">
                 {% with "Profile,Orders,My Address,Account Details,Logout"|split:',' as tablist %}
                     {% for tab in tablist %}
                         {% cycle 'fa-solid fa-user' 'fa-solid fa-burger' 'fa-solid fa-location-dot' 'fa-solid fa-address-book' 'fa-solid fa-arrow-right-to-bracket' as icon silent %}
@@ -52,7 +51,7 @@
                             <th>Status</th>
                             <th>Paid Status</th>
                             <th>Total</th>
-                            <th>Actions</th>
+                            <th class="pr-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="*:*:px-3 *:*:py-4 *:border-b">
@@ -125,35 +124,40 @@
                     these
                     cities, we're really sorry.</p>
             </div>
-            <div class="grow-[3] flex flex-col gap-5" x-show="openedIndex == 3" x-transition:enter>
-                <h2 class="font-semibold text-xl">Account Details</h2>
-                <div class="flex flex-col flex-wrap gap-3 *:grow">
-                    <div class="flex flex-wrap gap-3 *:grow">
-                        <div class="flex flex-col gap-1">
-                            <label>First name</label>
-                            <input type="text" class="border rounded-lg p-2 caret-slate-400">
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <label>Last name</label>
-                            <input type="text" class="border rounded-lg p-2 caret-slate-400">
+            <div class="grow-[3]" x-show="openedIndex == 3" x-transition:enter>
+                <form action="" class="flex flex-col gap-5">
+                    <h2 class="font-semibold text-xl">Account Details</h2>
+                    <div class="flex gap-5">
+                        <img src="{% static 'images/default-account-image.png'%}" alt="" class="rounded-full size-24">
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload file</label>
+                            <input class="block p-4 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" type="file">
                         </div>
                     </div>
-                    <div class="flex flex-col gap-1 *:grow">
-                        <label>Display name</label>
-                        <input type="text" class="border rounded-lg p-2 caret-slate-400">
+                    <div class="flex flex-col flex-wrap gap-3 *:grow">
+                        <div class="flex flex-wrap gap-3 *:grow">
+                            <div class="flex flex-col gap-1">
+                                <label>First name</label>
+                                <input type="text" class="border rounded-lg p-2 caret-slate-400">
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label>Last name</label>
+                                <input type="text" class="border rounded-lg p-2 caret-slate-400">
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1 *:grow">
+                            <label>Display name</label>
+                            <input type="text" class="border rounded-lg p-2 caret-slate-400">
+                        </div>
+                        <div class="flex flex-col gap-1 *:grow">
+                            <label>Email Address</label>
+                            <input type="email" class="border rounded-lg p-2 caret-slate-400">
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-1 *:grow">
-                        <label>Email Address</label>
-                        <input type="email" class="border rounded-lg p-2 caret-slate-400">
-                    </div>
-                    <div class="flex flex-col gap-1 *:grow">
-                        <label>Password</label>
-                        <input type="text" class="border rounded-lg p-2 caret-slate-400">
-                    </div>
-                </div>
-                <button
-                    class="bg-green-500 text-white border rounded-lg p-4 hover:bg-amber-400 transition-colors self-start">Save
-                    Profile</button>
+                    <button
+                        class="bg-green-500 text-white border rounded-lg p-4 hover:bg-amber-400 transition-colors self-start">Save
+                        Profile</button>
+                </form>
                 <div id="change-password-pop"
                     class="hidden -flex flex-col gap-3 bg-white border rounded-lg p-5 fixed w-4/5 mx-auto sm:w-96 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[120]  scale-90 hover:scale-95 transition-transform">
                     <h1 class="font-bold text-2xl">Change Password</h1>

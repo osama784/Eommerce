@@ -1,0 +1,55 @@
+{% load static %}
+
+<div id="small-navbar" class="flex flex-col gap-10 pb-10 fixed min-h-screen w-52 bg-white z-[110] left-0 top-0 shadow md:hidden"
+    x-show="smallNavbarShown" x-transition:enter>
+    <div style="background-color: #fefefe;" class="w-full py-10 px-10 border-b">
+        <img src="{% static 'images/nest.jpg'%}" alt="">
+    </div>
+    
+    <ul class="px-10 flex gap-3 flex-col text-base relative [&>*:where(li)]:p-1 [&>*:where(li)]:cursor-pointer [&>*:where(li)]:transition-colors [&>*:where(li)]:rounded"
+        x-data="{pagesShown: false}">
+        <li class="flex items-center gap-2 hover:text-amber-500
+          {% if chosen == 'deals'%}
+          text-amber-500
+          {% endif %}">
+            <i class="fa-solid fa-fire text-amber-500"></i>
+            <p><a href="">Deals</a></p>
+        </li>
+        <li class="hover:text-green-500
+          {% if chosen == 'home' %}
+          text-green-500
+          {% endif %}"><a href="{% url 'home'%}">Home</a></li>
+        <li class="hover:text-green-500
+                  {% if chosen == 'shop' %}
+                  text-green-500
+                  {% endif %}"><a href="{% url 'shop'%}">Shop</a></li>
+        <li class="hover:text-green-500
+                  {% if chosen == 'vendors' %}
+                  text-green-500
+                  {% endif %}"><a href="{% url 'vendor' 'hello' %}">Vendors</a></li>
+        <li class="hover:text-green-500
+                  {% if chosen == 'blog' %}
+                  text-green-500
+                  {% endif %}">Blog</li>
+        <li class="flex items-center gap-2 hover:text-green-500" @click="pagesShown = !pagesShown">
+            <p>Pages</p>
+            <i class="fa-solid fa-chevron-down text-sm"></i>
+        </li>
+        <ul id="pages-pop"
+            class="absolute flex flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -right-8 w-48 *:cursor-pointer text-gray-500"
+            x-show="pagesShown" x-on:click.outside="pagesShown = false" x-transition>
+            <li class="hover:text-black transition-colors"><a href="{% url 'about-us'%}">About Us</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'dashboard'%}">My Dashboard</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'purchase-guide'%}">Purchase Guide</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'privacy-policy'%}">Privacy Policy</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'terms-of-service'%}">Terms of Service</a>
+            </li>
+        </ul>
+        <li class="hover:text-green-500 
+        {% if chosen == 'contact'%}
+        text-green-500
+        {% endif %}"><a href="{% url 'contact'%}">Contact</a></li>
+    </ul>
+</div>
+
+<div id="theme" x-transition x-show="smallNavbarShown" x-on:click="smallNavbarShown = false" class="fixed bg-slate-300/75 z-[100] inset-0"></div>

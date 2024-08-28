@@ -1,6 +1,7 @@
 {% load static %}
 
-<div class="border rounded-xl flex flex-col gap-1 relative px-2 py-2 col-span-2 transition-all hover:shadow hover:border-gray-400">
+<div class="border rounded-xl flex flex-col gap-1 relative px-2 py-2 col-span-2 transition-all hover:shadow hover:border-gray-400"
+    x-data="{heartClicked: false}">
     <span
         class="absolute w-16 h-6 text-center content-center text-sm bg-pink-500 text-white top-0 left-0 rounded-ss-xl rounded-ee-xl z-50">-40%</span>
     <div class="w-full border h-56 rounded-lg group realtive overflow-hidden">
@@ -8,7 +9,7 @@
             class="object-cover size-full transition-transform duration-500 group-hover:scale-125">
         <div
             class="opacity-0 absolute gap-1 group-hover:opacity-100 flex rounded transition-opacity p-1 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 text-green-700 *:cursor-pointer">
-            <div class="border-r pr-1 peer/heart" x-data="{heartHovered: false, heartClicked:false}" x-on:mouseover="heartHovered = true"
+            <div class="border-r pr-1 peer/heart" x-data="{heartHovered: false}" x-on:mouseover="heartHovered = true"
                 x-on:mouseleave="heartHovered = false" x-on:click="heartClicked = !heartClicked">
                 <i class="fa-regular fa-heart" x-show="!(heartHovered || heartClicked)" x-transition:enter></i>
                 <i class="fa-solid fa-heart text-red-400" x-show="heartHovered || heartClicked"></i>
@@ -41,7 +42,7 @@
                 </div>
                 <i class="fa-solid fa-check group-hover:text-white transition-colors" x-show="addedToCart"></i>
             </div>
-            <div class="cursor-pointer" x-data="{heartHovered: false, heartClicked:false}" x-on:mouseover="heartHovered = true" x-on:mouseleave="heartHovered = false"
+            <div class="cursor-pointer" x-data="{heartHovered: false}" x-on:mouseover="heartHovered = true" x-on:mouseleave="heartHovered = false"
                 x-on:click="heartClicked = !heartClicked">
                 <i class="fa-regular fa-heart" x-show="!(heartHovered || heartClicked)" x-transition:enter></i>
                 <i class="fa-solid fa-heart text-red-400" x-show="heartHovered || heartClicked"></i>
