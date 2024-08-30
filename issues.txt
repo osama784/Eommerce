@@ -1,17 +1,12 @@
 Alpine.js functionalities:
-    showing tha nav
-    showing the categories 
-    showing the pages
-    in the first nav: rolling the statements
-    showing the wishlist
+    showing tha nav - done
+    showing the categories - done
+    showing the pages - done
+    add to cart in product.html
     
 
 TAILWIND functionalities:
     completting the bottom of the page
 
-
-HTML functionalities:
-    product.html 
-    fixing category.html page
 
    

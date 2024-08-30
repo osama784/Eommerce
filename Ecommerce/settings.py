@@ -113,10 +113,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
   BASE_DIR / "static",
-  BASE_DIR.parent / "node_modules"
 ]
-# STATIC_ROOT = BASE_DIR/ "static"
 
+STATIC_ROOT = BASE_DIR.parent / 'local-cdn' / 'static' 
+MEDIA_ROOT = BASE_DIR.parent / 'local-cdn' / 'media'
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

@@ -4,12 +4,16 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Q
 from django.db.models.functions import Lower
 
+from typing import Iterable
+
+
+from products import utils as products_utils
 from users.models import Profile
 
 
 
 class Product(models.Model):
-    class TypeChoices(models.TextChoices):
+    class CategoryChoices(models.TextChoices):
         ORGANIC = 'OR', 'organic'
         VEGETABLES = 'VG', 'vegetables'
         Plant_Based_Proteins = 'PP', 'plant-based protiens'
@@ -29,9 +33,10 @@ class Product(models.Model):
     discount = models.IntegerField(blank=True, null=True)
     vendor= models.ForeignKey('Vendor', on_delete=models.CASCADE)
     stock = models.IntegerField(default=1)
-    type = models.CharField(max_length=2, choices=TypeChoices.choices)
-    color = models.CharField(max_length=20)
-    image = models.URLField(default='')
+    category = models.CharField(max_length=2, choices=CategoryChoices.choices)
+    handle = models.CharField(max_length=200, blank=True, null=True)
+    life = models.PositiveSmallIntegerField()
+    image = models.ImageField(upload_to='products/', null=True, blank=True)
     first_image = models.URLField(blank=True, null=True)
     second_image = models.URLField(blank=True, null=True)
     third_image = models.URLField(blank=True, null=True)
@@ -40,6 +45,26 @@ class Product(models.Model):
     @property
     def discounted_price(self) -> int:
         return (self.price * self.discount / 100.0)
+    
+    @property
+    def get_total_reviews(self):
+        return self.reviews.count()
+    
+    @property
+    def get_new_price(self):
+        if self.discount:
+            return f'{self.price * self.discount / 100:.2f}'
+        return self.price
+    
+    @property
+    def get_display_image(self):
+        attachments = self.attachments
+        if attachments:
+            primary_attachment = attachments.filter(display=True)
+            if primary_attachment:
+                return primary_attachment.image.url
+        
+        return '/media/products/default_product.jpg'
 
     def __str__(self):
         return f'{self.stock} x {self.name}'
@@ -56,6 +81,19 @@ class Product(models.Model):
                 name="check_discount"
             )
         ]
+      
+
+class ProductAttachment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='attachments')
+    image = models.ImageField(upload_to=products_utils.product_attachment_download)        
+    display = models.BooleanField()
+
+    def save(self, force_insert: bool = ..., force_update: bool = ..., using: str | None = ..., update_fields: Iterable[str] | None = ...) -> None:
+        is_there_display_image = ProductAttachment.objects.filter(product=self.product, display=True).exists()
+        if is_there_display_image:
+            # return validatoi
+            pass
+        return super().save(force_insert, force_update, using, update_fields)
 
     
 class Review(models.Model):

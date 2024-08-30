@@ -2,10 +2,15 @@
 
 <div class="border rounded-xl flex flex-col gap-1 relative px-2 py-2 col-span-2 transition-all hover:shadow hover:border-gray-400"
     x-data="{heartClicked: false}">
-    <span
-        class="absolute w-16 h-6 text-center content-center text-sm bg-pink-500 text-white top-0 left-0 rounded-ss-xl rounded-ee-xl z-50">-40%</span>
+    <span class="absolute w-16 h-6 text-center content-center text-sm bg-pink-500 text-white top-0 left-0 rounded-ss-xl rounded-ee-xl z-50">
+        {% if product.discount %}
+        {{product.discount}}%
+        {% else %}
+        no discount
+        {% endif %}
+    </span>
     <div class="w-full border h-56 rounded-lg group realtive overflow-hidden">
-        <img src="{% static 'images/cake.jpg'%}" alt=""
+        <img src="{{product.get_display_image}}" alt=""
             class="object-cover size-full transition-transform duration-500 group-hover:scale-125">
         <div
             class="opacity-0 absolute gap-1 group-hover:opacity-100 flex rounded transition-opacity p-1 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 text-green-700 *:cursor-pointer">
@@ -24,14 +29,14 @@
             </span>
         </div>
     </div>
-    <small class="text-gray-500 text-xs">Food</small>
-    <strong class="font-bold h-12 line-clamp-2">Red Velvet Cakes</strong>
-    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
+    <small class="text-gray-500 text-xs">{{product.category}}</small>
+    <strong class="font-bold h-12 line-clamp-2">{{product.name}}</strong>
+    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>{{product.get_total_reviews}}</span>
     <p class="text-sm">
-        By <a href="" class="text-green-500">NestFOOD</a>
+        By <a href="" class="text-green-500">{{product.vendor}}</a>
     </p>
     <div class="flex justify-between items-center mt-3">
-        <span class="text-green-600 font-bold">$ 88.93</span>
+        <span class="text-green-600 font-bold">{{product.get_new_price}}</span>
         {% if request.user.is_authenticated %}
         <div class="flex items-center gap-2">
             <div class="bg-green-200 hover:bg-green-500 group cursor-pointer transition-colors px-2 py-1 rounded"
@@ -50,5 +55,7 @@
         </div>
         {% endif %}
     </div>
-    <small class="line-through text-gray-500 text-sm ml-2">$200.99</small>
+    {% if product.discount %}
+    <small class="line-through text-gray-500 text-sm ml-2">{{product.price}}</small>
+    {% endif %}
 </div>

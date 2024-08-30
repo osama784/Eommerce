@@ -11,7 +11,7 @@ from products.models import Product, Order, Review, Vendor
 
 
 def index(request):
-    products = Product.objects.select_related('vendor').prefetch_related('reviews').annotate(reviews_count=Count('reviews'))
+    products = Product.objects.select_related('vendor').prefetch_related('reviews')
 
     context = {'products': products}
     return render(request, 'index.html', context=context)
