@@ -8,7 +8,7 @@
 
 {% block content %}
 {% include 'partials/navbar.html' with chosen='shop' %}
-{% url 'shop' as parent_page_url %}
+{% url 'products:shop' as parent_page_url %}
 {% include 'partials/path.html' with parent_page_name="Shop" page_name="Wishlist" parent_page_url=parent_page_url %}
 
 <div class="container mx-auto px-4 my-10 xl:max-w-7xl" x-data="{removePopShown : false, removeText: '', numberOfProducts: 1}">
@@ -95,7 +95,7 @@
             <div id="theme" class="inset-0 bg-slate-200/75 fixed z-[110]" x-show="removePopShown" x-transition></div>
         </div>
         <div class="flex">
-            <a href="{% url 'shop'%}">
+            <a href="{% url 'products:shop'%}">
                 <div class="text-white bg-green-600 hover:bg-amber-400 translate-x-1 hover:translate-x-0 transition-[background-color,transform] px-2 py-3 rounded-lg flex items-center gap-2">
                     <i class="fa-solid fa-arrow-left-long"></i>
                     <div>Continue Shopping</div>

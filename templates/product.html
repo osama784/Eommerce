@@ -7,7 +7,7 @@
 
 {% block content %}
 {% include 'partials/navbar.html' with chosen='shop'%}
-{% url 'shop' as parent_page_url %}
+{% url 'products:shop' as parent_page_url %}
 {% include 'partials/path.html' with parent_page_name="Category_name" page_name="product_name" parent_page_url=parent_page_url%}
 
 <div class="grid grid-cols-12 gap-4 container mx-auto my-5 px-4 max-w-[1270px]">

@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'products',
     'users',
+    'vendors',
+    'services',
 
 ]
 

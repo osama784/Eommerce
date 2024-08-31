@@ -4,10 +4,10 @@
   <div class="flex justify-center sm:justify-between items-center container px-4 text-sm">
     <div>
       <ul class="flex *:border-r gap-2 *:pr-1 *:cursor-pointer text-xs">
-        <li><a href="{% url 'about-us'%}">About Us</a></li>
-        <li><a href="{% url 'dashboard'%}">My Account</a></li>
-        <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
-        <li class="border-none"><a href="{% url 'dashboard'%}">Order Tracking</a></li>
+        <li><a href="{% url 'services:about-us'%}">About Us</a></li>
+        <li><a href="{% url 'services:dashboard'%}">My Account</a></li>
+        <li><a href="{% url 'products:wishlist' %}">Wishlist</a></li>
+        <li class="border-none"><a href="{% url 'services:dashboard'%}">Order Tracking</a></li>
       </ul>
     </div>
     <div class="hidden sm:block">
@@ -44,14 +44,14 @@
         <li class="relative" x-on:mouseover="wishlistTextOpened = true"
           x-on:mouseover.outside="wishlistTextOpened = false">
           <i class="fa-regular fa-heart"></i>
-          <a href="{% url 'wishlist' %}" class="hover:text-green-500 transition-colors">Wishlist</a>
+          <a href="{% url 'products:wishlist' %}" class="hover:text-green-500 transition-colors">Wishlist</a>
           <span class="bg-white border shadow rounded-xl absolute top-8 -left-5 w-32 p-2 text-center z-[110]"
             x-show="wishlistTextOpened" x-on:mouseenter="wishlistTextOpened = false" x-transition>Items You
             Liked</span>
         </li>
         <li>
           <i class="fa-solid fa-cart-shopping"></i>
-          <a href="{% url 'cart' %}" class="hover:text-green-500 transition-colors">Cart</a>
+          <a href="{% url 'products:cart' %}" class="hover:text-green-500 transition-colors">Cart</a>
         </li>
         <li x-on:mouseover="accountOpened = true" x-on:mouseover.outside="accountOpened = false">
           <i class="fa-regular fa-circle-user"></i>
@@ -61,19 +61,19 @@
             <ul class="flex flex-col gap-5 p-3 *:flex *:gap-2 *:items-center *:cursor-pointer">
               <li>
                 <i class="fa-regular fa-circle-user"></i>
-                <p><a href="{% url 'dashboard' %}">My account</a></p>
+                <p><a href="{% url 'services:dashboard' %}">My account</a></p>
               </li>
               <li>
                 <i class="fa-solid fa-burger"></i>
-                <p><a href="{% url 'dashboard' %}">Order Tracking</a></p>
+                <p><a href="{% url 'services:dashboard' %}">Order Tracking</a></p>
               </li>
               <li>
                 <i class="fa-regular fa-heart"></i>
-                <p><a href="{% url 'wishlist' %}">My Wishlist</a></p>
+                <p><a href="{% url 'products:wishlist' %}">My Wishlist</a></p>
               </li>
               <li>
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                <p><a href="{% url 'dashboard' %}">Sign in</a></p>
+                <p><a href="{% url 'services:dashboard' %}">Sign in</a></p>
               </li>
             </ul>
           </div>
@@ -132,15 +132,15 @@
           <li class="hover:text-green-500
             {% if chosen == 'home' %}
             text-green-500
-            {% endif %}"><a href="{% url 'home'%}">Home</a></li>
+            {% endif %}"><a href="{% url 'products:home'%}">Home</a></li>
           <li class="hover:text-green-500
                     {% if chosen == 'shop' %}
                     text-green-500
-                    {% endif %}"><a href="{% url 'shop'%}">Shop</a></li>
+                    {% endif %}"><a href="{% url 'products:shop'%}">Shop</a></li>
           <li class="hover:text-green-500
                     {% if chosen == 'vendors' %}
                     text-green-500
-                    {% endif %}"><a href="{% url 'vendor' 'hello' %}">Vendors</a></li>
+                    {% endif %}"><a href="{% url 'vendors:vendor-list' %}">Vendors</a></li>
           <li class="flex items-center gap-2 hover:text-green-500" x-on:click="pagesShown = !pagesShown">
             <p>Pages</p>
             <i class="fa-solid fa-chevron-down text-sm"></i>
@@ -148,16 +148,16 @@
           <ul id="pages-pop"
             class="absolute flex flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -right-8 w-48 *:cursor-pointer text-gray-500"
             x-show="pagesShown" x-on:click.outside="pagesShown = false" x-transition>
-            <li class="hover:text-black transition-colors"><a href="{% url 'about-us'%}">About Us</a></li>
-            <li class="hover:text-black transition-colors"><a href="{% url 'dashboard'%}">My Dashboard</a></li>
-            <li class="hover:text-black transition-colors"><a href="{% url 'purchase-guide'%}">Purchase Guide</a></li>
-            <li class="hover:text-black transition-colors"><a href="{% url 'privacy-policy'%}">Privacy Policy</a></li>
-            <li class="hover:text-black transition-colors"><a href="{% url 'terms-of-service'%}">Terms of Service</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'services:about-us'%}">About Us</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'services:dashboard'%}">My Dashboard</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'services:purchase-guide'%}">Purchase Guide</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'services:privacy-policy'%}">Privacy Policy</a></li>
+            <li class="hover:text-black transition-colors"><a href="{% url 'services:terms-of-service'%}">Terms of Service</a></li>
           </ul>
           <li class="hover:text-green-500 
           {% if chosen == 'contact'%}
           text-green-500
-          {% endif %}"><a href="{% url 'contact'%}">Contact</a></li>
+          {% endif %}"><a href="{% url 'services:contact'%}">Contact</a></li>
         </ul>
       </div>
       {% include 'partials/small-navbar.html' %}

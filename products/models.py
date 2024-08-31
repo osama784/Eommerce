@@ -3,9 +3,7 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Q
 from django.db.models.functions import Lower
-
-from typing import Iterable
-
+from django.core.exceptions import ValidationError
 
 from products import utils as products_utils
 from users.models import Profile
@@ -36,11 +34,6 @@ class Product(models.Model):
     category = models.CharField(max_length=2, choices=CategoryChoices.choices)
     handle = models.CharField(max_length=200, blank=True, null=True)
     life = models.PositiveSmallIntegerField()
-    image = models.ImageField(upload_to='products/', null=True, blank=True)
-    first_image = models.URLField(blank=True, null=True)
-    second_image = models.URLField(blank=True, null=True)
-    third_image = models.URLField(blank=True, null=True)
-    fourth_image = models.URLField(blank=True, null=True)
 
     @property
     def discounted_price(self) -> int:
@@ -69,6 +62,11 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.stock} x {self.name}'
     
+    def save(self, *args, **kwargs) -> None:
+        if self.name:
+            self.handle = self.name.lower().replace(" ", "-")
+        return super().save(*args, **kwargs)
+    
     class Meta:
         ordering = ['stock']
         constraints = [
@@ -88,12 +86,11 @@ class ProductAttachment(models.Model):
     image = models.ImageField(upload_to=products_utils.product_attachment_download)        
     display = models.BooleanField()
 
-    def save(self, force_insert: bool = ..., force_update: bool = ..., using: str | None = ..., update_fields: Iterable[str] | None = ...) -> None:
+    def save(self, *args, **kwargs) -> None:
         is_there_display_image = ProductAttachment.objects.filter(product=self.product, display=True).exists()
         if is_there_display_image:
-            # return validatoi
-            pass
-        return super().save(force_insert, force_update, using, update_fields)
+            return ValidationError("the product should have one disply image.")
+        return super().save(*args, **kwargs)
 
     
 class Review(models.Model):

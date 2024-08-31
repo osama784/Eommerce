@@ -8,8 +8,7 @@
 
 {% block content %}
 {% include 'partials/navbar.html'%}
-{% url 'privacy-policy' as parent_page_url %}
-{% include 'partials/path.html' with parent_page_name="Privacy Policy" parent_page_url=parent_page_url %}
+{% include 'partials/path.html' with parent_page_name="Privacy Policy" %}
 
 
 <div class="container mx-auto px-4 my-10 xl:max-w-7xl">
