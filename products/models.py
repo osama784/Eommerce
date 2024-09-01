@@ -1,11 +1,13 @@
 from django.db import models
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Q
 from django.db.models.functions import Lower
 from django.core.exceptions import ValidationError
 
-from products import utils as products_utils
+from . import utils as products_utils
 from users.models import Profile
 
 
@@ -34,6 +36,10 @@ class Product(models.Model):
     category = models.CharField(max_length=2, choices=CategoryChoices.choices)
     handle = models.CharField(max_length=200, blank=True, null=True)
     life = models.PositiveSmallIntegerField()
+    image = models.ImageField(upload_to=products_utils.product_image_download, blank=True, null=True)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     @property
     def discounted_price(self) -> int:
@@ -51,13 +57,15 @@ class Product(models.Model):
     
     @property
     def get_display_image(self):
-        attachments = self.attachments
-        if attachments:
-            primary_attachment = attachments.filter(display=True)
-            if primary_attachment:
-                return primary_attachment.image.url
+        if self.image:
+            return self.image.url
         
         return '/media/products/default_product.jpg'
+    
+    @property
+    def get_attachments(self):
+        attachments = ProductAttachment.objects.filter(product=self)
+        return attachments or None
 
     def __str__(self):
         return f'{self.stock} x {self.name}'
@@ -66,6 +74,13 @@ class Product(models.Model):
         if self.name:
             self.handle = self.name.lower().replace(" ", "-")
         return super().save(*args, **kwargs)
+    
+    def get_absloute_url(self):
+        return reverse(f"products:product-detail", kwargs={'handle': self.handle})
+    
+    def get_download_url(self):
+        attachment = get_object_or_404(self.attachments, display=True)
+        return reverse("products:product-download", kwargs={'handle': self.handle, 'pk': attachment.pk})
     
     class Meta:
         ordering = ['stock']
@@ -84,13 +99,7 @@ class Product(models.Model):
 class ProductAttachment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='attachments')
     image = models.ImageField(upload_to=products_utils.product_attachment_download)        
-    display = models.BooleanField()
 
-    def save(self, *args, **kwargs) -> None:
-        is_there_display_image = ProductAttachment.objects.filter(product=self.product, display=True).exists()
-        if is_there_display_image:
-            return ValidationError("the product should have one disply image.")
-        return super().save(*args, **kwargs)
 
     
 class Review(models.Model):

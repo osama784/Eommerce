@@ -34,74 +34,62 @@ class Command(BaseCommand):
     products = [
         {
             "name": 'Velvet Cakes',
-            "color": "brown",
-            "type": Product.TypeChoices.DESSERTS
+            "type": Product.CategoryChoices.DESSERTS,
         },
         {
             "name": 'Spatchcock BBQ Chicken', 
-            "color": "red",
-            "type": Product.TypeChoices.MEAT_BEEF
+            "type": Product.CategoryChoices.MEAT_BEEF
         },
         {
             "name": 'Home-made BBQ Grilled Chicken', 
-            "color": "red",
-            "type": Product.TypeChoices.MEAT_BEEF
+            "type": Product.CategoryChoices.MEAT_BEEF
         },
         {
             "name": 'Double Bief Fried Chicken Bacon', 
-            "color": "amber",
-            "type": Product.TypeChoices.BURGERS
+            "type": Product.CategoryChoices.BURGERS
         },
         {
             "name": 'Zesty Zucchini Zoodles', 
-            "color": "green",
-            "type": Product.TypeChoices.SALADS_BOWLS
+            "type": Product.CategoryChoices.SALADS_BOWLS
         },
         {
             "name": 'Savory Seaweed Sushi Rolls', 
-            "color": "green",
-            "type": Product.TypeChoices.SUSHI
+            "type": Product.CategoryChoices.SUSHI
         },
         {
             "name": 'Mystical Mushroom Medley', 
-            "color": "brown",
-            "type": Product.TypeChoices.NUTS_SEEDS
+            "type": Product.CategoryChoices.NUTS_SEEDS
         },
         {
             "name": 'Enchanted Elixir Soup', 
-            "color": "wheat",
-            "type": Product.TypeChoices.SALADS_BOWLS
+            "type": Product.CategoryChoices.SALADS_BOWLS
         },
         {
             "name": 'Whimsical Waffle Tower', 
-            "color": "brown",
-            "type": Product.TypeChoices.DESSERTS
+            "type": Product.CategoryChoices.DESSERTS
         },
         {
             "name": 'Dragonfire Tacos', 
-            "color": "mixed",
-            "type": Product.TypeChoices.VEGETABLES
+            "type": Product.CategoryChoices.VEGETABLES
         },
         {
             "name": 'Galactic Grilled Cheese', 
-            "color": "amber",
-            "type": Product.TypeChoices.BURGERS
+            "type": Product.CategoryChoices.BURGERS
         },
         {
             "name": 'Stardust Smoothie Bowl', 
-            "color": "pink",
-            "type": Product.TypeChoices.DESSERTS
+            "type": Product.CategoryChoices.DESSERTS
         },
         {
             "name": "Fresh Juice",
-            "color": "mixed",
-            "type": Product.TypeChoices.JUICE
+            "type": Product.CategoryChoices.JUICE
         }
     ]
 
     for product in products:
         price = random.uniform(20.0, 700.0)
         discount = random.randint(1, 99)
+        # image_path = f'products/{products['name'].lower().replace()}'
         Product.objects.get_or_create(
             **product,
             vendor=random.choice(vendors),

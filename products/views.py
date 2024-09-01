@@ -1,13 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import FileResponse
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.db import connection
 
 from pprint import pprint
+import mimetypes
 
-from products.models import Product, Order, Review, Vendor
-
+from .models import Product, ProductAttachment, Order, Review, Vendor
 
 
 def index(request):
@@ -17,8 +18,18 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-def product(request):
+def product_detail(request, handle):
     return render(request, 'product.html')
+
+
+def product_download(request, handle, pk):
+    attachment = get_object_or_404(ProductAttachment, product__handle=handle, pk=pk)
+    image = attachment.image.open(mode='rb')
+    content_type, encoding = mimetypes.guess_type(image)
+    response = FileResponse(image)
+    response['Content-Type'] = content_type or 'application/octet-stream'
+    response["Content-Disposition"] = f'attachment;filename={attachment.image.name}'
+    return response
 
 
 @login_required
