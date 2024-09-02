@@ -45,8 +45,8 @@
           x-on:mouseover.outside="wishlistTextOpened = false">
           <i class="fa-regular fa-heart"></i>
           <a href="{% url 'products:wishlist' %}" class="hover:text-green-500 transition-colors">Wishlist</a>
-          <span class="bg-white border shadow rounded-xl absolute top-8 -left-5 w-32 p-2 text-center z-[110]"
-            x-show="wishlistTextOpened" x-on:mouseenter="wishlistTextOpened = false" x-transition>Items You
+          <span class="hidden bg-white border shadow rounded-xl absolute top-8 -left-5 w-32 p-2 text-center z-[110]"
+            x-show="wishlistTextOpened" x-on:mouseenter="wishlistTextOpened = false" x-bind:class="{'hidden': !wishlistTextOpened}" x-transition>Items You
             Liked</span>
         </li>
         <li>
@@ -56,8 +56,8 @@
         <li x-on:mouseover="accountOpened = true" x-on:mouseover.outside="accountOpened = false">
           <i class="fa-regular fa-circle-user"></i>
           <p class="transition-colors" x-bind:class="accountOpened && 'text-green-500'">Account</p>
-          <div id="account-pop" class="absolute bg-white rounded-lg border top-7 -right-2 z-[110] shadow-lg"
-            x-show="accountOpened" x-transition>
+          <div id="account-pop" class="hidden absolute bg-white rounded-lg border top-7 -right-2 z-[110] shadow-lg"
+            x-bind:class="{'hidden': !accountOpened}" x-show="accountOpened" x-transition>
             <ul class="flex flex-col gap-5 p-3 *:flex *:gap-2 *:items-center *:cursor-pointer">
               <li>
                 <i class="fa-regular fa-circle-user"></i>
@@ -84,10 +84,8 @@
   </div>
 </div>
 
-<div
-  class="h-16 w-full border-b border-slate-400 flex justify-center items-center sticky top-0 bg-white z-[100] shadow-sm">
-  <div class="container px-4 "
-    x-data="{smallNavbarShown: false, categoriesDropdownShown: false}">
+<div class="h-16 w-full border-b border-slate-400 flex justify-center items-center sticky top-0 bg-white z-[100] shadow-sm">
+  <div class="container px-4" x-data="{smallNavbarShown: false, categoriesDropdownShown: false}">
     <div class="relative flex justify-center md:justify-between items-center text-sm gap-5 md:gap-0">
       <div class="flex text-base items-center gap-2 bg-green-500 p-2 rounded text-white cursor-pointer hover:bg-green-600 transition-colors"
         x-on:click="categoriesDropdownShown = !categoriesDropdownShown">

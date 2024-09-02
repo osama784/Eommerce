@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 
 from . import utils as products_utils
 from users.models import Profile
+from vendors.models import Vendor
 
 
 
@@ -31,7 +32,7 @@ class Product(models.Model):
     name= models.CharField(max_length=200)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     discount = models.IntegerField(blank=True, null=True)
-    vendor= models.ForeignKey('Vendor', on_delete=models.CASCADE)
+    vendor= models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True, blank=True)
     stock = models.IntegerField(default=1)
     category = models.CharField(max_length=2, choices=CategoryChoices.choices)
     handle = models.CharField(max_length=200, blank=True, null=True)
@@ -42,15 +43,11 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     @property
-    def discounted_price(self) -> int:
-        return (self.price * self.discount / 100.0)
-    
-    @property
     def get_total_reviews(self):
         return self.reviews.count()
     
     @property
-    def get_new_price(self):
+    def get_new_price(self) -> int:
         if self.discount:
             return f'{self.price * self.discount / 100:.2f}'
         return self.price
@@ -61,6 +58,12 @@ class Product(models.Model):
             return self.image.url
         
         return '/media/products/default_product.jpg'
+    
+    def get_absolute_url(self):
+        return reverse(f"products:product-detail", kwargs={'handle': self.handle})
+    
+    def get_download_url(self):
+        return reverse("products:product-download", kwargs={'handle': self.handle})
     
     @property
     def get_attachments(self):
@@ -75,12 +78,6 @@ class Product(models.Model):
             self.handle = self.name.lower().replace(" ", "-")
         return super().save(*args, **kwargs)
     
-    def get_absloute_url(self):
-        return reverse(f"products:product-detail", kwargs={'handle': self.handle})
-    
-    def get_download_url(self):
-        attachment = get_object_or_404(self.attachments, display=True)
-        return reverse("products:product-download", kwargs={'handle': self.handle, 'pk': attachment.pk})
     
     class Meta:
         ordering = ['stock']
@@ -100,7 +97,8 @@ class ProductAttachment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='attachments')
     image = models.ImageField(upload_to=products_utils.product_attachment_download)        
 
-
+    def get_download_url(self):
+        return reverse('products:attachment-download', kwargs={'handle': self.product.handle, 'pk': self.pk})
     
 class Review(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
@@ -129,16 +127,6 @@ class Review(models.Model):
                 name="review_once"
             )
         ]
-
-
-class Vendor(models.Model):
-    name = models.CharField(max_length=200, unique=True)
-    address = models.CharField(max_length=200)
-    phone_number = models.CharField(max_length=15)
-    image = models.URLField(default='')
-
-    def __str__(self):
-        return self.name
 
 
 class Order(models.Model):

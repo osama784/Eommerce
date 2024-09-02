@@ -169,7 +169,6 @@
             </div>
             <div class="grid max-[430px]:grid-cols-2 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
                 {% for product in products %}
-                    {% static 'images/cake.jpg' as product_image%}
                     {% include 'partials/product-partial.html' with product=product%}                 
                 {% endfor %}
                 

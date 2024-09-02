@@ -13,22 +13,36 @@ from .models import Product, ProductAttachment, Order, Review, Vendor
 
 def index(request):
     products = Product.objects.select_related('vendor').prefetch_related('reviews')
-
+    print(products.first().image)
     context = {'products': products}
     return render(request, 'index.html', context=context)
 
 
 def product_detail(request, handle):
-    return render(request, 'product.html')
+    product = get_object_or_404(Product, handle=handle)
+    products = Product.objects.all()
+    context = {'product': product, 'products': products}
+    return render(request, 'product.html', context=context)
 
 
-def product_download(request, handle, pk):
+def attachment_download(request, handle, pk):
     attachment = get_object_or_404(ProductAttachment, product__handle=handle, pk=pk)
     image = attachment.image.open(mode='rb')
-    content_type, encoding = mimetypes.guess_type(image)
+    filename = attachment.image.name
+
     response = FileResponse(image)
-    response['Content-Type'] = content_type or 'application/octet-stream'
-    response["Content-Disposition"] = f'attachment;filename={attachment.image.name}'
+    response['Content-Type'] = 'application/octet-stream'
+    response["Content-Disposition"] = f'attachment;filename={filename}'
+    return response
+
+def product_download(request, handle):
+    product = get_object_or_404(Product, handle=handle)
+    image = product.image    
+    filename = image.name
+
+    response = FileResponse(image)
+    response['Content-Type'] = 'application/octet-stream'
+    response["Content-Disposition"] = f'attachment;filename={filename}'
     return response
 
 
