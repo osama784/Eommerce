@@ -20,7 +20,7 @@
                     class="rounded-lg size-full object-cover" x-transition>
             </div>
             {% if product.get_attachments %}
-            <div class="flex justify-between gap-1 *:rounded-lg *:border h-24 *:cursor-pointer *:w-20">
+            <div class="flex justify-around gap-1 *:rounded-lg *:border h-24 *:cursor-pointer *:w-20">
                 {% for attachment in product.get_attachments %}
                 <div class="hover:opacity-80 transition-opacity" x-data="{thisImage: {'url': '{{attachment.image.url}}' , 'download_url': '{{attachment.get_download_url}}' } }"
                     x-on:click="tmp=currentImage; currentImage = thisImage; thisImage=tmp">
@@ -121,7 +121,7 @@
                                 <i class="fa-solid fa-star text-yellow-500"></i>
                                 <i class="fa-solid fa-star text-yellow-500"></i>
                             </div>
-                            <span class="text-gray-500 pl-12">reviews({{product.vendor.get_total_products_reviews}})</span>
+                            <span class="text-gray-500 pl-12">reviews({{product.vendor.rating.count}})</span>
                         </div>
                     </div>
                     <div class="mt-16">
@@ -140,15 +140,15 @@
                     <div class="flex gap-2 justify-between mt-5 xl:w-4/6 xl:mx-auto">
                         <div class="flex flex-col gap-2 items-center">
                             <small class="text-green-600">Rating</small>
-                            <strong class="font-bold text-3xl">92%</strong>
+                            <strong class="font-bold text-3xl">{{product.vendor.get_products_quality_rating_percentage}}%</strong>
                         </div>
                         <div class="flex flex-col gap-2 items-center">
                             <small class="text-green-600">Ship on time</small>
-                            <strong class="font-bold text-3xl">100%</strong>
+                            <strong class="font-bold text-3xl">{{product.vendor.get_chat_rating_percentage}}%</strong>
                         </div>
                         <div class="flex flex-col gap-2 items-center">
                             <small class="text-green-600">Chat response</small>
-                            <strong class="font-bold text-3xl">100%</strong>
+                            <strong class="font-bold text-3xl">{{product.vendor.get_ship_rating_percentage}}%</strong>
                         </div>
                     </div>
                 </div>
@@ -292,7 +292,7 @@
                         <i class="fa-solid fa-star text-yellow-500"></i>
                         <i class="fa-solid fa-star text-yellow-500"></i>
                     </div>
-                    <span class="text-gray-500 pl-12">reviews({{product.vendor.get_total_products_reviews}})</span>
+                    <span class="text-gray-500 pl-12">reviews({{product.vendor.ratings.count}})</span>
                 </div>
             </div>
             <div class="mt-16">
@@ -309,15 +309,15 @@
             <div class="flex gap-2 justify-between mt-5">
                 <div class="flex flex-col gap-2 items-center">
                     <small class="text-green-600">Rating</small>
-                    <strong class="font-bold text-3xl">92%</strong>
+                    <strong class="font-bold text-3xl">{{product.vendor.get_products_quality_rating_percentage}}%</strong>
                 </div>
                 <div class="flex flex-col gap-2 items-center">
                     <small class="text-green-600">Ship on time</small>
-                    <strong class="font-bold text-3xl">100%</strong>
+                    <strong class="font-bold text-3xl">{{product.vendor.get_chat_rating_percentage}}%</strong>
                 </div>
                 <div class="flex flex-col gap-2 items-center">
                     <small class="text-green-600">Chat reponse</small>
-                    <strong class="font-bold text-3xl">100%</strong>
+                    <strong class="font-bold text-3xl">{{product.vendor.get_ship_rating_percentage}}%</strong>
                 </div>
             </div>
             <hr class="border-gray-400 mt-5">
@@ -346,7 +346,8 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-4 md:p-5">
-                    <form class="space-y-4" action="#">
+                    <form class="space-y-4" method="POST" action="{% url 'vendors:vendor-rating' product.vendor.handle %}">
+                        {% csrf_token %}
                         <div>
                             <label for="ship_rating" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Ship Speedness</label>
