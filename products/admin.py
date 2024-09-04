@@ -1,5 +1,5 @@
 from django.contrib import admin
-from products.models import Product, Vendor, Order, Review, ProductAttachment
+from products.models import Product, Order, Review, ProductAttachment
 
 
 class ProductAttachmentInline(admin.StackedInline):
@@ -10,11 +10,11 @@ class ProductAttachmentInline(admin.StackedInline):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductAttachmentInline]
     list_display = ['name', 'price', 'category', 'vendor']
+    readonly_fields = ['created', 'updated']
     
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductAttachment)
-admin.site.register(Vendor)
 admin.site.register(Order)
 admin.site.register(Review)
 

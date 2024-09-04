@@ -32,7 +32,7 @@ class Product(models.Model):
     name= models.CharField(max_length=200)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     discount = models.IntegerField(blank=True, null=True)
-    vendor= models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True, blank=True)
+    vendor= models.ForeignKey(Vendor, on_delete=models.SET_NULL, related_name='products', null=True, blank=True)
     stock = models.IntegerField(default=1)
     category = models.CharField(max_length=2, choices=CategoryChoices.choices)
     handle = models.CharField(max_length=200, blank=True, null=True)

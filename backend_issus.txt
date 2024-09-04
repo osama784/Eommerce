@@ -3,6 +3,7 @@ templates/product.html:
     adding to cart - hx
     add it to favorites - hx
 
+
 templates/cart.html:
     updating the cart if any product changed
     delete the product
@@ -17,3 +18,8 @@ templates/contact.html:
 
 others:
     connecting to strap api
+
+
+vendors/models.py:
+    adding some fields to Vendor: property -> rating, ship_on_time, chat_response
+
