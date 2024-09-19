@@ -1,5 +1,5 @@
 templates/product.html:
-    sending reviews - hx
+    sending reviews - hx -- done
     adding to cart - hx
     add it to favorites - hx
 

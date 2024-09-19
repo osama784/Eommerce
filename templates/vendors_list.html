@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
+{% load mytags %}
 
 
 {% block head%}
@@ -21,92 +22,11 @@
             </div>
         </div>
         <div class="space-y-10">
-            <p class="!col-span-2">We found 5 vendors for you!</p>
+            <p class="!col-span-2">We found {{vendors.count}} vendors for you!</p>
             <div  class="grid grid-cols-2 gap-5 *:col-span-2 *:md:col-span-1">
-                <div class="flex gap-8 border p-4 rounded-lg">
-                    <div class="space-y-3">
-                        <img src="{% static 'images/nature-food.png'%}" alt="" class="size-24">
-                        <p class="p-1 bg-green-50 text-green-500 rounded-lg text-center">7 Products</p>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <small class="text-gray-400">Since 2022</small>
-                        <h3 class="font-semibold text-xl">Nestify</h3>
-                        <div class="flex gap-2">
-                            <div class="flex gap-1 text-yellow-400">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <small class="text-gray-400">(4.0)</small>
-                        </div>
-                        <p class="text-gray-400">Address: 123 Main Street.</p>
-                        <p class="text-gray-400">Call Us: +123(456)789</p>
-                        <a href="">
-                            <div class="flex items-center gap-2 w-fit p-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors">
-                                <p>View Store</p>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="flex gap-8 border p-4 rounded-lg">
-                    <div class="space-y-3">
-                        <img src="{% static 'images/nature-food.png'%}" alt="" class="size-24">
-                        <p class="p-1 bg-green-50 text-green-500 rounded-lg text-center">7 Products</p>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <small class="text-gray-400">Since 2022</small>
-                        <h3 class="font-semibold text-xl">Nestify</h3>
-                        <div class="flex gap-2">
-                            <div class="flex gap-1 text-yellow-400">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <small class="text-gray-400">(4.0)</small>
-                        </div>
-                        <p class="text-gray-400">Address: 123 Main Street.</p>
-                        <p class="text-gray-400">Call Us: +123(456)789</p>
-                        <a href="">
-                            <div class="flex items-center gap-2 w-fit p-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors">
-                                <p>View Store</p>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="flex gap-8 border p-4 rounded-lg">
-                    <div class="space-y-3">
-                        <img src="{% static 'images/nature-food.png'%}" alt="" class="size-24">
-                        <p class="p-1 bg-green-50 text-green-500 rounded-lg text-center">7 Products</p>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <small class="text-gray-400">Since 2022</small>
-                        <h3 class="font-semibold text-xl">Nestify</h3>
-                        <div class="flex gap-2">
-                            <div class="flex gap-1 text-yellow-400">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <small class="text-gray-400">(4.0)</small>
-                        </div>
-                        <p class="text-gray-400">Address: 123 Main Street.</p>
-                        <p class="text-gray-400">Call Us: +123(456)789</p>
-                        <a href="">
-                            <div class="flex items-center gap-2 w-fit p-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors">
-                                <p>View Store</p>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                {% for vendor in vendors %}
+                    {% include 'partials/vendor-partial.html' with vendor=vendor  %}
+                {% endfor %}
             </div>    
         </div>
     </div>

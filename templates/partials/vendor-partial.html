@@ -1,0 +1,34 @@
+{% load mytags %}
+
+<div class="flex gap-8 border p-4 rounded-lg">
+    <div class="space-y-3">
+        <img src="{{vendor.image.url}}" alt="" class="size-24">
+        <p class="p-1 bg-green-50 text-green-500 rounded-lg text-center">{{vendor.products.count}} Products</p>
+    </div>
+    <div class="flex flex-col gap-2">
+        <small class="text-gray-400">{{vendor.opened}}</small>
+        <h3 class="font-semibold text-xl">{{vendor.name}}</h3>
+        <div class="flex gap-2">
+            <div class="flex gap-1">
+                {% for star in ''|center:vendor.get_stars_number %}
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                {% endfor %}
+                {% with 5|subtract:vendor.get_stars_number as value %}
+                    {% for star in ''|center:value %}
+                    <i class="fa-solid fa-star text-gray-400"></i>
+                    {% endfor %}
+                {% endwith %}
+            </div>
+            <small class="text-gray-400">({{vendor.get_stars_number}})</small>
+        </div>
+        <p class="text-gray-400">Address: {{vendor.address}}</p>
+        <p class="text-gray-400">Call Us: {{vendor.phone_number}}</p>
+        <a href="">
+            <div
+                class="flex items-center gap-2 w-fit p-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors">
+                <p><a href="{% url 'vendors:vendor' vendor.handle %}">View Store</a></p>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+    </div>
+</div>

@@ -8,10 +8,14 @@ from .models import Vendor
 from .forms import RatingForm
 
 def vendor(request, handle):
-    return render(request, 'vendor.html')
+    vendor = get_object_or_404(Vendor, handle=handle)
+    context={'vendor': vendor}
+    return render(request, 'vendor.html', context=context)
 
 def vendor_list(request):
-    return render(request, 'vendors_list.html')
+    vendors = Vendor.objects.all()
+    context = {'vendors': vendors}
+    return render(request, 'vendors_list.html', context=context)
 
 
 @require_POST

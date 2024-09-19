@@ -85,7 +85,7 @@
 </div>
 
 <div class="h-16 w-full border-b border-slate-400 flex justify-center items-center sticky top-0 bg-white z-[100] shadow-sm">
-  <div class="container px-4" x-data="{smallNavbarShown: false, categoriesDropdownShown: false}">
+  <div class="container px-4" x-data="{sidebarShown: false, categoriesDropdownShown: false}">
     <div class="relative flex justify-center md:justify-between items-center text-sm gap-5 md:gap-0">
       <div class="flex text-base items-center gap-2 bg-green-500 p-2 rounded text-white cursor-pointer hover:bg-green-600 transition-colors"
         x-on:click="categoriesDropdownShown = !categoriesDropdownShown">
@@ -94,47 +94,36 @@
         <i class="fa-solid fa-chevron-down" x-bind:class="categoriesDropdownShown && rotate-90" x-transition></i>
       </div>
       <!-- flowbite element -->
-      <div id="categories-dropdown" class="border absolute top-12 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
-        x-show="categoriesDropdownShown" x-on:click.outside="categoriesDropdownShown = false" x-transition>
+      <div id="categories-dropdown" class="border hidden absolute top-12 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+        x-show="categoriesDropdownShown" x-bind:class="{'hidden': !categoriesDropdownShown}" x-on:click.outside="categoriesDropdownShown = false" x-transition>
         <ul class="py-2 text-sm text-black">
-          <li>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Burger</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Sea Food</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Pet Food</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Milks & dairies</a>
-          </li>
+          {% for category in categories_navbar|slice:"4"%}
+            <li>
+              <a href="{% url 'products:category' category.0 %}" class="block px-4 py-2 hover:bg-gray-100 ">{{category.1|capfirst}}</a>
+            </li>
+          {% endfor %}
         </ul>
+        <div class="py-2">
+          <a href="{% url 'products:categories-list'%}" class="block px-4 py-2 text-sm text-green-500 hover:bg-gray-100">See all categories</a>
+        </div>
       </div>
       <!-- endelement -->
       <div class="block md:hidden py-1 px-3 rounded bg-gray-400 hover:bg-gray-500 transition-colors text-lg text-white cursor-pointer order-first"
-        x-on:click="smallNavbarShown = true">
+        x-on:click="sidebarShown = true">
         <i class="fa-solid fa-list"></i>
       </div>
       <div class="hidden md:block">
         <ul
           class="flex gap-3 max-md:flex-col text-base relative [&>*:where(li)]:p-1 [&>*:where(li)]:cursor-pointer [&>*:where(li)]:transition-colors [&>*:where(li)]:rounded"
           x-data="{pagesShown: false}">
-          <li class="flex items-center gap-2 hover:text-amber-500
-            {% if chosen == 'deals'%}
-            text-amber-500
-            {% endif %}">
-            <i class="fa-solid fa-fire text-amber-500"></i>
-            <p><a href="">Deals</a></p>
-          </li>
           <li class="hover:text-green-500
             {% if chosen == 'home' %}
             text-green-500
             {% endif %}"><a href="{% url 'products:home'%}">Home</a></li>
           <li class="hover:text-green-500
-                    {% if chosen == 'shop' %}
+                    {% if chosen == 'categories' %}
                     text-green-500
-                    {% endif %}"><a href="{% url 'products:shop'%}">Shop</a></li>
+                    {% endif %}"><a href="{% url 'products:categories-list'%}">Categories</a></li>
           <li class="hover:text-green-500
                     {% if chosen == 'vendors' %}
                     text-green-500
@@ -144,8 +133,8 @@
             <i class="fa-solid fa-chevron-down text-sm"></i>
           </li>
           <ul id="pages-pop"
-            class="absolute flex flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -right-8 w-48 *:cursor-pointer text-gray-500"
-            x-show="pagesShown" x-on:click.outside="pagesShown = false" x-transition>
+            class="absolute hidden flex-col gap-3 bg-white rounded border shadow-sm px-7 py-4 top-10 -right-8 w-48 *:cursor-pointer text-gray-500"
+            x-show="pagesShown" x-bind:class="{'hidden': !pagesShown, 'flex': pagesShown}" x-on:click.outside="pagesShown = false" x-transition>
             <li class="hover:text-black transition-colors"><a href="{% url 'services:about-us'%}">About Us</a></li>
             <li class="hover:text-black transition-colors"><a href="{% url 'services:dashboard'%}">My Dashboard</a></li>
             <li class="hover:text-black transition-colors"><a href="{% url 'services:purchase-guide'%}">Purchase Guide</a></li>
@@ -158,7 +147,7 @@
           {% endif %}"><a href="{% url 'services:contact'%}">Contact</a></li>
         </ul>
       </div>
-      {% include 'partials/small-navbar.html' %}
+      {% include 'partials/sidebar.html' %}
       <div class="items-center gap-3 mr-8 hidden lg:flex">
         <i class="fa-solid fa-headset text-3xl"></i>
         <div class="flex flex-col">

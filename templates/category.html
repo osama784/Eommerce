@@ -8,12 +8,13 @@
 
 
 {% block content %}
-{% include 'partials/navbar.html' with chosen="shop"%}
-{% include 'partials/path.html' with parent_page_name='Categories' page_name="category_name"%}
+{% include 'partials/navbar.html' with chosen="categories"%}
+{% url 'products:categories-list' as parent_page_url%}
+{% include 'partials/path.html' with parent_page_name='Categories' page_name=category.label|capfirst parent_page_url=parent_page_url %}
 
 <div class="container mx-auto px-4 my-5">
     <div class="flex flex-col gap-3 bg-green-100 border rounded-lg py-20 text-center px-4 sm:px-20 sm:text-left">
-        <h1 class="font-bold text-4xl">#Burger</h1>
+        <h1 class="font-bold text-4xl">#{{category.label|capfirst}}</h1>
         <div class="flex flex-wrap gap-3 items-center text-sm justify-center sm:justify-normal">
             <a href="{% url 'products:home'%}">
                 <div class="text-green-700 flex items-center gap-2">
@@ -22,156 +23,19 @@
                 </div>
             </a>
             <span class="text-green-500">&gt;</span>
-            <a href="" class="text-green-600">Shop</a>
-            <span class="text-green-500">&gt;</span>
-            <span>category_name</span>
+            <span>{{category.label|capfirst}}</span>
         </div>
     </div>
 </div>
 
 <div class="container mx-auto px-4 flex flex-col gap-3">
-    <p>We found 5 items for you!</p>
+    <p>We found {{products.count}} items for you!</p>
     <div class="grid grid-cols-12 gap-y-5">
         <div class="rounded-lg col-span-full flex flex-col gap-y-4">
             <div class="grid max-[430px]:grid-cols-2 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                <div class="border rounded-xl flex flex-col gap-1 relative px-2 py-2 col-span-2">
-                    <span
-                        class="absolute w-16 h-6 text-center content-center text-sm bg-pink-500 text-white top-0 left-0 rounded-ss-xl rounded-ee-xl z-50">-40%</span>
-                    <div class="w-full border h-56 rounded-lg group realtive overflow-hidden">
-                        <img src="{% static 'images/cake.jpg'%}" alt=""
-                            class="object-cover size-full transition-transform duration-500 group-hover:scale-125">
-                        <div
-                            class="opacity-0 absolute gap-1 group-hover:opacity-100 flex rounded transition-opacity p-1 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 text-green-700 *:cursor-pointer">
-                            <div class=" border-r pr-1"><i class="fa-regular fa-heart"></i></div>
-                            <div><i class="fa-solid fa-circle-info"></i></div>
-                        </div>
-                    </div>
-                    <small class="text-gray-500 text-xs">Food</small>
-                    <strong class="font-bold h-12 line-clamp-2">Red Velvet Cakes</strong>
-                    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
-                    <p class="text-sm">
-                        By <a href="" class="text-green-500">NestFOOD</a>
-                    </p>
-                    <div class="flex justify-between items-center mt-3">
-                        <span class="text-green-600 font-bold">$ 88.93</span>
-                        <div class="flex items-center gap-2">
-                            <div
-                                class="bg-green-200 hover:bg-green-500 group cursor-pointer transition-colors px-2 py-1 rounded">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <button class="group-hover:text-white">Add</button>
-                            </div>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <small class="line-through text-gray-500 text-sm ml-2">$200.99</small>
-                </div>
-                <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
-                    <span class="absolute"></span>
-                    <div class="w-full border h-56 rounded-lg group realtive overflow-hidden">
-                        <img src="{% static 'images/spatchcock-bbq-chicken.jpg'%}" alt=""
-                            class="object-cover size-full transition-transform duration-500 group-hover:scale-125">
-                        <div
-                            class="opacity-0 absolute gap-1 group-hover:opacity-100 flex rounded transition-opacity p-1 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 text-green-700 *:cursor-pointer">
-                            <div class=" border-r pr-1"><i class="fa-regular fa-heart"></i></div>
-                            <div><i class="fa-solid fa-circle-info"></i></div>
-                        </div>
-                    </div>
-                    <small class="text-gray-500 text-xs">Food</small>
-                    <strong class="font-bold">Spatchcock BBQ Chicken</strong>
-                    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
-                    <p class="text-sm">By <a href="" class="text-green-500">XFOOD</a></p>
-                    <div class="flex justify-between items-center mt-3">
-                        <span class="text-green-600 font-bold">$ 10.93</span>
-                        <div class="flex items-center gap-2">
-                            <div class="bg-green-200 px-2 py-1 rounded">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <button class="">Add</button>
-                            </div>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <small class="line-through text-gray-500 text-sm ml-2">$20.99</small>
-                </div>
-                <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
-                    <span class="absolute"></span>
-                    <div class="w-full border h-56 rounded-lg group realtive overflow-hidden">
-                        <img src="{% static 'images/grilled-bbq-chicken.jpg'%}" alt=""
-                            class="object-cover size-full transition-transform duration-500 group-hover:scale-125">
-                        <div
-                            class="opacity-0 absolute gap-1 group-hover:opacity-100 flex rounded transition-opacity p-1 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 text-green-700 *:cursor-pointer">
-                            <div class=" border-r pr-1"><i class="fa-regular fa-heart"></i></div>
-                            <div><i class="fa-solid fa-circle-info"></i></div>
-                        </div>
-                    </div>
-                    <small class="text-gray-500 text-xs">Food</small>
-                    <strong class="font-bold">Home-made BBQ Grilled Chicken</strong>
-                    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
-                    <p class="text-sm">
-                        By <a href="" class="text-green-500">Nestify</a>
-                    </p>
-                    <div class="flex justify-between items-center mt-3">
-                        <span class="text-green-600 font-bold">$ 10.93</span>
-                        <div class="flex items-center gap-2">
-                            <div class="bg-green-200 px-2 py-1 rounded">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <button class="">Add</button>
-                            </div>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <small class="line-through text-gray-500 text-sm ml-2">$20.99</small>
-                </div>
-                <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
-                    <span class="absolute"></span>
-                    <div class="w-full border h-56 bg-cover bg-center bg-no-repeat rounded-lg" style="
-                  background-image: url(../static/images/double-bief-fried-chicken-bacon.jpg);
-                ">
-                        <!-- <img src="{% static 'images/cake.jpg'%}" alt="" class="w-full"> -->
-                    </div>
-                    <small class="text-gray-500 text-xs">Food</small>
-                    <strong class="font-bold">Double Bief Fried Chicken Bacon</strong>
-                    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
-                    <p class="text-sm">
-                        By <a href="" class="text-green-500">Nestify</a>
-                    </p>
-                    <div class="flex justify-between items-center mt-3">
-                        <span class="text-green-600 font-bold">$ 10.93</span>
-                        <div class="flex items-center gap-2">
-                            <div class="bg-green-200 px-2 py-1 rounded">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <button class="">Add</button>
-                            </div>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <small class="line-through text-gray-500 text-sm ml-2">$20.99</small>
-                </div>
-                <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
-                    <span class="absolute"></span>
-                    <div class="w-full border h-56 bg-cover bg-left bg-no-repeat rounded-lg" style="
-                  background-image: url(../static/images/spatchcock-bbq-chicken.jpg);
-                ">
-                    </div>
-                    <small class="text-gray-500 text-xs">Food</small>
-                    <strong class="font-bold">Spatchcock BBQ Chicken</strong>
-                    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
-                    <p class="text-sm">By <a href="" class="text-green-500">XFOOD</a></p>
-                    <div class="flex justify-between items-center mt-3">
-                        <span class="text-green-600 font-bold">$ 10.93</span>
-                        <div class="flex items-center gap-2">
-                            <div class="bg-green-200 px-2 py-1 rounded">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <button class="">Add</button>
-                            </div>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <small class="line-through text-gray-500 text-sm ml-2">$20.99</small>
-                </div>
-                {% comment %} {% component 'product' name="babarony" number_stars="12"
-                image_url="../static/images/double-bief-fried-chicken-bacon.jpg"
-                new_price="12.32" old_price="20.32" company="FOODTIFY" category="Sweet"
-                %} {%endcomponent%} {% endcomment %}
+                {% for product in products %}
+                    {% include 'partials/product-partial.html' with product=product%}
+                {% endfor %}
             </div>
         </div>
     </div>

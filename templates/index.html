@@ -1,5 +1,6 @@
 {% extends 'main.html'%}
 {% load static%}
+{% load mytags %}
 
 
 
@@ -12,7 +13,7 @@
 {% include 'partials/navbar.html' with chosen="home" %}
 
 <div class="grid grid-cols-12 gap-4 container mx-auto my-5 px-4 xl:max-w-7xl">
-    <div class="h-fit grid-cols-2 gap-y-5 hidden col-span-3 lg:grid">
+    <div class="h-fit grid-cols-2 gap-y-5 hidden col-span-3 lg:grid sticky top-20">
         <div class="rounded-lg shadow-md border flex col-span-full p-3 flex-col">
             <h2 class="font-bold border-b pb-3 text-lg">Category</h2>
             <ul
@@ -63,64 +64,6 @@
                 </li>
             </ul>
         </div>
-        <div class="rounded-lg shadow-md border flex col-span-full p-3 flex-col gap-2 relative ">
-            <h2 class="font-bold border-b pb-3 text-lg">Fill by price</h2>
-            <hr class="border-green-600 border-2 rounded" />
-            <div class="flex justify-between">
-                <p class="text-sm">
-                    From: <span class="text-green-600 font-bold">$500</span>
-                </p>
-                <p class="text-sm">
-                    To: <span class="text-green-600 font-bold">$1,000</span>
-                </p>
-            </div>
-
-            <form action="" class="flex flex-col gap-5">
-                <div>
-                    <h3>Color</h3>
-                    <ul class="text-gray-700 flex flex-col pl-2 gap-1 *:flex *:items-center *:gap-1">
-                        <li>
-                            <input type="checkbox" name="color" id="red" class="" />
-                            <label for="">Red (56)</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="color" id="green" />
-                            <label for="green">Green (56)</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="color" id="blue" />
-                            <label for="blue">Blue (21)</label>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Item Condition</h3>
-                    <ul class="text-gray-700 flex flex-col pl-2 gap-1 *:flex *:items-center *:gap-1">
-                        <li>
-                            <input type="checkbox" name="condition" id="new" />
-                            <label for="new">New</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="condition" id="refurbished" />
-                            <label for="refurbished">Refurbished</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="condition" id="sweets" />
-                            <label for="sweets">Sweets</label>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-            <div
-                class="w-fit bg-green-500 hover:bg-green-600 transition-colors text-center py-3 px-8 rounded space-x-2 cursor-pointer">
-                <i class="fa-solid fa-filter text-white"></i>
-                <button class="text-white rounded">Filter</button>
-            </div>
-            <div class="absolute bottom-10 right-0 rotate-90">
-                <img src="{% static 'images/lettuce.png'%}" alt="" class="w-24" draggable="false" />
-            </div>
-        </div>
-        
         <div class="rounded-lg shadow-md border flex col-span-full pt-16 pb-24 h-fit pl-10 flex-col gap-2 bg-no-repeat bg-left-top"
             style="background-image: url(../static/images/juice.jpg);">
             <small class="text-sm text-gray-500">Organic</small>
@@ -147,15 +90,13 @@
                 </button>
             </div>
         </div>
-        <div class="rounded-lg col-span-full flex flex-col gap-y-4">
+        <div class="rounded-lg col-span-full flex flex-col gap-y-4" x-data="">
             <div class="flex justify-between items-center w-full relative">
                 <h1 class="text-3xl max-[360px]:text-xl">Popular Prducts</h1>
                 <ul
                     class="text-sm space-y-3 hidden *:cursor-pointer flex-col bg-white absolute z-50 top-16 right-[10%] w-3/4 py-8 border rounded-lg text-center items-center md:border-none md:flex md:flex-row md:static md:w-auto md:gap-4 md:rounded-none md:space-y-0">
                     <li class="text-green-500">All</li>
-                    <li class="hover:text-green-500 transition-colors">
-                        Milks & Dairies
-                    </li>
+                    <li class="hover:text-green-500 transition-colors">Milks & Dairies</li>
                     <li class="hover:text-green-500 transition-colors">Coffes & Teas</li>
                     <li class="hover:text-green-500 transition-colors">Pet Foods</li>
                     <li class="hover:text-green-500 transition-colors">Meats</li>
@@ -168,10 +109,28 @@
                 </div>
             </div>
             <div class="grid max-[430px]:grid-cols-2 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                {% for product in products %}
+                {% for product in products|slice:"5" %}
                     {% include 'partials/product-partial.html' with product=product%}                 
                 {% endfor %}
                 
+            </div>
+            <br>
+            <div class="flex justify-center gap-5 items-center">
+                <div class="text-green-500 hover:text-green-600 transition-colors cursor-pointer">
+                    <i class="fa-solid fa-circle-chevron-left fa-2x"></i>
+                </div>
+                <!-- pages of pagination -->
+                {% with products.count|divide_ceil:"5" as value %}
+                    {% for number in ''|center:value %}
+                        <div class="size-10 border rounded-full text-green-500 hover:text-white hover:bg-green-500 transition-colors flex justify-center items-center cursor-pointer">
+                            {{forloop.counter}}
+                        </div>
+                    {% endfor %}
+                {% endwith %}    
+                <!-- end pages -->
+                <div class="text-green-500 hover:text-green-600 transition-colors cursor-pointer">
+                    <i class="fa-solid fa-circle-chevron-right fa-2x"></i>
+                </div>
             </div>
         </div>
         

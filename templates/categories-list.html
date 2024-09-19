@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+
+
+{% block head %}
+<title>Nest | Categories</title>
+{% endblock head %}
+
+
+
+{% block content %}
+{% include 'partials/navbar.html' with chosen="categories" %}
+{% include 'partials/path.html' with parent_page_name="Categories" %}
+
+<div class="container mx-auto px-4 my-10 max-w-[800px]">
+    <div class="flex gap-10 flex-wrap">
+        {% for category in categories %}
+        <!-- flowbite element -->
+        <div class="max-w-sm p-4 space-y-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{category.category_name}}</h5>
+            <p class="text-gray-500">{{category.num_products}} Product{{category.num_products|pluralize}}</p>
+            <a href="{% url 'products:category' category.category_db %}"
+                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors focus:ring-4 focus:outline-none focus:ring-green-300">
+                See more products
+                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 5h12m0 0L9 1m4 4L9 9" />
+                </svg>
+            </a>
+        </div>
+        <!-- end element -->
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'partials/footer.html' %}
+{% endblock content %}

@@ -10,84 +10,41 @@
 {% include "partials/navbar.html" with chosen="shop" %}
 
 {% include "partials/path.html" with parent_page_name="Shop"%}
-<div class="container mx-auto px-4 my-10 xl:max-w-7xl" x-data="{productsTags: [] }">
-    <div class="flex flex-col gap-10">
+<div class="container mx-auto px-4 my-10 xl:max-w-7xl"> 
+    <div class="flex flex-col gap-10" x-data="{products: [], vendors: [], categories: []}" x-init="products = await (await fetch('{% url 'api:get-products' %}')).json()" >
         <div class="flex gap-10 flex-wrap justify-around *:h-fit *:shadow *:rounded-lg *:border *:py-5 *:px-10 *:grow">
             <div class="flex flex-col gap-3 max-w-72">
                 <h2 class="font-bold text-lg">By Vendors</h2>
                 <div class="flex flex-col gap-4 *:py-1">
-                    <div>
-                        <input type="checkbox" name="nestify" id="">
-                        <label for="food">Nestify</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="xfood" id="">
-                        <label for="xfood">XFood</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="nature" id="">
-                        <label for="nature">Nature Foods</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="nest" id="">
-                        <label for="nest">NestFood</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="roots" id="">
-                        <label for="roots">Healthy Roots</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="dest" id="">
-                        <label for="dest">DestFood</label>
-                    </div>
+                    {% for vendor in vendors %}
+                        <div>
+                            <input type="checkbox" name="{{vendor.name}}" id="{{vendor.name}}" value="{{vendor.name}}" 
+                            x-on:change="$el.checked ? vendors.push({{vendor.pk}}) : vendors.splice(vendors.indexOf({{vendor.pk}}), 1);
+                                        checkLengths ?  products = await (await fetch(`{% url 'api:get-products' %}?${generateParams('categories', categories)}${generateParams('vendors', vendors)}`)).json() : products = await (await fetch('{% url 'api:get-products' %}')).json()">
+                            <label for="{{vendor.name}}">{{vendor.name|capfirst}}</label>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="flex flex-col gap-3 max-w-72 items-center" x-data="{numberOfTags: 6}">
+            <div class="flex flex-col gap-3 max-w-72 items-center" x-data="{numberOfTags: 5}">
                 <h2 class="font-bold text-lg">Popular Tags</h2>
                 <p x-text="`${numberOfTags} tags`"></p>
                 <div class="flex flex-col gap-5 *:border *:py-1 *:px-2 *:rounded-xl *:shadow *:w-fit text-sm">
-                    <div class="text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1" x-data="{isChosen : true}">
-                        <div x-on:click="isChosen = !isChosen;!isChosen && numberOfTags --;isChosen && numberOfTags ++">
+                    {% for category in categories|slice:"5" %}
+                    <div class="text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1"
+                        x-data="{isChosen : false}">
+                        <div x-on:click="isChosen = !isChosen;
+                                        isChosen ? numberOfTags++ : numberOfTags--;
+                                        isChosen ? categories.push('{{category.0}}') : categories.splice(categories.indexOf('{{category.0}}', 1));
+                                        checkLengths ?  products = await (await fetch(`{% url 'api:get-products' %}?${generateParams('categories', categories)}${generateParams('vendors', vendors)}`)).json() : products = await (await fetch('{% url 'api:get-products' %}')).json()">
                             <i class="fa-solid fa-xmark text-slate-300 cursor-pointer hover:text-black transition-colors"
                                 x-bind:class="!isChosen && 'rotate-45' "></i>
-                        </div>    
-                        <p>chicken</p>
+                        </div>
+                        <p>{{category.1}}</p>
                     </div>
-                    <div class="text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1" x-data="{isChosen : true}">
-                        <div x-on:click="isChosen = !isChosen;!isChosen && numberOfTags --;isChosen && numberOfTags ++">
-                            <i class="fa-solid fa-xmark text-slate-300 cursor-pointer hover:text-black transition-colors"
-                                x-bind:class="!isChosen && 'rotate-45' "></i>
-                        </div>    
-                        <p>burger</p>
-                    </div>
-                    <div class="text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1" x-data="{isChosen : true}">
-                        <div x-on:click="isChosen = !isChosen;!isChosen && numberOfTags --;isChosen && numberOfTags ++">
-                            <i class="fa-solid fa-xmark text-slate-300 cursor-pointer hover:text-black transition-colors"
-                                x-bind:class="!isChosen && 'rotate-45' "></i>
-                        </div>    
-                        <p>vanilla</p>
-                    </div>
-                    <div class="text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1" x-data="{isChosen : true}">
-                        <div x-on:click="isChosen = !isChosen;!isChosen && numberOfTags --;isChosen && numberOfTags ++">
-                            <i class="fa-solid fa-xmark text-slate-300 cursor-pointer hover:text-black transition-colors"
-                                x-bind:class="!isChosen && 'rotate-45' "></i>
-                        </div>    
-                        <p>cakes</p>
-                    </div>
-                    <div class="text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1" x-data="{isChosen : true}">
-                        <div x-on:click="isChosen = !isChosen;!isChosen && numberOfTags --;isChosen && numberOfTags ++">
-                            <i class="fa-solid fa-xmark text-slate-300 cursor-pointer hover:text-black transition-colors"
-                                x-bind:class="!isChosen && 'rotate-45' "></i>
-                        </div>    
-                        <p>milkshake</p>
-                    </div>
-                    <div class="text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1" x-data="{isChosen : true}">
-                        <div x-on:click="isChosen = !isChosen;!isChosen && numberOfTags --;isChosen && numberOfTags ++">
-                            <i class="fa-solid fa-xmark text-slate-300 cursor-pointer hover:text-black transition-colors"
-                                x-bind:class="!isChosen && 'rotate-45' "></i>
-                        </div>    
-                        <p>chocolate</p>
-                    </div>
+                    {% endfor %}
+                    <hr>
+                    <a href="">see all categories</a>
                 </div>
             </div>
             <div class="max-w-80 flex flex-col gap-3 justify-between">
@@ -107,109 +64,34 @@
         </div>
         <div class="rounded-lg flex flex-col gap-y-4">
             <div class="flex flex-wrap justify-between items-center gap-5 w-full relative">
-                <h3 class="text-lg">There are 10 products available!</h3>
+                <h3 class="text-lg">There are {{products.count }} products available!</h3>
             </div>
             <div class="grid max-[430px]:grid-cols-2 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                {% static 'images/cake.jpg' as product_image%}
-                {% include 'partials/product-partial.html'%}
-                <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
-                    <span class="absolute"></span>
-                    <div class="w-full border h-56 bg-cover bg-left bg-no-repeat rounded-lg" style="
-                    background-image: url(../static/images/spatchcock-bbq-chicken.jpg);">
-                        <!-- <img src="{% static 'images/cake.jpg'%}" alt="" class="w-full"> -->
-                    </div>
-                    <small class="text-gray-500 text-xs">Food</small>
-                    <strong class="font-bold">Spatchcock BBQ Chicken</strong>
-                    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
-                    <p class="text-sm">By <a href="" class="text-green-500">XFOOD</a></p>
-                    <div class="flex justify-between items-center mt-3">
-                        <span class="text-green-600 font-bold">$ 10.93</span>
-                        <div class="flex items-center gap-2">
-                            <div class="bg-green-200 px-2 py-1 rounded">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <button class="">Add</button>
-                            </div>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <small class="line-through text-gray-500 text-sm ml-2">$20.99</small>
-                </div>
-                <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
-                    <span class="absolute"></span>
-                    <div class="w-full border h-56 bg-cover bg-left bg-no-repeat rounded-lg" style="
-                    background-image: url(../static/images/grilled-bbq-chicken.jpg);
-                    ">
-                        <!-- <img src="{% static 'images/cake.jpg'%}" alt="" class="w-full"> -->
-                    </div>
-                    <small class="text-gray-500 text-xs">Food</small>
-                    <strong class="font-bold">Home-made BBQ Grilled Chicken</strong>
-                    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
-                    <p class="text-sm">
-                        By <a href="" class="text-green-500">Nestify</a>
-                    </p>
-                    <div class="flex justify-between items-center mt-3">
-                        <span class="text-green-600 font-bold">$ 10.93</span>
-                        <div class="flex items-center gap-2">
-                            <div class="bg-green-200 px-2 py-1 rounded">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <button class="">Add</button>
-                            </div>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <small class="line-through text-gray-500 text-sm ml-2">$20.99</small>
-                </div>
-                <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
-                    <span class="absolute"></span>
-                    <div class="w-full border h-56 bg-cover bg-center bg-no-repeat rounded-lg" style="
-                    background-image: url(../static/images/double-bief-fried-chicken-bacon.jpg);
-                    ">
-                        <!-- <img src="{% static 'images/cake.jpg'%}" alt="" class="w-full"> -->
-                    </div>
-                    <small class="text-gray-500 text-xs">Food</small>
-                    <strong class="font-bold">Double Bief Fried Chicken Bacon</strong>
-                    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
-                    <p class="text-sm">
-                        By <a href="" class="text-green-500">Nestify</a>
-                    </p>
-                    <div class="flex justify-between items-center mt-3">
-                        <span class="text-green-600 font-bold">$ 10.93</span>
-                        <div class="flex items-center gap-2">
-                            <div class="bg-green-200 px-2 py-1 rounded">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <button class="">Add</button>
-                            </div>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <small class="line-through text-gray-500 text-sm ml-2">$20.99</small>
-                </div>
-                <div class="border rounded-md flex flex-col gap-1 relative px-2 py-2 col-span-2">
-                    <span class="absolute"></span>
-                    <div class="w-full border h-56 bg-cover bg-left bg-no-repeat rounded-lg" style="
-                    background-image: url(../static/images/spatchcock-bbq-chicken.jpg);
-                    ">
-                    </div>
-                    <small class="text-gray-500 text-xs">Food</small>
-                    <strong class="font-bold">Spatchcock BBQ Chicken</strong>
-                    <span><i class="fa-solid fa-star text-yellow-500 mr-1"></i>(0)</span>
-                    <p class="text-sm">By <a href="" class="text-green-500">XFOOD</a></p>
-                    <div class="flex justify-between items-center mt-3">
-                        <span class="text-green-600 font-bold">$ 10.93</span>
-                        <div class="flex items-center gap-2">
-                            <div class="bg-green-200 px-2 py-1 rounded">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <button class="">Add</button>
-                            </div>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <small class="line-through text-gray-500 text-sm ml-2">$20.99</small>
-                </div>
+                 {% for product in products%}               
+                    {% include 'partials/product-partial.html' with product=product %}
+                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    function generateParams(key, values) {
+        let params = '';
+        values.forEach(element => {
+            params += `${key}=${element}&`;
+        });
+        return params
+    }
+
+    function checkLengths(categories, vendors) {
+        if (categories.length == 0 || vendors.length == 0) {
+            return false
+        }
+        return true
+    }
+</script>
 
 {% include 'partials/footer.html'%}
 

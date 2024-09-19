@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.db.models.functions import Lower
 from django.core.exceptions import ValidationError
 
@@ -12,9 +12,7 @@ from users.models import Profile
 from vendors.models import Vendor
 
 
-
-class Product(models.Model):
-    class CategoryChoices(models.TextChoices):
+class CategoryChoices(models.TextChoices):
         ORGANIC = 'OR', 'organic'
         VEGETABLES = 'VG', 'vegetables'
         Plant_Based_Proteins = 'PP', 'plant-based protiens'
@@ -29,6 +27,8 @@ class Product(models.Model):
         SUSHI = 'SH', 'sushis'
 
 
+
+class Product(models.Model):
     name= models.CharField(max_length=200)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     discount = models.IntegerField(blank=True, null=True)
@@ -45,6 +45,23 @@ class Product(models.Model):
     @property
     def get_total_reviews(self):
         return self.reviews.count()
+    
+    @property
+    def get_stars_percentage(self):
+        count_all = self.get_total_reviews
+        count_five = self.reviews.filter(rating=5).count()
+        count_four = self.reviews.filter(rating=4).count()
+        count_three = self.reviews.filter(rating=3).count()
+        count_two = self.reviews.filter(rating=2).count()
+        count_one = self.reviews.filter(rating=1).count()
+        return {
+            'five': products_utils.custom_round(count_five * 5 / count_all),
+            'four': products_utils.custom_round(count_four * 5 / count_all),
+            'three': products_utils.custom_round(count_three * 5 / count_all),
+            'two': products_utils.custom_round(count_two * 5 / count_all),
+            'one': products_utils.custom_round(count_one * 5 / count_all),
+        }
+
     
     @property
     def get_new_price(self) -> int:
@@ -100,6 +117,7 @@ class ProductAttachment(models.Model):
     def get_download_url(self):
         return reverse('products:attachment-download', kwargs={'handle': self.product.handle, 'pk': self.pk})
     
+    
 class Review(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
     body = models.TextField(max_length=500)
@@ -107,7 +125,7 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField(validators=[
         MinValueValidator(1), MaxValueValidator(5)
     ])
-    created = models.DateField(default=timezone.now)
+    created = models.DateField(auto_now_add=True)
 
     @property
     def like(self):
@@ -129,41 +147,68 @@ class Review(models.Model):
         ]
 
 
-class Order(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    entries = models.BigIntegerField(default=0)
 
+
+class Cart(models.Model):
+    owner = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, null=True, blank=True)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.owner.user.username} : {self.quantity} x {self.product.name}'
- 
+        return f"{self.owner.user.username}"
 
-class Like_DisLike(models.Model):
-    class TypeChoices(models.TextChoices):
-        LIKE = 'LK', 'like'
-        DISLIKE = 'DK', 'dislike'
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    type = models.CharField(max_length=2, choices=TypeChoices.choices)
-    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name='likes')
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint('owner', name="like_dislike_once")
-        ]
- 
+    def subtotal(self):
+        return self.quantity * self.product.price
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name}"
+
 
 class Invoice(models.Model):
-    class StatusChoices(models.IntegerChoices):
-        PROCESSING = 1
-        DELIVERED  = 2
-        SHIPPED = 3
-        CANCELED = 4
-
-    name = models.CharField(default='INVOICE', max_length=50)
-    total = models.IntegerField()
-    paid_status = models.BooleanField(default=False)
-    status = models.IntegerField(choices=StatusChoices.choices)
-    products = models.JSONField()
+    client = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='invoices')
+    coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, null=True, blank=True)
+    paid_status = models.BooleanField(default=True)
+    
     created = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def shipping(self):
+        return 0
+
+    @property
+    def subtotal(self):
+        sum_prices = self.items.aggregate(sum_prices=Sum('price'))['sum_prices']
+        return sum_prices or 0
+    
+    @property
+    def total(self):
+        return self.subtotal - self.shipping - self.coupon
+
+    def __str__(self):
+        return f"Invoice {self.pk} for {self.client}"    
+
+
+class InvoiceItem(models.Model):
+    invoice = models.ForeignKey(Invoice, related_name='items', on_delete=models.CASCADE)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.description    
+
+
+class Coupon(models.Model):
+    name = models.CharField(max_length=10)
+    life = models.PositiveIntegerField(default=10)
+
+    created = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

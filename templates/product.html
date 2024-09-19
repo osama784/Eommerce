@@ -1,14 +1,15 @@
 {% extends 'main.html'%}
 {% load static %}
+{% load mytags %}
 
 {% block head %}
 <title>Product</title>
 {% endblock head %}
 
 {% block content %}
-{% include 'partials/navbar.html' with chosen='shop'%}
-{% url 'products:shop' as parent_page_url %}
-{% include 'partials/path.html' with parent_page_name="Category_name" page_name="product_name" parent_page_url=parent_page_url%}
+{% include 'partials/navbar.html'%}
+{% url 'products:category' product.category as parent_page_url %}
+{% include 'partials/path.html' with parent_page_name=product.get_category_display page_name=product.name parent_page_url=parent_page_url%}
 
 <div class="grid grid-cols-12 gap-4 container mx-auto my-5 px-4 max-w-[1270px]"
     x-data="{currentImage: { 'url': '{{product.get_display_image}}', 'download_url': '{{product.get_download_url}}' },
@@ -34,7 +35,10 @@
             {% if product.discount %}
                 <small class="bg-red-200 text-red-500 py-1 px-3 text-sm w-fit rounded-md">-{{product.discount}}%</small>
             {% endif%}
-            <p class="font-bold text-3xl">{{product.name}}</p>
+            <div>
+                <p class="font-bold text-3xl">{{product.name}}</p>
+                <small>{{product.get_category_display}}</small>
+            </div>
             <div class="text-sm flex gap-1 items-center">
                 <div class="flex gap-1">
                     <i class="fa-solid fa-star text-yellow-500"></i>
@@ -109,19 +113,24 @@
                     x-transition:enter.duration.500ms>
                     <h1 class="font-bold text-black text-2xl ">Vendor</h1>
                     <div class="flex h-36 gap-2 w-fit items-center self-center">
-                        <div class="rounded-full w-fit h-fit overflow-hidden mt-10">
-                            <img src="{{product.vendor.image.url}}" alt="" class="object-cover size-32">
+                        <div class="rounded-full w-fit h-fit overflow-hidden mt-10 border hover:shadow-md transition-all">
+                            <a href="{{product.vendor.get_absolute_url}}">
+                                <img src="{{product.vendor.image.url}}" alt="" class="object-cover size-32">
+                            </a>
                         </div>
                         <div class="flex flex-col gap-2">
-                            <span class="text-green-500">{{product.vendor.name}}</span>
+                            <a href="{{product.vendor.get_absolute_url }}" class="text-green-500">{{product.vendor.name}}</a>
                             <div class="flex gap-1 pl-5">
+                                {% for star in ''|center:product.vendor.get_stars_number %}
                                 <i class="fa-solid fa-star text-yellow-500"></i>
-                                <i class="fa-solid fa-star text-yellow-500"></i>
-                                <i class="fa-solid fa-star text-yellow-500"></i>
-                                <i class="fa-solid fa-star text-yellow-500"></i>
-                                <i class="fa-solid fa-star text-yellow-500"></i>
+                                {% endfor %}
+                                {% with 5|subtract:product.vendor.get_stars_number as value %}
+                                    {% for star in ''|center:value %}
+                                    <i class="fa-solid fa-star text-gray-400"></i>
+                                    {% endfor %}
+                                {% endwith %}
                             </div>
-                            <span class="text-gray-500 pl-12">reviews({{product.vendor.rating.count}})</span>
+                            <span class="text-gray-500 pl-12">reviews({{product.vendor.ratings.count}})</span>
                         </div>
                     </div>
                     <div class="mt-16">
@@ -154,61 +163,69 @@
                 </div>
                 <div class="flex gap-x-3 gap-y-10 flex-col xl:flex-row" x-show="openedIndex == 3" x-transition:enter
                     x-transition:enter.duration.500ms>
-                    <div class="flex flex-col gap-5 xl:w-7/12">
+                    <div class="flex flex-col gap-5 xl:w-7/12" x-data="{reviews: []}" x-init="reviews = await(await fetch('{% url 'api:get-reviews' product.handle %}')).json()">
                         <div>
                             <h3 class="font-medium">Customer Quastions & answers</h3>
                             <div class="flex flex-col gap-2">
                                 <div class="flex flex-col gap-2 *:rounded *:border *:p-2">
-                                    {% for review in product.reviews.all %}
+                                    <template x-for="review in reviews">
                                         <div>
-                                            <small>{{review.owner.user.username}}</small>
-                                            <p>{{review.body}}</p>
+                                            <small x-text="review.owner"></small>
+                                            <p x-text="review.body"></p>
                                         </div>
-                                    {% endfor %}
+                                    </template>
                                 </div>
                             </div>
                         </div>
-                        {% if request.user.is_authenticated %}
-                        <div id="add-comment" class="grow flex flex-col gap-2">
-                            <h3 class="font-medium">Add a Review</h3>
-                            <textarea name="" id="" class="rounded-lg border p-2 w-full h-56"></textarea>
-                            <select name="rating" id="" class="font-[FontAwesome] p-3 rounded-lg border w-fit">
-                                <option value="1">
-                                    &#xf005;
+                        {% if could_review is False %}
+                        <p class="text-green-500">You reviewed this product before.</p>
+                        {% elif request.user.is_authenticated %}
+                        <form action="" hx-post="{% url 'products:create-review' product.handle %}">
+                            
+                            <div id="add-review" class="grow flex flex-col gap-2">
+                                
+                                <h3 class="font-medium">Add a Review</h3>
+                                <textarea name="body" id="body" class="rounded-lg border p-2 w-full h-56"></textarea>
+                                <select name="rating" id="" class="font-[FontAwesome] p-3 rounded-lg border w-fit">
+                                    <option value="1">
+                                        &#xf005;
 
-                                </option>
-                                <option value="2">
-                                    &#xf005;
-                                    &#xf005;
-                                </option>
-                                <option value="3">
-                                    &#xf005;
-                                    &#xf005;
-                                    &#xf005;
-                                </option>
-                                <option value="4">
-                                    &#xf005;
-                                    &#xf005;
-                                    &#xf005;
-                                    &#xf005;
-                                </option>
-                                <option value="5">
-                                    &#xf005;
-                                    &#xf005;
-                                    &#xf005;
-                                    &#xf005;
-                                    &#xf005;
-                                </option>
-                            </select>
-                            <div class="w-full">
-                                <button
-                                    class="p-2 bg-green-500 text-white rounded-lg hover:bg-amber-400 transition-colors">Submit
-                                    Review</button>
+                                    </option>
+                                    <option value="2">
+                                        &#xf005;
+                                        &#xf005;
+                                    </option>
+                                    <option value="3">
+                                        &#xf005;
+                                        &#xf005;
+                                        &#xf005;
+                                    </option>
+                                    <option value="4">
+                                        &#xf005;
+                                        &#xf005;
+                                        &#xf005;
+                                        &#xf005;
+                                    </option>
+                                    <option value="5">
+                                        &#xf005;
+                                        &#xf005;
+                                        &#xf005;
+                                        &#xf005;
+                                        &#xf005;
+                                    </option>
+                                </select>
+                                <div class="w-full">
+                                    <button
+                                        class="p-2 bg-green-500 text-white rounded-lg hover:bg-amber-400 transition-colors">Submit
+                                        Review</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+                        {% else %}
+                        <p class="text-gray-500">* You have to <a href="{% url 'users:login-user' %}" class="text-green-500 hover:underline">login</a> to be able to review.</p>
                         {% endif %}
                     </div>
-                    <div class="flex flex-col gap-3 xl:w-5/12 ">
+                    <div class="flex flex-col gap-3 xl:w-5/12 " x-data="{get_stars_percentage: {{product.get_stars_percentage}} }">
                         <div class="font-medium">
                             <h3>Customer Quastions & answers</h3>
                             <small>out of 5.0</small>
@@ -217,31 +234,31 @@
                             <div>
                                 <span>5 star</span>
                                 <div
-                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-4/5 before:h-full before:rounded-s-lg before:block ">
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:h-full before:rounded-s-lg" x-bind:class=" get_stars_percentage.five == 0 ? `before:hidden` : `before:block before:w-${get_stars_percentage.five}/5` ">
                                 </div>
                             </div>
                             <div>
                                 <span>4 star</span>
                                 <div
-                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-3/5 before:h-full before:rounded-s-lg before:block ">
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:h-full before:rounded-s-lg " x-bind:class=" get_stars_percentage.four == 0 ? `before:hidden` : `before:block before:w-${get_stars_percentage.four}/5` ">
                                 </div>
                             </div>
                             <div>
                                 <span>3 star</span>
                                 <div
-                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-1/5 before:h-full before:rounded-s-lg before:block ">
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:h-full before:rounded-s-lg " x-bind:class=" get_stars_percentage.three == 0 ? `before:hidden` : `before:block before:w-${get_stars_percentage.three}/5` ">
                                 </div>
                             </div>
                             <div>
                                 <span>2 star</span>
                                 <div
-                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-2/5 before:h-full before:rounded-s-lg before:block ">
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:h-full before:rounded-s-lg " x-bind:class=" get_stars_percentage.two == 0 ? `before:hidden` : `before:block before:w-${get_stars_percentage.two}/5` ">
                                 </div>
                             </div>
                             <div>
                                 <span>1 star</span>
                                 <div
-                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:w-full before:h-full before:rounded-lg before:block ">
+                                    class="grow bg-slate-300 rounded-lg before:bg-yellow-400 before:h-full before:rounded-lg " x-bind:class=" get_stars_percentage.one == 0  ? `before:hidden` : `before:block before:w-${get_stars_percentage.one}/5` ">
                                 </div>
                             </div>
                         </div>
@@ -250,13 +267,15 @@
                 </div>
             </div>
         </div>
-        <div class="hidden lg:grid grid-cols-12 gap-y-5 col-span-full ">
+        <div class="grid grid-cols-12 gap-y-5 col-span-full ">
             <div class="rounded-lg col-span-full flex flex-col gap-y-4">
-                <h1 class="text-3xl max-[360px]:text-xl">Related Prducts</h1>
+                <h1 class="text-3xl max-[360px]:text-xl">Related Products</h1>
                 <hr class="border">
                 <div class="grid max-[430px]:grid-cols-2 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                    {% for current_product in products %}
+                    {% for current_product in related_products %}
                         {% include 'partials/product-partial.html' with product=current_product %}
+                        {% empty %}
+                        <p class="col-span-full">There are no related products with category <span class="text-green-500">"{{product.get_category_display}}"</span>, we hpe to see more in the future. </p>
                     {% endfor %}
                 </div>
             </div>
@@ -280,17 +299,22 @@
         <div class="rounded-lg shadow-md border flex flex-col gap-1 col-span-full p-3 pb-10 px-5 bg-slate-200 h-fit">
             <h1 class="font-bold text-black text-2xl ">Vendor</h1>
             <div class="flex h-36 gap-2 w-fit items-center self-center">
-                <div class="rounded-full w-fit h-fit overflow-hidden mt-10">
-                    <img src="{{product.vendor.image.url}}" alt="" class="object-cover size-32">
+                <div class="rounded-full w-fit h-fit overflow-hidden mt-10 border hover:shadow-md transition-all">
+                    <a href="{{product.vendor.get_absolute_url}}">
+                        <img src="{{product.vendor.image.url}}" alt="" class="object-cover size-32">
+                    </a>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <span class="text-green-500">{{product.vendor.name}}</span>
+                    <a href="{{product.vendor.get_absolute_url}}" class="text-green-500">{{product.vendor.name}}</a>
                     <div class="flex gap-1 pl-5">
+                        {% for star in ''|center:product.vendor.get_stars_number %}
                         <i class="fa-solid fa-star text-yellow-500"></i>
-                        <i class="fa-solid fa-star text-yellow-500"></i>
-                        <i class="fa-solid fa-star text-yellow-500"></i>
-                        <i class="fa-solid fa-star text-yellow-500"></i>
-                        <i class="fa-solid fa-star text-yellow-500"></i>
+                        {% endfor %}
+                        {% with 5|subtract:product.vendor.get_stars_number as value %}
+                            {% for star in ''|center:value %}
+                            <i class="fa-solid fa-star text-gray-400"></i>
+                            {% endfor %}
+                        {% endwith %}
                     </div>
                     <span class="text-gray-500 pl-12">reviews({{product.vendor.ratings.count}})</span>
                 </div>
@@ -325,8 +349,9 @@
         </div>
     </div>
     <!-- flowbite element -->
-    <div id="rating-vendor-pop" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[160] flex justify-center items-center w-full"
-        x-show="ratingVendorShown" x-on:click.outside="ratingVendorShown = false" x-transition:enter="transition ease-out duration-300 ">
+    <div id="rating-vendor-pop" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[160] hidden justify-center items-center w-full"
+        x-show="ratingVendorShown" x-bind:class="{'hidden': !ratingVendorShown, 'flex': ratingVendorShown }" 
+        x-on:click.outside="ratingVendorShown = false" x-transition:enter="transition ease-out duration-300 ">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow">
@@ -457,7 +482,8 @@
         </div>
     </div>
     <!-- end element -->
-    <div x-show="ratingVendorShown" id="theme" class="z-[100] fixed inset-0 bg-slate-200/75" x-transition></div>
+    <div x-show="ratingVendorShown" id="theme" class="z-[100] hidden fixed inset-0 bg-slate-200/75" 
+        x-transition x-bind:class="{'hidden': !ratingVendorShown}"></div>
 </div>
 
 {% include 'partials/footer.html'%}
