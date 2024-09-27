@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 
-from products.models import Product, Review
+from products.models import Product, Review, CartItem
 
 class ProductSerializer(serializers.ModelSerializer):
     absolute_url = serializers.SerializerMethodField()
@@ -39,7 +39,7 @@ class ProductSerializer(serializers.ModelSerializer):
         return '/media/products/default_product.jpg'
 
 
-
+"""Review serializers"""
 class ReviewSerializer(serializers.ModelSerializer):
     owner = serializers.SerializerMethodField()
 
@@ -49,3 +49,22 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     def get_owner(self, obj):
         return obj.owner.user.username
+
+
+class ReviewCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ['body', 'rating']
+
+
+
+"""CartItem serializers"""
+class CartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = '__all__'
+
+class CartItemUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ['quantity']

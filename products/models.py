@@ -7,6 +7,8 @@ from django.db.models import Q, Sum
 from django.db.models.functions import Lower
 from django.core.exceptions import ValidationError
 
+from datetime import datetime, timedelta
+
 from . import utils as products_utils
 from users.models import Profile
 from vendors.models import Vendor
@@ -156,6 +158,20 @@ class Cart(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+
+    @property
+    def shipping(self):
+        return 0
+
+    @property
+    def subtotal(self):
+        sum_items = self.items.aggregate(sum_items=Sum('subtotal'))['sum_items']
+        return sum_items or 0
+
+    @property
+    def total(self):
+        return self.shipping + self.subtotal
+
     def __str__(self):
         return f"{self.owner.user.username}"
 
@@ -163,10 +179,13 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+    subtotal = models.DecimalField(max_digits=8, decimal_places=2)
+
     created = models.DateTimeField(auto_now_add=True)
 
-    def subtotal(self):
-        return self.quantity * self.product.price
+    def save(self, *args, **kwargs):
+        self.subtotal = float(self.quantity * self.product.price)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
@@ -209,6 +228,15 @@ class Coupon(models.Model):
     life = models.PositiveIntegerField(default=10)
 
     created = models.DateField(auto_now_add=True)
+
+    @property
+    def check_validity(self):
+        # Convert to string and then to date object
+        datetime_obj = timezone.now() - timedelta(days=self.life)
+        date_str = datetime_obj.strftime('%Y-%m-%d')
+        date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+        
+        return self.created >=  date_obj
 
     def __str__(self):
         return self.name

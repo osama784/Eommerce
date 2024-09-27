@@ -1,4 +1,4 @@
-<table id="items-table" class="rounded-lg min-w-[648px] sm:min-w-full h-fit text-center">
+<table id="cart-items-table" class="rounded-lg min-w-[648px] sm:min-w-full h-fit text-center border-separate [border-spacing:0.25rem]">
     <thead class="bg-gray-50">
         <tr class="*:py-3 *:font-medium *:tracking-wider text-gray-500">
             <th class="!w-24 ">Product</h3>
@@ -7,38 +7,34 @@
             <th>Quantity</h3>
             <th>Subtotal</h3>
             <th>Remove</h3>
+            <th>Update</th>
         </tr>
     </thead>
     <tbody>
         {% for item in items %}
-            <tr class="*:pb-2 *:first:pt-3">
+            <tr id="cart-item" class="*:pb-2 *:first:pt-3" x-data="{subtotal: {{item.subtotal}}, quantity: {{item.quantity}} }"
+                data-update-quantity-url="{% url 'api:update-cart-item-quantity' item.pk %}"
+                data-remove-cart-item-url="{% url 'api:remove-cart-item' item.pk %}">
                 <td class="pl-2">
                     <img src="{{item.product.get_display_image}}" alt="" class="rounded-lg object-cover h-24">
                 </td>
                 <td>{{item.product.name}}</td>
                 <td>${{item.product.price}}</td>
-                <td><input type="number" name="" id="" class="w-14 border p-1 outline-none rounded-lg" value="{{item.quantity}}">
+                <td>
+                    <input type="number" name="quantity" id="quantity" class="w-14 border p-1 outline-none rounded-lg" value="{{item.quantity}}"
+                    x-on:change="subtotal = parseFloat( ( {{item.product.price}} * $el.value ).toFixed(2) );"
+                    x-model="quantity">
                 </td>
-                <td>${{item.subtotal}}</td>
-                <td hx-post="{% url 'products:remove-cart-item' item.pk %}" hx-trigger="click" hx-target="#items-table">
-                    <div class="cursor-pointer" x-on:click="removePopShown = true; removeText = 'this product' "><i
-                            class="fa-regular fa-trash-can"></i></div>
+                <td x-text="`$${subtotal}`"></td>
+                <td x-on:click="numberOfItems --; cartTotal -= subtotal" id="remove-btn">
+                    <div class="cursor-pointer"><i class="fa-regular fa-trash-can"></i></div>
+                </td>
+                <td id="update-quantity-btn">
+                    <button><i class="fa-solid fa-arrows-rotate"></i></button>
                 </td>
             </tr>
         {% endfor %}
-        <tr class="*:pb-2 *:first:pt-3">
-            <td class="pl-2">
-                <img src="{% static 'images/juice.jpg'%}" alt="" class="rounded-lg object-cover h-24">
-            </td>
-            <td>Orange Juice</td>
-            <td>$35.99</td>
-            <td><input type="number" name="" id="" class="w-14 border p-1 outline-none rounded-lg">
-            </td>
-            <td>$15.99</td>
-            <td>
-                <div class="cursor-pointer" x-on:click="removePopShown = true; removeText = 'this product' "><i
-                        class="fa-regular fa-trash-can"></i></div>
-            </td>
-        </tr>
+        
     </tbody>
 </table>
+

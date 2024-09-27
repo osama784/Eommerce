@@ -1,24 +1,17 @@
-Alpine.js functionalities:
-    showing tha nav - done
-    showing the categories - done
-    showing the pages - done
-    
-
-TAILWIND functionalities:
-    completting the bottom of the page
-    adding footer
-
-
 more functionalities:
     pagination (products)   
-    filtering in shop.html
-    no filtering based on colors (in the sidebar)
     searching for vendors
 
 
 Javascript:
-    sending reviews
+    sending reviews - done
     adding to cart - change the number on cart icon when adding
+    updating the cart
 
-continue:
-    removing all shop words    
+
+- making all alpine elements hidden first -- done
+- sending reviews (api)
+- apply coupon (api)
+- hiding billing details 
+
+

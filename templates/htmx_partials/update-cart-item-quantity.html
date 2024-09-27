@@ -1,0 +1,6 @@
+<form action="" hx-patch="{% url 'products:update-cart-item-quantity' item.pk %}">
+    <input type="hidden" name="quantity" x-bind:value="quantity">
+    <button>
+        <i class="fa-solid fa-arrows-rotate"></i>
+    </button>
+</form>

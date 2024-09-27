@@ -1004,10 +1004,6 @@ video {
   height: 2rem;
 }
 
-.h-80{
-  height: 20rem;
-}
-
 .h-96{
   height: 24rem;
 }
@@ -1193,6 +1189,10 @@ video {
 
 .grow-\[3\]{
   flex-grow: 3;
+}
+
+.border-separate{
+  border-collapse: separate;
 }
 
 .-translate-x-1\/2{
@@ -2121,6 +2121,14 @@ video {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
+.\[border-spacing\:0\.25rem\]{
+  border-spacing: 0.25rem;
+}
+
+.\[border-spacing\:0\.75rem\]{
+  border-spacing: 0.75rem;
+}
+
 /* 
 @layer base {
     html {
@@ -2380,6 +2388,11 @@ video {
   display: block;
 }
 
+.before\:hidden::before{
+  content: var(--tw-content);
+  display: none;
+}
+
 .before\:size-3::before{
   content: var(--tw-content);
   width: 0.75rem;
@@ -2389,31 +2402,6 @@ video {
 .before\:h-full::before{
   content: var(--tw-content);
   height: 100%;
-}
-
-.before\:w-1\/5::before{
-  content: var(--tw-content);
-  width: 20%;
-}
-
-.before\:w-2\/5::before{
-  content: var(--tw-content);
-  width: 40%;
-}
-
-.before\:w-3\/5::before{
-  content: var(--tw-content);
-  width: 60%;
-}
-
-.before\:w-4\/5::before{
-  content: var(--tw-content);
-  width: 80%;
-}
-
-.before\:w-full::before{
-  content: var(--tw-content);
-  width: 100%;
 }
 
 .before\:rounded-lg::before{
@@ -2895,6 +2883,10 @@ video {
 
   .sm\:p-0{
     padding: 0px;
+  }
+
+  .sm\:p-1{
+    padding: 0.25rem;
   }
 
   .sm\:px-0{

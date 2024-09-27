@@ -4,9 +4,10 @@ from products.models import Product, Review, ProductAttachment, Cart, CartItem, 
 
 class ProductAttachmentInline(admin.StackedInline):
     model = ProductAttachment
-    max_num = 5
+    max_num = 4
     extra = 0
 
+@admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductAttachmentInline]
     list_display = ['name', 'price', 'category', 'vendor']
@@ -16,22 +17,25 @@ class ProductAdmin(admin.ModelAdmin):
 
 class CartItemInline(admin.StackedInline):
     model = CartItem
+    readonly_fields = ['subtotal']
+    extra = 0
 
+@admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
     inlines = [CartItemInline]
 
 class InvoiceItemInline(admin.StackedInline):
     model = InvoiceItem
+    extra = 0
 
+@admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
     inlines = [InvoiceItemInline]
     
+@admin.register(Coupon)
+class CouponAdmin(admin.ModelAdmin):
+    readonly_fields = ['created']
 
 
-admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductAttachment)
 admin.site.register(Review)
-admin.site.register(Cart, CartAdmin)
-admin.site.register(Invoice, InvoiceAdmin)
-admin.site.register(Coupon)
 
