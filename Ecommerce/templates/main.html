@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/all.min.css'%}" />
+    <!-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
+
+    {% block head%}
+    <title>Nest</title>
+    {% endblock head%}
+</head>
+
+<body class="font-body">
+    {% block content%}
+    {% endblock content %}
+    <script src="{% static 'alpinejs/dist/cdn.min.js' %}" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load static%}
+
+{% block head %}
+<title>Nest | Sign up</title>
+{% endblock head%}
+
+
+{% block content %}
+{% include 'partials/navbar.html' with chosen='home'%}
+{% include 'partials/path.html' with parent_page_name="Pages" page_name="Sign up"%}
+
+<div class="container mx-auto px-4 my-16 lg:max-w-[1023.99px]">
+    <div class="flex flex-col flex-wrap gap-10 items-center justify-center *:grow">
+        <div class="space-y-2 self-start">
+            <h1 class="font-bold text-4xl">Create an Account</h1>
+            <p>Already have an account? <a href="{% url 'users:login-user' %}" class="text-green-500">Login</a></p>
+        </div>
+        <div class="flex flex-col  gap-10 w-full px-5 sm:px-0 *:sm:w-1/2 ">
+            <form action="{% url 'users:register-user' %}" method="POST">
+                <div class="flex flex-col gap-5 *:border *:rounded-lg *:p-3 *:outline-slate-400 *:grow">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Username" name="username" class="placeholder:text-gray-500" required>
+                    <input type="text" placeholder="Email" name="email" class="placeholder:text-gray-500" required>
+                    <input type="password" placeholder="Password" name="password" class="placeholder:text-gray-500" required>
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 hover:-translate-y-1 transition-[background-color,transform] rounded-lg text-white p-2 w-fit">
+                        Submit & register</button>
+                    <p class="text-gray-500 text-sm !border-none">
+                        Notice: Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our 
+                        <a href="{% url 'services:privacy-policy'%}" class="text-green-500 underline hover:text-green-600">privacy policy</a>. </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

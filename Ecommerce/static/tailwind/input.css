@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap");
+@tailwind base;
+
+@tailwind components;
+@tailwind utilities;
+
+.loading-coupon-text {
+    @apply text-gray-500 text-sm
+}
+
+
+.valid-coupon-text {
+    @apply text-green-500 text-sm
+}
+
+.invalid-coupon-text {
+    @apply text-red-500 text-sm
+}
+
+.w-5\/5 {
+    @apply w-full
+}
+.w-0\/5 {
+    @apply w-0
+}
+
+.before\:w-5\/5::before {
+    content: var(--tw-content);
+    width: 100%;
+}
+.before\:w-4\/5::before {
+    content: var(--tw-content);
+    width: 80%;
+}
+.before\:w-3\/5::before {
+    content: var(--tw-content);
+    width: 60%;
+}
+.before\:w-2\/5::before {
+    content: var(--tw-content);
+    width: 40%;
+}
+.before\:w-1\/5::before {
+    content: var(--tw-content);
+    width: 20%;
+}
+
+.before\:w-0\/5::before {
+    content: var(--tw-content);
+    width: 0px;
+}

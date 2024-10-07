@@ -1,0 +1,39 @@
+{% extends 'main.html'%}
+{% load static %}
+
+
+{% block head%}
+<title>Nest | Login</title>
+{% endblock head%}
+
+
+{% block content%}
+{% include 'partials/navbar.html' with chosen="home"%}
+
+{%include 'partials/path.html' with parent_page_name="Pages" page_name="Login" %}
+
+<div class="flex flex-col md:flex-row *:grow container mx-auto my-24 px-5 rounded-lg gap-10 max-w-[1270px]">
+    <img src="{% static 'images/man.jpg'%}" alt=""
+        class="object-cover w-full self-center md:self-auto md:w-1/2 max-w-[600px] rounded-lg shadow">
+    <div class="flex flex-col gap-7">
+        <div>
+            <h1 class="font-bold text-4xl text-slate-900">Login</h1>
+            <p class="text-grey-500">Don't have an account? <a href="{% url 'users:register-user'%}" class="text-green-500">Create
+                    here</a></p>
+        </div>
+        <form action="{% url 'users:login-user' %}" method="POST">
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            <div class="flex flex-col gap-3">
+                {% csrf_token %}
+                <input type="text" name="username" class="px-3 py-5 border rounded-lg" required>
+                <input type="password" name="password" class="px-3 py-5 border rounded-lg" required>
+                <button type="submit"
+                    class="py-3 px-7 bg-slate-900 text-white rounded-lg w-fit cursor-pointer transition-all hover:bg-green-500 hover:-translate-y-2">Login</button>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+{% include 'partials/footer.html'%}
+{% endblock content%}

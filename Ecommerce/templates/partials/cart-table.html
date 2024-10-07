@@ -1,0 +1,50 @@
+<table id="cart-items-table" class="rounded-lg min-w-[648px] sm:min-w-full h-fit text-center border-separate [border-spacing:0.25rem]">
+    <thead class="bg-gray-50">
+        <tr class="*:py-3 *:font-medium *:tracking-wider text-gray-500">
+            <th class="!w-24 ">Product</h3>
+            <th>Title</h3>
+            <th>Unit Price</h3>
+            <th>Quantity</h3>
+            <th>Subtotal</h3>
+            <th>Remove</h3>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody class="*:*:px-3 *:*:py-4">
+        {% for item in items %}
+            <tr id="cart-item" x-data="{
+                subtotal: {{item.subtotal}},
+                oldQuantity: {{item.quantity}},
+                newQuantity: {{item.quantity}},
+                price: {{item.product.price}} ,
+                removed: false }"
+                x-show="!removed"
+                data-update-quantity-url="{% url 'api:update-cart-item-quantity' item.pk %}"
+                data-remove-cart-item-url="{% url 'api:create-or-remove-cart-item' item.product.pk %}">
+                <td class="pl-2">
+                    <img src="{{item.product.get_display_image}}" alt="" class="rounded-lg object-cover size-28">
+                </td>
+                <td>{{item.product.name}}</td>
+                <td>${{item.product.price}}</td>
+                <td>
+                    <input type="number" name="quantity" id="quantity" class="w-14 border p-1 outline-none rounded-lg" value="{{item.quantity}}"
+                    x-on:change="subtotal = parseFloat( ( price * $el.value ).toFixed(2) );" min="0" max="20"
+                    x-model="newQuantity">
+                </td>
+                <td x-text="`$${subtotal}`"></td>
+                <td x-on:click="numberOfItems --; cartTotal -= subtotal;removed= true" id="remove-btn">
+                    <div class="cursor-pointer"><i class="fa-regular fa-trash-can"></i></div>
+                </td>
+                <td id="update-quantity-btn" x-on:click="
+                if (oldQuantity == newQuantity)  return;
+                cartSubtotal -= parseFloat(( oldQuantity * price ).toFixed(2));
+                cartSubtotal += parseFloat((newQuantity * price).toFixed(2) );
+                oldQuantity = newQuantity;">
+                    <button><i class="fa-solid fa-arrows-rotate"></i></button>
+                </td>
+            </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
+

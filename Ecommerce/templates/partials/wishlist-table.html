@@ -1,0 +1,44 @@
+<table class="rounded-lg min-w-[648px] sm:min-w-full h-fit text-center">
+    <thead class="bg-gray-50">
+        <tr class="*:py-3 *:font-medium *:tracking-wider text-gray-500">
+            <th class="!w-24 ">Product</h3>
+            <th>
+                </h3>
+            <th>Price</h3>
+            <th>Stock status</h3>
+            <th>Action</h3>
+            <th>Remove</h3>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr id="wishlist-item" class="*:pb-2 *:first:pt-3" x-data="{addedToCart : {% if item.product.added_to_cart %} true {% else %} false {% endif %}, removed: false}"
+        x-show="!removed"
+        data-create-or-remove-cart-item-url="{% url 'api:create-or-remove-cart-item' item.product.pk %}"
+        data-remove-wishlist-item-url="{% url 'api:create-or-remove-wishlist-item' item.product.pk %}">
+            <td class="pl-2">
+                <img src="{{item.product.image.url}}" alt="" class="rounded-lg object-cover size-28">
+            </td>
+            <td>{{item.product.name}}</td>
+            <td class="text-2xl font-semibold text-green-500">${{item.product.price}}</td>
+            <td>
+                <div class="size-full flex justify-center items-center">
+                    <p class="w-fit p-2 text-green-500 bg-green-50 rounded-lg">In Stock</p>
+                </div>
+            </td>
+        
+            <td>
+                <div class="w-full">
+                    <div id="create-or-remove-cart-item-btn" x-text="addedToCart ? 'Remove from Cart' : 'Add to cart' "
+                       class="w-full cursor-pointer bg-green-500 px-5 py-2 text-white hover:bg-amber-400 transition-colors rounded-lg"
+                        x-on:click="addedToCart = !addedToCart" x-transition>Add to cart</div>
+                </div>
+            </td>
+            <td>
+                <div class="cursor-pointer" id="remove-wishlist-item-btn" x-on:click="numberOfItems --;removed=true"><i
+                        class="fa-regular fa-trash-can"></i></div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
