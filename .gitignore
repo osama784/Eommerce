@@ -163,7 +163,7 @@ cython_debug/
 
 #Additions
 Ecommerce/issues.txt
-Ecommerce/db.sqlite3
+# Ecommerce/db.sqlite3
 local-cdn
 
 .vscode
