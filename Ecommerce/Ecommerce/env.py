@@ -8,7 +8,7 @@ ENV_FILE_PATH = PROJECT_DIR / '.env'
 
 @lru_cache
 def get_config():
-    if ENV_FILE_PATH:
+    if ENV_FILE_PATH.exists():
         return Config((RepositoryEnv(str(ENV_FILE_PATH))))
     return Config()
 
