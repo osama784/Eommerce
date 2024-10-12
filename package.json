@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx tailwindcss -i ./Ecommerce/static/tailwind/input.css -o ./Ecommerce/static/css/output.css --watch",
-    "start": "cd Ecommerce && python manage.py runserver"
+    "start": "cd Ecommerce && python manage.py runserver",
+    "build:alpine": "esbuild Ecommerce/static/alpinejs/input.js --outfile=Ecommerce/static/js/alpine_output.js --bundle --minify"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,7 @@
   "description": "",
   "devDependencies": {
     "autoprefixer": "^10.4.19",
+    "esbuild": "^0.24.0",
     "postcss": "^8.4.40",
     "tailwindcss": "^3.4.7"
   },
