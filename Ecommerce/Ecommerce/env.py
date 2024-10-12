@@ -10,7 +10,7 @@ ENV_FILE_PATH = PROJECT_DIR / '.env'
 def get_config():
     if ENV_FILE_PATH.exists():
         return Config((RepositoryEnv(str(ENV_FILE_PATH))))
-    return Config()
+    return decouple_config
 
 
 config = get_config()
