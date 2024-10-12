@@ -1,10 +1,17 @@
+from django.utils.text import slugify
 import math
 
-def product_attachment_download(instance, filename):
-    return f'products/{instance.product.handle}/attachments/{filename}'  
+def get_prefix_id_product_attachment(instance, *args, **kwargs):
+    return f'products/{instance.product.handle}/attachments'  
 
-def product_image_download(instance, filename):
-    return f'products/{instance.handle}/{filename}' 
+def get_prefix_id_product(instance, *args, **kwargs):
+    return f'products/{instance.handle}' 
+
+def get_display_name_product(instance, *args, **kwargs):
+    return f'{instance.handle}'
+
+def get_display_name_product_attachment(instance, *args, **kwargs):
+    return f'{instance.product.handle}--attachments'
 
 def custom_round(number):
     str_num = str(number)

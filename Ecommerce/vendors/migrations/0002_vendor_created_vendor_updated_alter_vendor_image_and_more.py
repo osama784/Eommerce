@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='vendor',
             name='image',
-            field=models.ImageField(blank=True, null=True, upload_to=vendors.utils.vendor_download),
+            field=models.ImageField(blank=True, null=True),
         ),
         migrations.CreateModel(
             name='Rating',

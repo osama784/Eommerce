@@ -2,8 +2,10 @@ from django.db import models
 from django.db.models import Count, Sum
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
+from django.utils.text import slugify
 from django.urls import reverse
 
+from cloudinary.models import CloudinaryField
 from math import ceil
 
 from . import utils as vendors_utils
@@ -14,7 +16,12 @@ class Vendor(models.Model):
     name = models.CharField(max_length=200, unique=True)
     address = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=15)
-    image = models.ImageField(upload_to=vendors_utils.vendor_download ,blank=True, null=True)
+    image = CloudinaryField(
+        'image',
+        public_id_prefix=vendors_utils.get_vendor_prefix_id,
+        display_name=vendors_utils.get_vendor_display_name,
+        blank=True,
+        null=True)
     handle = models.CharField(max_length=200, null=True, blank=True)
     opened = models.DateField(null=True, blank=True)
     social_facebook = models.URLField(blank=True, null=True)
@@ -57,11 +64,11 @@ class Vendor(models.Model):
     
 
     def __str__(self):
-        return self.name
+        return self.name or 'Vendor'
     
     def save(self, *args, **kwargs) -> None:
         if self.name:
-            self.handle = self.name.lower().replace(" ", "-")
+            self.handle = slugify(self.name)
         return super().save(*args, **kwargs)
     
 

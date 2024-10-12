@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 
-from users.models import Profile
+# profiles gets created automatically using signals
 
 
 class Command(BaseCommand):
@@ -41,9 +41,10 @@ class Command(BaseCommand):
     ]
 
     for user in users:
-        new_user = User.objects.create(
+        new_user, created = User.objects.get_or_create(
             **user,
         )
-        new_user.set_password('test')
-        new_user.save()
-        Profile.objects.create(user=new_user)
+        if created:
+            new_user.set_password('test')
+            new_user.save()
+            

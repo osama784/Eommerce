@@ -12,8 +12,5 @@ def split(value, arg):
 def subtract(value, arg):
     return value - arg
 
-@register.filter
-def divide_ceil(value, arg):
-    return ceil(value / int(arg))
 
 

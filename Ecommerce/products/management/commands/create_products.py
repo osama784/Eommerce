@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from products.models import Product, Vendor
+from products.models import Product, Vendor, CategoryChoices
 
 import random
 
@@ -12,55 +12,55 @@ class Command(BaseCommand):
     products = [
         {
             "name": 'Velvet Cakes',
-            "category": Product.CategoryChoices.DESSERTS,
+            "category": CategoryChoices.DESSERTS,
         },
         {
             "name": 'Spatchcock BBQ Chicken', 
-            "category": Product.CategoryChoices.MEAT_BEEF
+            "category": CategoryChoices.MEAT_BEEF
         },
         {
             "name": 'Home-made BBQ Grilled Chicken', 
-            "category": Product.CategoryChoices.MEAT_BEEF
+            "category": CategoryChoices.MEAT_BEEF
         },
         {
             "name": 'Double Bief Fried Chicken Bacon', 
-            "category": Product.CategoryChoices.BURGERS
+            "category": CategoryChoices.BURGERS
         },
         {
             "name": 'Zesty Zucchini Zoodles', 
-            "category": Product.CategoryChoices.SALADS_BOWLS
+            "category": CategoryChoices.SALADS_BOWLS
         },
         {
             "name": 'Savory Seaweed Sushi Rolls', 
-            "category": Product.CategoryChoices.SUSHI
+            "category": CategoryChoices.SUSHI
         },
         {
             "name": 'Mystical Mushroom Medley', 
-            "category": Product.CategoryChoices.NUTS_SEEDS
+            "category": CategoryChoices.NUTS_SEEDS
         },
         {
             "name": 'Enchanted Elixir Soup', 
-            "category": Product.CategoryChoices.SALADS_BOWLS
+            "category": CategoryChoices.SALADS_BOWLS
         },
         {
             "name": 'Whimsical Waffle Tower', 
-            "category": Product.CategoryChoices.DESSERTS
+            "category": CategoryChoices.DESSERTS
         },
         {
             "name": 'Dragonfire Tacos', 
-            "category": Product.CategoryChoices.VEGETABLES
+            "category": CategoryChoices.VEGETABLES
         },
         {
             "name": 'Galactic Grilled Cheese', 
-            "category": Product.CategoryChoices.BURGERS
+            "category": CategoryChoices.BURGERS
         },
         {
             "name": 'Stardust Smoothie Bowl', 
-            "category": Product.CategoryChoices.DESSERTS
+            "category": CategoryChoices.DESSERTS
         },
         {
             "name": "Fresh Juice",
-            "category": Product.CategoryChoices.JUICE
+            "category": CategoryChoices.JUICE
         }
     ]
     previous = False

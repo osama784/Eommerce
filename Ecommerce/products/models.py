@@ -4,7 +4,9 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Q, Sum
 from django.db.models.functions import Lower
+from django.utils.text import slugify
 
+from cloudinary.models import CloudinaryField
 from datetime import datetime, timedelta
 
 from .middleware import get_current_request
@@ -38,8 +40,12 @@ class Product(models.Model):
     category = models.CharField(max_length=2, choices=CategoryChoices.choices)
     handle = models.CharField(max_length=200, blank=True, null=True)
     life = models.PositiveSmallIntegerField()
-    image = models.ImageField(upload_to=products_utils.product_image_download, blank=True, null=True)
-
+    image = CloudinaryField(
+        'image', 
+        public_id_prefix=products_utils.get_prefix_id_product,
+        display_name=products_utils.get_display_name_product,
+        blank=True, 
+        null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -115,7 +121,7 @@ class Product(models.Model):
     
     def save(self, *args, **kwargs) -> None:
         if self.name:
-            self.handle = self.name.lower().replace(" ", "-")
+            self.handle = slugify(self.name)
         return super().save(*args, **kwargs)
     
     
@@ -135,7 +141,11 @@ class Product(models.Model):
 
 class ProductAttachment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='attachments')
-    image = models.ImageField(upload_to=products_utils.product_attachment_download)        
+    # image = models.ImageField(upload_to=products_utils.product_attachment_download)        
+    image = CloudinaryField(
+        'image',
+        public_id_prefix=products_utils.get_prefix_id_product_attachment,
+        display_name=products_utils.get_display_name_product_attachment)        
 
     def get_download_url(self):
         return reverse('products:attachment-download', kwargs={'handle': self.product.handle, 'pk': self.pk})

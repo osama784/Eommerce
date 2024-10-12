@@ -88,9 +88,9 @@
   </div>
 </div>
 
-<div class="h-16 w-full border-b border-slate-400 flex justify-center items-center sticky top-0 bg-white shadow-sm">
+<div class="h-16 w-full border-b border-slate-400 flex justify-center items-center sticky top-0 bg-white shadow-sm z-[100]">
   <div class="container px-4" x-data="{sidebarShown: false, categoriesDropdownShown: false}">
-    <div class="relative flex justify-center md:justify-between items-center text-sm gap-5 md:gap-0">
+    <div class="relative flex justify-center md:justify-between items-center text-sm gap-5 md:gap-0 ">
       <div class="flex text-base items-center gap-2 bg-green-500 p-2 rounded text-white cursor-pointer hover:bg-green-600 transition-colors"
         x-on:click="categoriesDropdownShown = !categoriesDropdownShown">
         <i class="fa-solid fa-table"></i>
@@ -100,7 +100,7 @@
       <!-- flowbite element -->
       <div id="categories-dropdown" class="border hidden absolute top-12 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
         x-show="categoriesDropdownShown" x-bind:class="{'hidden': !categoriesDropdownShown}" x-on:click.outside="categoriesDropdownShown = false" x-transition>
-        <ul class="py-2 text-sm text-black">
+        <ul class="py-2 text-sm text-black bg-white" >
           {% for category in categories_navbar|slice:"4"%}
             <li>
               <a href="{% url 'products:category' category.0 %}" class="block px-4 py-2 hover:bg-gray-100 ">{{category.1|capfirst}}</a>
